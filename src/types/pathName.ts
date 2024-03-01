@@ -6,4 +6,5 @@ export enum Path {
   Account = '/account',
   Favourites = '/favourites',
   Login = '/login',
+  Signin = '/signin',
 }

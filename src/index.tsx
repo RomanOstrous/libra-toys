@@ -11,6 +11,7 @@ import { FavouritePage } from './pages/Favorites/FavouritePage';
 import { NotFound } from './pages/NotFound/NotFound';
 import { AccountPage } from './pages/Account/AccountPage';
 import { LoginPage } from './pages/Login/LoginPage';
+import { SigninPage } from './pages/Signin/SigninPage';
 
 const container = document.getElementById('root') as HTMLElement;
 
@@ -31,6 +32,8 @@ createRoot(container).render(
         <Route path={Path.Cart} element={<CartPage />} />
 
         <Route path={Path.Favourites} element={<FavouritePage />} />
+
+        <Route path={Path.Signin} element={<SigninPage />} />
 
         <Route path={Path.Login} element={<LoginPage/>} />
 

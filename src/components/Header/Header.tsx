@@ -58,6 +58,12 @@ export const Header = () => {
               Login
             </NavLink>
           </div>
+
+          <div className="header__nav-item">
+            <NavLink to={Path.Signin} className={getLinkClass}>
+              Signin
+            </NavLink>
+          </div>
         </nav>
       </div>
     </div>
