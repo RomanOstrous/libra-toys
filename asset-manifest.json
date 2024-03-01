@@ -1,10 +1,13 @@
 {
   "files": {
-    "main.js": "/libra-toys/static/js/main.6b83a313.js",
+    "main.css": "/libra-toys/static/css/main.1f4593cf.css",
+    "main.js": "/libra-toys/static/js/main.57213b8c.js",
     "index.html": "/libra-toys/index.html",
-    "main.6b83a313.js.map": "/libra-toys/static/js/main.6b83a313.js.map"
+    "main.1f4593cf.css.map": "/libra-toys/static/css/main.1f4593cf.css.map",
+    "main.57213b8c.js.map": "/libra-toys/static/js/main.57213b8c.js.map"
   },
   "entrypoints": [
-    "static/js/main.6b83a313.js"
+    "static/css/main.1f4593cf.css",
+    "static/js/main.57213b8c.js"
   ]
 }
