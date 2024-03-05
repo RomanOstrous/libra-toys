@@ -1,81 +1,138 @@
-import { Button, Checkbox, Form, Input } from 'antd';
-
-type FieldType = {
-  username?: string;
-  password?: string;
-  remember?: string;
-};
-
-const onFinish = (values: any) => {
-  console.log('Success:', values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
-};
+import 'bulma';
+import './LoginForm.scss';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useState } from 'react';
+import classNames from 'classnames';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../app/hook';
+import { actions } from '../../app/authSlice';
 
 function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [hasEmailError, setHasEmailError] = useState(false);
+
+  const [password, setPassword] = useState('');
+  const [hasPasswordError, setHasPasswordError] = useState(false);
+
+  const [error, setError] = useState('');
+  const [loader, setLoader] = useState(false);
+  const [disable, setDisable] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setEmail(value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setPassword(value);
+    setHasPasswordError(value.length < 8);
+  };
+
+  const onFinish = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setHasEmailError(!email);
+    setHasPasswordError(!password);
+
+    if(!email || !password) {
+      return;
+    }
+
+    setDisable(true);
+
+    const data = {
+      email: email,
+      password: password
+    };
+
+    try {
+      setLoader(true);
+      const response = await axios.post('https://toy-shop-api.onrender.com/api/user/token/', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      
+      const { access, refresh } = response.data;
+      Cookies.set('access_token', access);
+      Cookies.set('refresh_token', refresh);
+      dispatch(actions.login());
+      navigate('/');
+
+     // console.log('Registration successful:', response.data);
+    } catch (error) {
+      console.error('Registration failed:', error);
+      setError('Registration failed')
+      setTimeout(() =>{
+        setError('');
+      }, 3000);
+    } finally {
+      setLoader(false);
+      setDisable(false);
+    }
+  };
+
   return (
     <>
-      <Form
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item<FieldType>
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
-        >
-          <Input />
-        </Form.Item>
+      <h1>Вхід до аккаунту</h1>
+      <form className='login__form box' onSubmit={onFinish}>
+        <div className="field">
+          <p className="control has-icons-left has-icons-right">
+            <input
+              className={classNames('input', {
+                'is-danger': hasEmailError
+              })}
+              type="email" 
+              name="email" 
+              placeholder="Електронна почта"
+              autoComplete='off'
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-envelope"></i>
+            </span>
+          </p>
+        </div>
+        <div className="field">
+          <p className="control has-icons-left">
+            <input 
+              className={classNames('input', {
+                'is-danger': hasPasswordError
+              })} 
+              type="password" 
+              name="password" 
+              placeholder="Пароль"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
 
-        <Form.Item
-          name="email"
-          label="E-mail"
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+        <div className="login__error">
+          {error}
+        </div>
 
-        <Form.Item<FieldType>
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
+        <div className="field">
+          <p className="control">
+            <button className="button is-success" disabled={disable}>
+              {loader ? 'Загрузка...' : 'Вхід'}
+            </button>
+          </p>
 
-        <Form.Item<FieldType>
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+          <p>Немає аккаунту?</p>
+          <Link to='/signin'> Зареєструватись</Link>
+        </div>
+      </form>
     </>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

@@ -1,0 +1,9 @@
+.signin{
+  &__form {
+    max-width: 400px;
+  }
+
+  &__error {
+    background-color: red;
+  }
+}

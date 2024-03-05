@@ -1,72 +1,130 @@
-import { Button, Form, Input } from 'antd';
+import 'bulma';
+import './SigninForm.scss';
+import axios from 'axios';
+import { useState } from 'react';
 
-type FieldType = {
-  username?: string;
-  password?: string;
-};
+import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
-const onFinish = (values: any) => {
-  console.log('Success:', values);
-};
+function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [hasEmailError, setHasEmailError] = useState(false);
 
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
-};
 
-function SigninForm() {
+  const [password, setPassword] = useState('');
+  const [hasPasswordError, setHasPasswordError] = useState(false);
+  
+  const [error, setError] = useState('');
+
+  const [loader, setLoader] = useState(false);
+  const [disable, setDisable] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setEmail(value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setPassword(value);
+    setHasPasswordError(value.length < 8);
+  };
+
+  const onFinish = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setHasEmailError(!email);
+    setHasPasswordError(!password);
+
+    if(!email || !password) {
+      return;
+    }
+
+    setDisable(true);
+    
+    const data = {
+      email: email,
+      password: password
+    };
+
+    try {
+      setLoader(true);
+      const response = await axios({
+        method: 'post',
+        url: 'https://toy-shop-api.onrender.com/api/user/registration/',
+        data: data,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      navigate('../login');
+      console.log('Реєстрація успішна', response.data);
+    } catch (error) {
+      console.error('Не вдалось створити аккаунт', error);
+      setError('Не вдалось створити аккаунт! Перевірте правильність данних.')
+      setTimeout(() =>{
+        setError('');
+      }, 5000);
+    } finally {
+      setLoader(false);
+      setDisable(false);
+    }
+  };
+
+
   return (
     <>
-      <Form
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item<FieldType>
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
-        >
-          <Input />
-        </Form.Item>
+    <h1>Реєстрація</h1>
+      <form className='signin__form box' onSubmit={onFinish}>
+        <div className="field">
+          <p className="control has-icons-left has-icons-right">
+            <input
+              className={classNames('input', {
+                'is-danger': hasEmailError
+              })}
+              type="email" 
+              name="email" 
+              placeholder="Електронна почта"
+              autoComplete='off'
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-envelope"></i>
+            </span>
+          </p>
+        </div>
+        <div className="field">
+          <p className="control has-icons-left">
+            <input 
+              className={classNames('input', {
+                'is-danger': hasPasswordError
+              })} 
+              type="password" 
+              name="password" 
+              placeholder="Пароль"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
 
-        <Form.Item
-          name="email"
-          label="E-mail"
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item<FieldType>
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+        <div className="signin__error">{error}</div>
+        <div className="field">
+          <p className="control">
+            <button className="button is-success" disabled={disable}>
+              {loader ? 'Загрузка...' : 'Створити аккаунт'}
+            </button>
+          </p>
+        </div>
+      </form>
     </>
-  )
-}
+  );
+};
 
-export default SigninForm
+export default LoginForm;
