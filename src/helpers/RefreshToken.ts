@@ -7,15 +7,14 @@ export function tokenRefresh(refreshToken: string) {
       refresh: refreshToken
     })
     .then(response => {
-      const { access, refresh} = response.data;
+      const { access} = response.data;
       Cookies.set('access_token', access);
-      Cookies.set('refresh_token', refresh);
-      console.log('Token refreshed successfully:', response.data);
+      console.log('Рефреш успішний', response.data);
     })
     .catch(error => {
-      console.error('Failed to refresh token:', error);
+      console.error('Помилка рефреш токена', error);
     });
   } catch (error) {
-    console.error('Error refreshing token:', error);
+    console.error('Помилка рефреш', error);
   }
 }

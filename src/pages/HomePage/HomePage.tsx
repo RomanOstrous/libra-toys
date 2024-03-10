@@ -1,5 +1,9 @@
+import './HomePage.scss';
+
 export const HomePage = () => {
   return (
-    <h1> Home </h1>
+    <>
+      <img className="home__img" src="" alt="" />
+    </>
   );
 };

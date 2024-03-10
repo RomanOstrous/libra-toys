@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, HashRouter as Router, Routes } from 'react-router-dom';
 import { Path } from './types/pathName';
-import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/css/all.css';
 import { App } from './App';
 import { HomePage } from './pages/HomePage/HomePage';
 import { GalleryPage } from './pages/Gallery/GalleryPage';

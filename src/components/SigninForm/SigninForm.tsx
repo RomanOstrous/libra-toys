@@ -1,15 +1,13 @@
-import 'bulma';
 import './SigninForm.scss';
-import axios from 'axios';
 import { useState } from 'react';
 
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { client } from '../../services/httpClient';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [hasEmailError, setHasEmailError] = useState(false);
-
 
   const [password, setPassword] = useState('');
   const [hasPasswordError, setHasPasswordError] = useState(false);
@@ -50,20 +48,13 @@ function LoginForm() {
 
     try {
       setLoader(true);
-      const response = await axios({
-        method: 'post',
-        url: 'https://toy-shop-api.onrender.com/api/user/registration/',
-        data: data,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      const response = await client.post('user/registration/', data); // Використовуємо хелпер
 
       navigate('../login');
-      console.log('Реєстрація успішна', response.data);
+      console.log('Реєстрація успішна', response);
     } catch (error) {
       console.error('Не вдалось створити аккаунт', error);
-      setError('Не вдалось створити аккаунт! Перевірте правильність данних.')
+      setError('Не вдалось створити аккаунт! Перевірте правильність даних.')
       setTimeout(() =>{
         setError('');
       }, 5000);
@@ -72,7 +63,6 @@ function LoginForm() {
       setDisable(false);
     }
   };
-
 
   return (
     <>

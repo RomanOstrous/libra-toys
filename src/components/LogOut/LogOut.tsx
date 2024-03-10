@@ -7,8 +7,7 @@ export default function LogOut() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-
-  const handleLogOut = () => {
+  const logOut = () => {
     Cookies.remove('access_token');
     Cookies.remove('refresh_token');
     dispatch(actions.logout())
@@ -17,7 +16,7 @@ export default function LogOut() {
 
   return (
     <div>
-      <button onClick={handleLogOut}>
+      <button onClick={logOut}>
         LogOut
       </button>
     </div>

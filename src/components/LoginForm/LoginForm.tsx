@@ -1,12 +1,16 @@
-import 'bulma';
 import './LoginForm.scss';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hook';
 import { actions } from '../../app/authSlice';
+import { client } from '../../services/httpClient';
+
+interface TokenResponse {
+  access: string;
+  refresh: string;
+}
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -51,25 +55,21 @@ function LoginForm() {
 
     try {
       setLoader(true);
-      const response = await axios.post('https://toy-shop-api.onrender.com/api/user/token/', data, {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-      
-      const { access, refresh } = response.data;
+      const response = await client.post<TokenResponse>('user/token/', data);
+
+      const { access, refresh } = response;
       Cookies.set('access_token', access);
       Cookies.set('refresh_token', refresh);
       dispatch(actions.login());
       navigate('/');
 
-     // console.log('Registration successful:', response.data);
+      console.log('Registration successful:', response);
     } catch (error) {
       console.error('Registration failed:', error);
       setError('Registration failed')
       setTimeout(() =>{
         setError('');
-      }, 3000);
+      }, 5000);
     } finally {
       setLoader(false);
       setDisable(false);
