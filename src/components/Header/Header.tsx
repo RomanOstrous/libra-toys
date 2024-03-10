@@ -28,16 +28,11 @@ useEffect(() => {
     <div className="header">
 
       <Link to="/" className="header__logo">
-        <img className="header__logo-img" src="../../assets/Logo.png" alt="logo" />
+        <img className="header__logo-img" src="" alt="logo" />
       </Link>
 
       <nav className="header__nav-container">
         <div className="header__left">
-          <div className="header__nav-item">
-            <NavLink to="/" className={getLinkClass}>
-              Головна
-            </NavLink>
-          </div>
 
           <div className="header__nav-item">
             <NavLink to={Path.Gallery} className={getLinkClass}>

@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./components/Header/Header";
 import './App.scss';
-import 'bulma';
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { tokenRefresh } from "./helpers/RefreshToken";
