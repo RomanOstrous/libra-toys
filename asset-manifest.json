@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/libra-toys/static/css/main.5a0c1773.css",
-    "main.js": "/libra-toys/static/js/main.3e6d10fe.js",
+    "main.css": "/libra-toys/static/css/main.1107097e.css",
+    "main.js": "/libra-toys/static/js/main.289d0894.js",
     "static/media/Vectours.png": "/libra-toys/static/media/Vectours.64d9d00b93d24db617df.png",
     "static/media/fa-solid-900.ttf": "/libra-toys/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
     "static/media/fa-brands-400.ttf": "/libra-toys/static/media/fa-brands-400.6205fd00fb1b573e9f0f.ttf",
@@ -13,16 +13,17 @@
     "static/media/fa-v4compatibility.woff2": "/libra-toys/static/media/fa-v4compatibility.b3049b13a93f07e026fc.woff2",
     "static/media/heart.svg": "/libra-toys/static/media/heart.27798f45c1f04d14e575105f1b71f178.svg",
     "static/media/Logo.svg": "/libra-toys/static/media/Logo.4c224f9bf05c2cf58f0cb6d6c906bb8c.svg",
+    "static/media/google.svg": "/libra-toys/static/media/google.7e0e41dfe0a290aefb93bcb610d5cd2e.svg",
     "static/media/cross.svg": "/libra-toys/static/media/cross.4749fd53ec62d326207759c845ee14da.svg",
     "static/media/person.svg": "/libra-toys/static/media/person.86c25f2a2b35b3e8f39bca69b215c1d7.svg",
     "index.html": "/libra-toys/index.html",
     "static/media/cart.svg": "/libra-toys/static/media/cart.b62ff6f053e22828507d2a41b535bd8a.svg",
     "static/media/burger.svg": "/libra-toys/static/media/burger.ae8663732b4dd5c330204d6d12368cf0.svg",
-    "main.5a0c1773.css.map": "/libra-toys/static/css/main.5a0c1773.css.map",
-    "main.3e6d10fe.js.map": "/libra-toys/static/js/main.3e6d10fe.js.map"
+    "main.1107097e.css.map": "/libra-toys/static/css/main.1107097e.css.map",
+    "main.289d0894.js.map": "/libra-toys/static/js/main.289d0894.js.map"
   },
   "entrypoints": [
-    "static/css/main.5a0c1773.css",
-    "static/js/main.3e6d10fe.js"
+    "static/css/main.1107097e.css",
+    "static/js/main.289d0894.js"
   ]
 }
