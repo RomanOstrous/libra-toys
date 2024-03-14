@@ -1,0 +1,54 @@
+@import "../../styles/utils/utils";
+
+.phone-menu {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  background-color: black;
+  top: 88px;
+  padding: 32px;
+  box-sizing: border-box;
+
+  &__active {
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &__inactive {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  @include on-tablet {
+    display: none;
+  }
+
+  &__nav-link {
+    color: aliceblue;
+    text-decoration: none;
+    @include Namu24;
+  }
+
+  &__is-active {
+    display: none;
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    box-sizing: border-box;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+}

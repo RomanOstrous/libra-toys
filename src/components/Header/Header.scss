@@ -1,9 +1,34 @@
+@import "../../styles/utils/utils";
+
 .header {
+  position: fixed;
+  top: 0;
   background-color: gray;
   display: flex;
-  align-items: center;
-  gap: 50px;
-  height: 50px;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 88px;
+  width: 100%;
+
+  @include on-tablet{
+    position: static;
+    height: 96px;
+    padding: 0 32px;
+  }
+
+  @include on-desktop{
+    position: static;
+    height: 104px;
+    padding: 0 48px;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 0 16px;
+  }
 
   &__logo {
     width: 50px;
@@ -15,35 +40,54 @@
     }
   }
 
-
-  &__nav-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-  }
-
   &__left {
-    display: flex;
-    gap: 20px;
+    display: none;
+
+    @include on-tablet {
+      display: flex;
+      gap: 32px;
+    }
   }
 
   &__right {
+    display: none;
+
+    @include on-tablet {
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+  &__phone {
     display: flex;
+    align-items: center;
+    width: 84px;
     gap: 20px;
-    margin-right: 20px;
+
+    @include on-tablet {
+      display: none;
+    }
   }
 
   &__nav-link {
+    @include Namu24;
     color: aliceblue;
     text-decoration: none;
   }
 
   &__is-active {
-    color: red;
+
+    text-decoration: underline;
   }
 
   &__nav-item {
     text-decoration: none;
+  }
+
+  &__burger {
+    background: none;
+    border: none;
+    box-sizing: border-box;
+    padding: 0;
   }
 }

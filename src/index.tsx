@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { Route, HashRouter as Router, Routes } from 'react-router-dom';
 import { Path } from './types/pathName';
+import './styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { App } from './App';
 import { HomePage } from './pages/HomePage/HomePage';
@@ -19,7 +20,7 @@ const container = document.getElementById('root') as HTMLElement;
 
 createRoot(container).render(
   <Provider store={store}>
-      <Router>
+    <Router>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />

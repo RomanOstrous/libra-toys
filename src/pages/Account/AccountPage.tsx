@@ -25,9 +25,8 @@ export const AccountPage = () => {
 
   return (
     <>
-      <h1> AccountPage </h1>
+      <h1> Акаунт </h1>
 
-      <div>{}</div>
       
       <LogOut />
     </>

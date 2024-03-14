@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hook';
 import { actions } from '../../app/authSlice';
 import { client } from '../../services/httpClient';
+import Google from "../../assets/icons/google.svg";
 
 interface TokenResponse {
   access: string;
@@ -14,123 +15,163 @@ interface TokenResponse {
 
 function LoginForm() {
   const [email, setEmail] = useState('');
-  const [hasEmailError, setHasEmailError] = useState(false);
+  const [hasEmailError, setHasEmailError] = useState('');
 
   const [password, setPassword] = useState('');
-  const [hasPasswordError, setHasPasswordError] = useState(false);
+  const [hasPasswordError, setHasPasswordError] = useState('');
 
   const [error, setError] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
 
+  let hasError = false;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setEmail(value);
+    setHasEmailError('');
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setPassword(value);
-    setHasPasswordError(value.length < 8);
+    setHasPasswordError('');
+  };
+
+  const handleEmailBlur = () => {
+    if (!email.includes('@')) {
+      setHasEmailError('Введіть коректну адресу електронної пошти');
+      hasError = true;
+    }
+  };
+  
+  const handlePasswordBlur = () => {
+    if (password.length < 8) {
+      setHasPasswordError('Пароль повинен містити не менше 8 символів');
+      hasError = true;
+    }
   };
 
   const onFinish = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setHasEmailError(!email);
-    setHasPasswordError(!password);
+    handleEmailBlur();
+    handlePasswordBlur();
 
-    if(!email || !password) {
-      return;
-    }
 
-    setDisable(true);
+    if (!hasError) {
+      setDisable(true);
 
-    const data = {
-      email: email,
-      password: password
-    };
+      const data = {
+        email: email,
+        password: password
+      };
 
-    try {
-      setLoader(true);
-      const response = await client.post<TokenResponse>('user/token/', data);
+      try {
+        setLoader(true);
+        const response = await client.post<TokenResponse>('user/token/', data);
+        const { access, refresh } = response;
 
-      const { access, refresh } = response;
-      Cookies.set('access_token', access);
-      Cookies.set('refresh_token', refresh);
-      dispatch(actions.login());
-      navigate('/');
+        Cookies.set('access_token', access);
+        Cookies.set('refresh_token', refresh);
+        dispatch(actions.login());
+        navigate('/');
 
-      console.log('Registration successful:', response);
-    } catch (error) {
-      console.error('Registration failed:', error);
-      setError('Registration failed')
-      setTimeout(() =>{
-        setError('');
-      }, 5000);
-    } finally {
-      setLoader(false);
-      setDisable(false);
+        console.log('Registration successful:', response);
+      } catch (error) {
+        console.log('Схоже сталась помилка, перевірте правильність почти та паролю', error);
+        setError('Схоже сталась помилка, перевірте правильність почти та паролю');
+        setEmail('');
+        setPassword('');
+        setTimeout(() =>{
+          setError('');
+        }, 5000);
+      } finally {
+        setLoader(false);
+        setDisable(false);
+      }
     }
   };
 
   return (
     <>
-      <h1>Вхід до аккаунту</h1>
-      <form className='login__form box' onSubmit={onFinish}>
-        <div className="field">
-          <p className="control has-icons-left has-icons-right">
+      <div className="login container grid ">
+        <div className="login__container grid__item--desktop-3-6 grid__item--tablet-2-5">
+          <h1 className='login__title'>Вхід</h1>
+          <button className='login__google'>
+            <img src={Google} alt="Google" className='login__google-ico'/>
+            <p className='login__google-text'>Через Google</p>
+          </button>
+          
+          <div className="login__decor">
+            <span className="login__decor-line"></span>
+            <span className="login__decor-text">або</span>
+            <span className="login__decor-line"></span>
+          </div>
+
+          <form className='login__form' onSubmit={onFinish}>
+            <p className='login__form-text'>
+              Пошта
+            </p>
+
             <input
-              className={classNames('input', {
-                'is-danger': hasEmailError
+              className={classNames('login__input', {
+                'login__input--is-danger': hasEmailError,
+                'login__input--is-ok': !hasEmailError && email
               })}
-              type="email" 
               name="email" 
-              placeholder="Електронна почта"
+              placeholder="Введи свою почту"
               autoComplete='off'
               value={email}
               onChange={handleEmailChange}
+              onBlur={handleEmailBlur}
             />
-            <span className="icon is-small is-left">
-              <i className="fas fa-envelope"></i>
-            </span>
-          </p>
-        </div>
-        <div className="field">
-          <p className="control has-icons-left">
+
+            {hasEmailError ? (
+              <p className='login__input-error'>{hasEmailError}</p>
+            ) : (
+              <p className='login__input-noerror'></p>
+            )}
+
+            <p className='login__form-text'>
+              Пароль
+            </p>
+
             <input 
-              className={classNames('input', {
-                'is-danger': hasPasswordError
+              className={classNames('login__input', {
+                'login__input--is-danger': hasPasswordError,
+                'login__input--is-ok': !hasPasswordError && password
               })} 
               type="password" 
               name="password" 
-              placeholder="Пароль"
+              placeholder="Введи свій пароль"
               value={password}
               onChange={handlePasswordChange}
+              onBlur={handlePasswordBlur}
             />
-            <span className="icon is-small is-left">
-              <i className="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
 
-        <div className="login__error">
-          {error}
-        </div>
+            {hasPasswordError ? (
+              <p className='login__input-error'>{hasPasswordError}</p>
+            ) : (
+              <p className='login__input-noerror'></p>
+            )}
 
-        <div className="field">
-          <p className="control">
-            <button className="button is-success" disabled={disable}>
-              {loader ? 'Загрузка...' : 'Вхід'}
-            </button>
-          </p>
+          <button className="login__button" disabled={disable}>
+            {loader ? 'Загрузка...' : 'Увійти'}
+          </button>
+        </form>
 
-          <p>Немає аккаунту?</p>
-          <Link to='/signin'> Зареєструватись</Link>
+        <Link to='/signin' className="login__link">Забув пароль?(поміняти лінк на потрібний)</Link>
+      </div>
+      
+        <div className="login__bottom grid__item--desktop-3-6 grid__item--tablet-2-5">
+
+
+          <p className="login__question">Не маєш облікового запису?</p>
+          <Link to='/signin' className="login__link">Зареєструватись</Link>
         </div>
-      </form>
+      </div>
     </>
   );
 };
