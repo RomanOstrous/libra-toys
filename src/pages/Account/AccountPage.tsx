@@ -1,32 +1,13 @@
-import { useEffect } from "react";
 import LogOut from "../../components/LogOut/LogOut";
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import UserInfo from "../../components/UserInfo/UserInfo";
+
 
 
 export const AccountPage = () => {
-  const token = Cookies.get('access_token');
-  console.log(token);
-
-  useEffect(() => {
-    axios.get('https://toy-shop-api.onrender.com/api/user/me/', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    .then(response => {
-      
-      console.log('чотко', response);
-    })
-    .catch(error => {
-      console.log('херня вийшла', error);
-    });
-  }, [token])
-
   return (
     <>
       <h1> Акаунт </h1>
-
+      <UserInfo />
       
       <LogOut />
     </>

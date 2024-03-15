@@ -6,13 +6,12 @@ export default function Footer() {
     <div className='footer'>
       <div className="footer__container container">
         <div className="footer__info">
-          <Link to="https://www.instagram.com/_libra_711/" className="footer__text">
+          <Link to="https://www.instagram.com/_libra_711/" className="footer__text-l">
             Instagram
           </Link>
 
-          <p className="footer__text">
+          <p className="footer__text-l">
             Libra_711_@gmail.com
-            <br />
           </p>
         </div>
 
