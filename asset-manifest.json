@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/libra-toys/static/css/main.b87329a8.css",
-    "main.js": "/libra-toys/static/js/main.32511f91.js",
+    "main.css": "/libra-toys/static/css/main.7af05871.css",
+    "main.js": "/libra-toys/static/js/main.157970a5.js",
+    "static/media/Vectours.png": "/libra-toys/static/media/Vectours.64d9d00b93d24db617df.png",
     "static/media/fa-solid-900.ttf": "/libra-toys/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
     "static/media/NAMU-Pro.ttf": "/libra-toys/static/media/NAMU-Pro.b30d0e0cc330be936b3e.ttf",
     "static/media/fa-brands-400.ttf": "/libra-toys/static/media/fa-brands-400.6205fd00fb1b573e9f0f.ttf",
@@ -22,11 +23,11 @@
     "static/media/error.svg": "/libra-toys/static/media/error.5c567e14e941fef0bdc7.svg",
     "static/media/cart.svg": "/libra-toys/static/media/cart.b62ff6f053e22828507d2a41b535bd8a.svg",
     "static/media/burger.svg": "/libra-toys/static/media/burger.ae8663732b4dd5c330204d6d12368cf0.svg",
-    "main.b87329a8.css.map": "/libra-toys/static/css/main.b87329a8.css.map",
-    "main.32511f91.js.map": "/libra-toys/static/js/main.32511f91.js.map"
+    "main.7af05871.css.map": "/libra-toys/static/css/main.7af05871.css.map",
+    "main.157970a5.js.map": "/libra-toys/static/js/main.157970a5.js.map"
   },
   "entrypoints": [
-    "static/css/main.b87329a8.css",
-    "static/js/main.32511f91.js"
+    "static/css/main.7af05871.css",
+    "static/js/main.157970a5.js"
   ]
 }
