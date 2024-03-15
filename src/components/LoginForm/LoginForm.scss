@@ -181,6 +181,7 @@
       line-height: 12px;
       margin-bottom: 4px;
       @include NamuStandart;
+      
       &::before {
         position: absolute;
         content: '';

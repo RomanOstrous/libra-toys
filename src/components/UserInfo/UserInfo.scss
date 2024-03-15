@@ -3,7 +3,6 @@
 .user {
   display: block;
   width: 100%;
-  padding: 24px;
   box-sizing: border-box;
 
   @include on-tablet {
@@ -24,7 +23,6 @@
     }
   }
 
-
   &__form {
     display: flex;
     flex-direction: column;
@@ -43,10 +41,10 @@
     height: 48px;
     padding: 12px 16px;
     margin-bottom: 6px;
-    border: 1px solid #495057;
     border-radius: 48px;
     box-sizing: border-box;
-    background: inherit;
+    background: #111213;
+    border: none;
     outline: none;
     color: white;
     @include Namu16;
@@ -66,10 +64,6 @@
 
     &--is-danger {
       border: 1px solid #DD2525;
-    }
-
-    &--is-ok {
-      border: 1px solid #77BA14;
     }
 
     &-noerror {
@@ -109,6 +103,7 @@
     box-sizing: border-box;
     background-color: #F9B129;
     transition: all 0.3s ease;
+    @include Namu24;
 
     &:disabled {
       background-color: #FDDE8880;

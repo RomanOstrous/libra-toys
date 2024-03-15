@@ -18,8 +18,6 @@ function LoginForm() {
   const [hasEmailError, setHasEmailError] = useState('');
 
   const [password, setPassword] = useState('');
-  const [hasPasswordError, setHasPasswordError] = useState('');
-
   const [error, setError] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
@@ -37,7 +35,6 @@ function LoginForm() {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setPassword(value);
-    setHasPasswordError('');
   };
 
   const handleEmailBlur = () => {
@@ -47,18 +44,9 @@ function LoginForm() {
     }
   };
   
-  const handlePasswordBlur = () => {
-    if (password.length < 8) {
-      setHasPasswordError('Пароль повинен містити не менше 8 символів');
-      hasError = true;
-    }
-  };
-
   const onFinish = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleEmailBlur();
-    handlePasswordBlur();
-
 
     if (!hasError) {
       setDisable(true);
@@ -76,7 +64,7 @@ function LoginForm() {
         Cookies.set('access_token', access);
         Cookies.set('refresh_token', refresh);
         dispatch(actions.login());
-        navigate('/');
+        navigate('/account');
 
         console.log('Registration successful:', response);
       } catch (error) {
@@ -140,22 +128,14 @@ function LoginForm() {
 
             <input 
               className={classNames('login__input', {
-                'login__input--is-danger': hasPasswordError,
-                'login__input--is-ok': !hasPasswordError && password
+                'login__input--is-ok':  password.length >= 8
               })} 
               type="password" 
               name="password" 
               placeholder="Введи свій пароль"
               value={password}
               onChange={handlePasswordChange}
-              onBlur={handlePasswordBlur}
             />
-
-            {hasPasswordError ? (
-              <p className='login__input-error'>{hasPasswordError}</p>
-            ) : (
-              <p className='login__input-noerror'></p>
-            )}
 
           <button className="login__button" disabled={disable}>
             {loader ? 'Загрузка...' : 'Увійти'}
@@ -166,8 +146,6 @@ function LoginForm() {
       </div>
       
         <div className="login__bottom grid__item--desktop-3-6 grid__item--tablet-2-5">
-
-
           <p className="login__question">Не маєш облікового запису?</p>
           <Link to='/signin' className="login__link">Зареєструватись</Link>
         </div>

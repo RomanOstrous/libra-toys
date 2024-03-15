@@ -26,4 +26,4 @@ export function useLocaleStorage<T>(
   };
 
   return [value, save];
-}
+};

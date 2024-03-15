@@ -16,5 +16,5 @@ export function tokenRefresh(refreshToken: string) {
     });
   } catch (error) {
     console.error('Помилка рефреш', error);
-  }
-}
+  };
+};

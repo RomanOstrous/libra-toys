@@ -72,5 +72,5 @@ export default function PhoneMenu({burger}: Props) {
         </>
       )}
     </div>
-  )
-}
+  );
+};

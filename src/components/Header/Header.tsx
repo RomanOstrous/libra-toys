@@ -29,7 +29,7 @@ export const Header = () => {
 useEffect(() => {
   if (!token?.length) {
     localStorage.setItem("isLoggedIn", "false");
-    dispatch(actions.logout())
+    dispatch(actions.logout());
     navigate('/');
   }
 },[token?.length])

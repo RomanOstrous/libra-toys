@@ -84,9 +84,9 @@
 
     &-text {
       flex: 1;
-      @include Namu20;
       color: white;
       margin-right: 48px;
+      @include Namu20;
     }
   }
   
@@ -141,8 +141,8 @@
     background: inherit;
     outline: none;
     color: white;
-    @include Namu16;
     transition: all 0.3s ease;
+    @include Namu16;
 
     &::placeholder {
       color: #495057;
@@ -180,6 +180,7 @@
       line-height: 12px;
       margin-bottom: 4px;
       @include NamuStandart;
+      
       &::before {
         position: absolute;
         content: '';

@@ -1,0 +1,21 @@
+@import "../../styles/utils/utils";
+
+.logout {
+  width: 100%;
+  height: 48px;
+
+  border: 1px solid #EA523F;
+  border-radius: 48px;
+  box-sizing: border-box;
+  background: inherit;
+  color: #EA523F;
+  transition: all 0.3s ease;
+  @include Namu24;
+
+
+  &:hover {
+    color: white;
+    border: 1px solid white;
+    transition: all 0.3s ease;
+  }
+}

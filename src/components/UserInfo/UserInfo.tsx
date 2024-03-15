@@ -12,15 +12,11 @@ export default function UserInfo() {
   const [hasLastNameError, setHasLastNameError] = useState('');
 
   const [email, setEmail] = useState('');
-  const [hasEmailError, setHasEmailError] = useState('');
-
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
   const [edit, setEdit] = useState(true);
 
   const token = Cookies.get('access_token');
-  console.log(token);
-
   let hasError = false;
 
   useEffect(() => {
@@ -59,13 +55,6 @@ export default function UserInfo() {
     setHasLastNameError('');
   };
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setEmail(value);
-    setHasEmailError('');
-  };
-
-
   const handleNameBlur = () => {
     if (!name) {
       setHasNameError("Введіть ім'я");
@@ -86,16 +75,8 @@ export default function UserInfo() {
     }
   };
 
-  const handleEmailBlur = () => {
-    if (!email.includes('@')) {
-      setHasEmailError('Введіть коректну адресу електронної пошти');
-      hasError = true;
-    }
-  };
-  
   const onFinish = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleEmailBlur();
     handleLastNameBlur();
     handleNameBlur();
     setLoader(true);
@@ -104,7 +85,6 @@ export default function UserInfo() {
       setDisable(true);
       
       const data = {
-        email: email,
         first_name: name,
         last_name: lastName,
       };
@@ -117,10 +97,9 @@ export default function UserInfo() {
       .then(response => {
         
         console.log('чотко змінив', response);
-
         setName(response.data.first_name);
         setLastName(response.data.last_name);
-        setEmail(response.data.email);
+        setEdit(true);
       })
       .catch(error => {
         console.log('Не вдалось Змінити', error);
@@ -132,7 +111,6 @@ export default function UserInfo() {
     };
   };
 
-
   return (
     <div className="user">
       <form id="formId" className='user__form' onSubmit={onFinish}>
@@ -143,10 +121,9 @@ export default function UserInfo() {
         <input
           className={classNames('user__input', {
             'user__input--is-danger': hasNameError,
-            'user__input--is-ok': !hasNameError && name
           })}
           name="email" 
-          placeholder="Введи своє ім'я"
+          placeholder="Ім'я"
           autoComplete='off'
           value={name}
           onChange={handleNameChange}
@@ -167,10 +144,9 @@ export default function UserInfo() {
         <input
           className={classNames('user__input', {
             'user__input--is-danger': hasLastNameError,
-            'user__input--is-ok': !hasLastNameError && lastName
           })}
           name="last name" 
-          placeholder="Введи своє прізвище"
+          placeholder="Прізвище"
           autoComplete='off'
           value={lastName}
           onChange={handleLastNameChange}
@@ -189,44 +165,34 @@ export default function UserInfo() {
         </p>
 
         <input
-          className={classNames('user__input', {
-            'user__input--is-danger': hasEmailError,
-            'user__input--is-ok': !hasEmailError && email
-          })}
+          className='user__input'
           name="email" 
           placeholder="Введи свою почту"
           autoComplete='off'
           value={email}
-          onChange={handleEmailChange}
-          onBlur={handleEmailBlur}
-          readOnly={edit}
+          readOnly
         />
 
-        {hasEmailError ? (
-          <p className='user__input-error'>{hasEmailError}</p>
-        ) : (
-          <p className='user__input-noerror'></p>
-        )}
-
-        {edit === false ? (
+        {edit === false && (
           <button 
             type="submit"
             className="user__button" 
             disabled={disable} 
-            onClick={() => setEdit(true)}
           >
             {loader ? 'Загрузка...' : 'Підтвердити'}
           </button>
-        ): (
-          <button 
-            type="button"
-            className="user__button"
-            onClick={() => setEdit(false)}
-          >
-            Змінити
-          </button>
         )}
       </form>
+
+      {edit === true && (
+        <button 
+          type="button"
+          className="user__button"
+          onClick={() => setEdit(false)}
+        >
+          Змінити
+        </button>
+      )}
     </div>
-  )
-}
+  );
+};

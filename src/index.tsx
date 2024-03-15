@@ -23,7 +23,7 @@ createRoot(container).render(
     <Router>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<AboutPage />} />
+          <Route index element={<HomePage />} />
 
           <Route path={Path.Gallery}>
             <Route index element={<GalleryPage/>} />

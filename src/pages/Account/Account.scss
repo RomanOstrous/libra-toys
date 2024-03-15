@@ -1,0 +1,20 @@
+@import "../../styles/utils/utils";
+
+.account {
+  padding: 24px 16px;
+  display: grid;
+  width: 100%;
+
+  @include on-tablet {
+    padding: 32px 24px;
+  }
+
+  @include on-tablet {
+    padding: 48px 48px;
+  }
+
+
+  &__container {
+    display: grid;
+  }
+}
