@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/libra-toys/static/css/main.0569ec71.css",
-    "main.js": "/libra-toys/static/js/main.abecbe12.js",
+    "main.js": "/libra-toys/static/js/main.b848f393.js",
     "static/media/Vectours.png": "/libra-toys/static/media/Vectours.64d9d00b93d24db617df.png",
     "static/media/fa-solid-900.ttf": "/libra-toys/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
     "static/media/NAMU-Pro.ttf": "/libra-toys/static/media/NAMU-Pro.b30d0e0cc330be936b3e.ttf",
@@ -24,10 +24,10 @@
     "static/media/cart.svg": "/libra-toys/static/media/cart.b62ff6f053e22828507d2a41b535bd8a.svg",
     "static/media/burger.svg": "/libra-toys/static/media/burger.ae8663732b4dd5c330204d6d12368cf0.svg",
     "main.0569ec71.css.map": "/libra-toys/static/css/main.0569ec71.css.map",
-    "main.abecbe12.js.map": "/libra-toys/static/js/main.abecbe12.js.map"
+    "main.b848f393.js.map": "/libra-toys/static/js/main.b848f393.js.map"
   },
   "entrypoints": [
     "static/css/main.0569ec71.css",
-    "static/js/main.abecbe12.js"
+    "static/js/main.b848f393.js"
   ]
 }
