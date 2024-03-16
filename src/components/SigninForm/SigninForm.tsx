@@ -1,3 +1,4 @@
+import React from "react";
 import './SigninForm.scss';
 import { useState } from 'react';
 import classNames from 'classnames';
@@ -23,7 +24,7 @@ function SigninForm() {
   
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
-  const [error, setError] = useState('');
+  //const [error, setError] = useState('');
   
   let hasError = false;
   const navigate = useNavigate();
@@ -133,9 +134,9 @@ function SigninForm() {
         setEmail('');
         setPassword('');
         setPasswordOk('');
-        setError('Не вдалось створити аккаунт! Перевірте правильність даних.')
+        // setError('Не вдалось створити аккаунт! Перевірте правильність даних.')
         setTimeout(() =>{
-          setError('');
+          // setError('');
         }, 5000);
       } finally {
         setLoader(false);
@@ -151,7 +152,7 @@ function SigninForm() {
           <h1 className='signin__title'>Зареєструватись</h1>
           <button className='signin__google'>
             <img src={Google} alt="" className='signin__google-ico'/>
-            <p className='signin__google-text'>Увійти через Google</p>
+            <p className='signin__google-text'>Через Google</p>
           </button>
           
           <div className="signin__decor">
@@ -162,7 +163,7 @@ function SigninForm() {
 
           <form className='signin__form' onSubmit={onFinish}>
             <p className='signin__form-text'>
-              Ім'я
+              Ім&apos;я
             </p>
 
             <input
@@ -288,6 +289,6 @@ function SigninForm() {
       </div>
     </>
   );
-};
+}
 
 export default SigninForm;

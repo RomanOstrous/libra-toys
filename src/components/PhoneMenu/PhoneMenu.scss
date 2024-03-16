@@ -30,7 +30,8 @@
   &__nav-link {
     color: aliceblue;
     text-decoration: none;
-    @include Namu24;
+
+    @include namu24;
   }
 
   &__is-active {

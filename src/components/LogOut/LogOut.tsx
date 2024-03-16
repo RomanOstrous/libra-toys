@@ -1,3 +1,4 @@
+import React from "react";
 import Cookies from "js-cookie";
 import './LogOut.scss';
 import { useNavigate } from "react-router-dom";
@@ -20,4 +21,4 @@ export default function LogOut() {
       Вийти з акаунту
     </button>
   );
-};
+}

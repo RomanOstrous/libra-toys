@@ -12,79 +12,100 @@
   }
 }
 
-@mixin LibraStandart {
-  font-family: "Libra";
+@mixin libra-standart {
+  font-family: Libra, sans-serif;
   font-weight: 400;
   line-height: 100%;
   letter-spacing: 0%;
 }
 
-@mixin NamuStandart {
-  font-family: "Namu";
+@mixin namu-standart {
+  font-family: Namu, sans-serif;
   font-weight: 400;
   letter-spacing: 0%;
 }
 
-@mixin PopinsStandart {
-  font-family: "Popins";
+@mixin popins-standart {
+  font-family: Popins, sans-serif;
   font-weight: 400;
   line-height: 120%;
   letter-spacing: 0%;
 }
 
-@mixin Libra56 {
-  @include LibraStandart();
+@mixin libra56 {
   font-size: 56px;
-}
-@mixin Libra48 {
-  @include LibraStandart();
-  font-size: 48px;
-}
-@mixin Libra40 {
-  @include LibraStandart();
-  font-size: 40px;
-}
-@mixin Libra32 {
-  @include LibraStandart();
-  font-size: 32px;
+
+  @include libra-standart;
 }
 
-@mixin Namu32 {
-  @include NamuStandart();
+@mixin libra48 {
+  font-size: 48px;
+
+  @include libra-standart;
+}
+
+@mixin libra40 {
+  font-size: 40px;
+
+  @include libra-standart;
+}
+
+@mixin libra32 {
+  font-size: 32px;
+
+  @include libra-standart;
+}
+
+@mixin namu32 {
   line-height: 100%;
   font-size: 32px;
+
+  @include namu-standart;
 }
-@mixin Namu24 {
-  @include NamuStandart();
+
+@mixin namu24 {
   line-height: 100%;
   font-size: 24px;
+
+  @include namu-standart;
 }
-@mixin Namu20 {
-  @include NamuStandart();
+
+@mixin namu20 {
   line-height: 150%;
   font-size: 20px;
+
+  @include namu-standart;
 }
-@mixin Namu16 {
-  @include NamuStandart();
+
+@mixin namu16 {
   line-height: 150%;
   font-size: 16px;
+
+  @include namu-standart;
 }
-@mixin Namu14 {
-  @include NamuStandart();
+
+@mixin namu14 {
   line-height: 150%;
   font-size: 14px;
+
+  @include namu-standart;
 }
 
 
-@mixin Popins24 {
-  @include PopinsStandart();
+@mixin popins24 {
   font-size: 24px;
+
+  @include popins-standart;
 }
-@mixin Popins20 {
-  @include PopinsStandart();
+
+@mixin popins20 {
   font-size: 20px;
+
+  @include popins-standart;
 }
-@mixin Popins16 {
-  @include PopinsStandart();
+
+@mixin popins16 {
   font-size: 16px;
+
+  @include popins-standart;
 }

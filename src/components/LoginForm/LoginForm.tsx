@@ -1,3 +1,4 @@
+import React from "react";
 import './LoginForm.scss';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
@@ -18,7 +19,7 @@ function LoginForm() {
   const [hasEmailError, setHasEmailError] = useState('');
 
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
 
@@ -69,11 +70,11 @@ function LoginForm() {
         console.log('Registration successful:', response);
       } catch (error) {
         console.log('Схоже сталась помилка, перевірте правильність почти та паролю', error);
-        setError('Схоже сталась помилка, перевірте правильність почти та паролю');
+        // setError('Схоже сталась помилка, перевірте правильність почти та паролю');
         setEmail('');
         setPassword('');
         setTimeout(() =>{
-          setError('');
+          // setError('');
         }, 5000);
       } finally {
         setLoader(false);
@@ -152,6 +153,6 @@ function LoginForm() {
       </div>
     </>
   );
-};
+}
 
 export default LoginForm;

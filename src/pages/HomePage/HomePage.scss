@@ -1,14 +1,102 @@
 @import "../../styles/utils/utils";
 
-.home__img {
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 266px;
+  
+  &__img {
+    width: 100%;
+    height: 266px;
 
-  @include on-tablet {
-    height: 400px;
+    @include on-tablet {
+      height: 400px;
+    }
+
+    @include on-desktop {
+      height: 600px;
+    }
   }
 
-  @include on-desktop {
-    height: 600px;
+  &__box {
+    gap: 48px;
+    padding: 48px 16px;
+
+    @include on-desktop {
+      padding: 120px 0;
+      gap: 75px;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+
+    &:first-child {
+      flex-direction: column-reverse;
+    }
+
+    @include on-tablet {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    &-image {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  &__image{
+    width: 100%;
+    max-width: 345px;
+    max-height: 256px;
+
+    @include on-desktop {
+      max-width: 489px;
+      max-height: 344px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+
+    &-title {
+      margin-bottom: 16px;
+      color: white;
+      @include libra40;
+
+      @include on-desktop {
+        @include libra56;
+      }
+    }
+
+    &-subtitle {
+      margin-bottom: 8px;
+      color: #CED4DA;
+      @include namu20;
+
+      @include on-desktop {
+        @include namu24;
+      }
+    }
+
+    &-text {
+      text-align: left;
+      color: #868E96;
+      @include namu16;
+
+      @include on-desktop {
+        @include namu20;
+      }
+    }
   }
 }

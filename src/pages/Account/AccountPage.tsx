@@ -1,3 +1,4 @@
+import React from "react";
 import LogOut from "../../components/LogOut/LogOut";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import './Account.scss';

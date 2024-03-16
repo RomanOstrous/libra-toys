@@ -39,7 +39,9 @@
 
   &__title {
     margin-bottom: 16px;
-    @include Libra40;
+
+    @include libra40;
+
     color: white;
 
     @include on-tablet {
@@ -86,7 +88,8 @@
       flex: 1;
       color: white;
       margin-right: 48px;
-      @include Namu20;
+
+      @include namu20;
     }
   }
   
@@ -124,13 +127,14 @@
 
     &-text {
       margin-bottom: 8px;
-      @include Namu20;
+
+      @include namu20;
+
       color: white;
     }
   }
 
   &__input {
-    margin-bottom: 16px;
     width: 100%;
     height: 48px;
     padding: 12px 16px;
@@ -142,7 +146,8 @@
     outline: none;
     color: white;
     transition: all 0.3s ease;
-    @include Namu16;
+
+    @include namu16;
 
     &::placeholder {
       color: #495057;
@@ -179,7 +184,8 @@
       box-sizing: border-box;
       line-height: 12px;
       margin-bottom: 4px;
-      @include NamuStandart;
+
+      @include namu-standart;
       
       &::before {
         position: absolute;
@@ -225,7 +231,9 @@
   &__link {
     text-decoration: none;
     color: #196EE5;
-    @include Namu16;
+
+    @include namu16;
+
     transition: all 0.3s ease;
 
     &:hover {

@@ -38,12 +38,14 @@
 
   &__text {
     color: white;
-    @include Popins20;
+
+    @include popins20;
   }
 
   &__text-l {
     word-break: break-all;
     color: white;
-    @include Popins20;
+
+    @include popins20;
   }
 }

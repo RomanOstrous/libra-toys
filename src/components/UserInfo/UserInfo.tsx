@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import classNames from "classnames";
 import Cookies from "js-cookie";
@@ -108,14 +109,14 @@ export default function UserInfo() {
         setLoader(false);
         setDisable(false);
       })
-    };
+    }
   };
 
   return (
     <div className="user">
       <form id="formId" className='user__form' onSubmit={onFinish}>
         <p className='user__form-text'>
-          Ім'я
+          Ім&apos;я
         </p>
 
         <input
@@ -195,4 +196,4 @@ export default function UserInfo() {
       )}
     </div>
   );
-};
+}

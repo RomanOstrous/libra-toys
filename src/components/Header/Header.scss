@@ -3,7 +3,7 @@
 .header {
   position: fixed;
   top: 0;
-  background-color: gray;
+  background-color: black;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
@@ -70,7 +70,8 @@
   }
 
   &__nav-link {
-    @include Namu24;
+    @include namu24;
+
     color: aliceblue;
     text-decoration: none;
   }

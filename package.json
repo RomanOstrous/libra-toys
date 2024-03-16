@@ -17,6 +17,7 @@
     "axios": "^1.6.7",
     "bulma": "^0.9.4",
     "classnames": "^2.5.1",
+    "eslint": "^8.57.0",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -33,7 +34,8 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/ && stylelint src/**/*.scss"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +56,11 @@
     ]
   },
   "devDependencies": {
-    "@types/js-cookie": "^3.0.6"
+    "@types/js-cookie": "^3.0.6",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
+    "stylelint-order": "^6.0.4",
+    "stylelint-scss": "^6.2.1"
   }
 }

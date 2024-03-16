@@ -1,3 +1,4 @@
+import React from "react";
 import classNames from "classnames";
 import './PhoneMenu.scss';
 import { Path } from "../../types/pathName";
@@ -73,4 +74,4 @@ export default function PhoneMenu({burger}: Props) {
       )}
     </div>
   );
-};
+}
