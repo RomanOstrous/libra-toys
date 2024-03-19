@@ -1,7 +1,7 @@
 import React from "react";
 import './HomePage.scss';
 import imgV from '../../assets/images/Vectours.png';
-import img1 from '../../assets/images/бошка_3_малюнок.png';
+import img1 from '../../assets/images/chort.png';
 import img2 from '../../assets/images/Group.png';
 
 export const HomePage = () => {
