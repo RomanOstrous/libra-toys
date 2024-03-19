@@ -1,7 +1,7 @@
 export enum Path {
   Cart = 'cart',
   About = 'about',
-  Gallery = 'gallery',
+  Toys = 'toys',
   Account = 'account',
   Favourites = 'favourites',
   Login = 'login',

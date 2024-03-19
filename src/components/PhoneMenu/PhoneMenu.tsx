@@ -36,7 +36,7 @@ export default function PhoneMenu({burger}: Props) {
       'phone-menu__inactive': !burger
     })}>
       <div className="phone-menu__link">
-        <NavLink to={Path.Gallery} className={getLinkClass}>
+        <NavLink to={Path.Toys} className={getLinkClass}>
           Іграшки
         </NavLink>
 

@@ -72,6 +72,7 @@
     &-title {
       margin-bottom: 16px;
       color: white;
+
       @include libra40;
 
       @include on-desktop {
@@ -82,6 +83,7 @@
     &-subtitle {
       margin-bottom: 8px;
       color: #CED4DA;
+
       @include namu20;
 
       @include on-desktop {
@@ -92,6 +94,7 @@
     &-text {
       text-align: left;
       color: #868E96;
+      
       @include namu16;
 
       @include on-desktop {

@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import './LogOut.scss';
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hook";
-import { actions } from "../../app/authSlice";
+import { actions } from "../../app/Slices/authSlice";
 
 export default function LogOut() {
   const navigate = useNavigate();

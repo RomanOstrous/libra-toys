@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { Path } from "../../types/pathName";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import Cookies from "js-cookie";
-import { actions } from "../../app/authSlice";
+import { actions } from "../../app/Slices/authSlice";
 
 import Logo from "../../assets/images/Logo.svg";
 import BurgerIco from "../../assets/icons/burger.svg";
@@ -44,7 +44,7 @@ useEffect(() => {
 
         <div className="header__left">
           <div className="header__nav-item">
-            <NavLink to={Path.Gallery} className={getLinkClass}>
+            <NavLink to={Path.Toys} className={getLinkClass}>
               Іграшки
             </NavLink>
           </div>

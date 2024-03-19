@@ -6,7 +6,7 @@ import './styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { App } from './App';
 import { HomePage } from './pages/HomePage/HomePage';
-import { GalleryPage } from './pages/Gallery/GalleryPage';
+import { ToyPage } from './pages/Toy/ToyPage';
 import { AboutPage } from './pages/About/AboutPage';
 import { CartPage } from './pages/Cart/CartPage';
 import { FavouritePage } from './pages/Favorites/FavouritePage';
@@ -26,8 +26,8 @@ createRoot(container).render(
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
 
-          <Route path={Path.Gallery}>
-            <Route index element={<GalleryPage/>} />
+          <Route path={Path.Toys}>
+            <Route index element={<ToyPage/>} />
           </Route>
 
           <Route path={Path.About} element={<AboutPage />} />

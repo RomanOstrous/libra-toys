@@ -24,7 +24,7 @@ function request<T>(
   }
 
   return axios(config)
-    .then(response => response.data)
+    .then((response) => response.data)
     .catch(error => {
       throw new Error('Network Error');
     });
