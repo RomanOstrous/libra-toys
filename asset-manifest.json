@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/libra-toys/static/css/main.fafa80c4.css",
-    "main.js": "/libra-toys/static/js/main.dfeb1c1a.js",
+    "main.css": "/libra-toys/static/css/main.7efccc3b.css",
+    "main.js": "/libra-toys/static/js/main.ce36acfd.js",
     "static/media/Vectours.png": "/libra-toys/static/media/Vectours.64d9d00b93d24db617df.png",
     "static/media/fa-solid-900.ttf": "/libra-toys/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
     "static/media/NAMU-Pro.ttf": "/libra-toys/static/media/NAMU-Pro.b30d0e0cc330be936b3e.ttf",
@@ -14,6 +14,7 @@
     "static/media/fa-regular-400.woff2": "/libra-toys/static/media/fa-regular-400.e931bc0d14f5bbb1da22.woff2",
     "static/media/chort.png": "/libra-toys/static/media/chort.dcbd46e5a12f2342b395.png",
     "static/media/demon.png": "/libra-toys/static/media/demon.274a14c5b85b434a6bce.png",
+    "static/media/End.png": "/libra-toys/static/media/End.e0a1c8d345216b295e62.png",
     "static/media/Libra_font_Regular.otf": "/libra-toys/static/media/Libra_font_Regular.3a9ab7b43fdc73985da2.otf",
     "static/media/Group.png": "/libra-toys/static/media/Group.962e973f1afb413a69e2.png",
     "static/media/fa-v4compatibility.ttf": "/libra-toys/static/media/fa-v4compatibility.2eb7b3ef25042305f3ff.ttf",
@@ -23,15 +24,15 @@
     "static/media/google.svg": "/libra-toys/static/media/google.7e0e41dfe0a290aefb93bcb610d5cd2e.svg",
     "static/media/cross.svg": "/libra-toys/static/media/cross.4749fd53ec62d326207759c845ee14da.svg",
     "static/media/person.svg": "/libra-toys/static/media/person.86c25f2a2b35b3e8f39bca69b215c1d7.svg",
-    "index.html": "/libra-toys/index.html",
     "static/media/error.svg": "/libra-toys/static/media/error.5c567e14e941fef0bdc7.svg",
     "static/media/cart.svg": "/libra-toys/static/media/cart.b62ff6f053e22828507d2a41b535bd8a.svg",
+    "index.html": "/libra-toys/index.html",
     "static/media/burger.svg": "/libra-toys/static/media/burger.ae8663732b4dd5c330204d6d12368cf0.svg",
-    "main.fafa80c4.css.map": "/libra-toys/static/css/main.fafa80c4.css.map",
-    "main.dfeb1c1a.js.map": "/libra-toys/static/js/main.dfeb1c1a.js.map"
+    "main.7efccc3b.css.map": "/libra-toys/static/css/main.7efccc3b.css.map",
+    "main.ce36acfd.js.map": "/libra-toys/static/js/main.ce36acfd.js.map"
   },
   "entrypoints": [
-    "static/css/main.fafa80c4.css",
-    "static/js/main.dfeb1c1a.js"
+    "static/css/main.7efccc3b.css",
+    "static/js/main.ce36acfd.js"
   ]
 }
