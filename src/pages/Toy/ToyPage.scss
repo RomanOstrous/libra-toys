@@ -1,0 +1,26 @@
+@import "../../styles/utils/utils";
+
+.toy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  &__box {
+    width: 100%;
+    padding: 48px;
+    box-sizing: border-box;
+  }
+
+  &__toys {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 180px;
+  }
+
+  &__img {
+    width: 100%;
+    max-height: 360px;
+  }
+}

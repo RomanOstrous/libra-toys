@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { tokenRefresh } from "./helpers/RefreshToken";
 import { useAppSelector } from "./app/hook";
 import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./helpers/scrool";
 
 export const App = () => {
   const refreshToken = Cookies.get('refresh_token');
@@ -32,6 +33,7 @@ useEffect(() => {
         <Header />
       </header>
       <main className="main">
+        <ScrollToTop/>
         <Outlet />
       </main>
       <footer>
