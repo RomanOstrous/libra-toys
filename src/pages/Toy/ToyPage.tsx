@@ -8,8 +8,9 @@ import { Filters } from "../../components/Filters/Filters";
 
 export const ToyPage = () => {
   const dispatch = useAppDispatch();
-  const {product, loading, error} = useAppSelector(state => state.product);
+  const { product, loading, error } = useAppSelector(state => state.product);
   const [sortBy, setSortBy] = useState('');
+  const [selectedFilters, setSelectedFilters] = useState<number[]>([]);
 
   useEffect(() => {
     dispatch(initProduct());
@@ -27,14 +28,18 @@ export const ToyPage = () => {
         return copy.sort((a, b) => a.title.localeCompare(b.title));
       case 'price':
         return copy.sort((a, b) => a.price - b.price);
-        case 'name-rev':
-          return copy.sort((a, b) => b.title.localeCompare(a.title));
-        case 'price-rev':
-          return copy.sort((a, b) => b.price - a.price);
+      case 'name-rev':
+        return copy.sort((a, b) => b.title.localeCompare(a.title));
+      case 'price-rev':
+        return copy.sort((a, b) => b.price - a.price);
       default:
         return copy;
     }
   };
+
+  const filteredProducts = selectedFilters.length > 0
+  ? sortedProducts().filter(item => selectedFilters.includes(item.category)) 
+  : sortedProducts();
 
   return (
     <>
@@ -43,13 +48,13 @@ export const ToyPage = () => {
           <h1 className="toy__title">Іграшки</h1>
 
           <div className="toy__params grid__item--desktop-1-8 grid__item--tablet-1-6">
-            <Filters onChange={handleSortChange}/>
+            <Filters onSort={handleSortChange} setSelectedFilters={setSelectedFilters} selectedFilters={selectedFilters}/>
           </div>
           {loading && <div>Провірка загрузка</div>}
           {error && <div>Помилка {error}</div>}
 
           <div className="toy__toys grid__item--desktop-1-8 grid__item--tablet-1-6">
-            {product && sortedProducts().map((item) => (
+            {product && filteredProducts.map((item) => (
               <ProductCard key={item.id} product={item}/>
             ))}
           </div>

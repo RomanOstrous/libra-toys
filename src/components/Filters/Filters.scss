@@ -1,0 +1,85 @@
+@import "../../styles/utils/utils";
+
+.filters {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  margin: 32px 0 64px ;
+  width: 100%;
+  box-sizing: border-box;
+
+  &__sort {
+
+
+  }
+
+  &__category {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    background-color: #232020;
+    border-radius: 30px;
+    border: 1px solid white;
+    animation-duration: 0.3s;
+    box-sizing: border-box;
+
+    &-header {
+      position: relative;
+      width: 100%;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      background: none;
+      border: none;
+      box-sizing: border-box;
+    }
+
+    &-title {
+      color: white;
+    }
+
+    &-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &-arrow {
+      animation-duration: 0.3s;
+      transition: 0.3s;
+      &-active {
+        animation-duration: 0.3s;
+        transition: 0.3s;
+        rotate: 180deg;
+      }
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      outline: none;
+      border: none;
+    }
+
+    &-item {
+      width: 100%;
+      height: 48px;
+      background: none;
+      outline: none;
+      border: none;
+      border-top: 1px solid white;
+      box-sizing: border-box;
+      color: white;
+
+      &:hover {
+        color: yellow;
+      }
+
+      &--active {
+        color: orange;
+      }
+    }
+  }
+}
