@@ -1,20 +1,29 @@
 .grid {
-  display: flex;
-  flex-direction: column;
-
   @include on-tablet {
     display: grid;
+    flex-direction: column;
     column-gap: 16px;
     grid-template-columns: repeat(6, 1fr);
   }
 
   @include on-desktop {
     display: grid;
+    flex-direction: column;
     grid-template-columns: repeat(8, 1fr);
     column-gap: 18px;
   }
 
   &__item {
+    @include on-phone {
+      @for $start from 1 through 4 {
+        @for $end from $start through 4 {
+          &--phone-#{$start}-#{$end} {
+            grid-column: #{$start} / #{$end + 1};
+          }
+        }
+      }
+    }
+
     @include on-tablet {
       @for $start from 1 through 6 {
         @for $end from $start through 6 {

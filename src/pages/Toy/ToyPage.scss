@@ -14,9 +14,19 @@
 
   &__box {
     width: 100%;
-    padding: 48px;
+    padding: 24px 16px;
     box-sizing: border-box;
+
+    @include on-tablet {
+      padding: 48px 32px;
+    }
+
+    @include on-desktop {
+      padding: 48px;
+    }
   }
+
+  
 
   &__toys {
     display: grid;

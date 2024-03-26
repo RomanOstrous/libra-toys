@@ -2,8 +2,9 @@
 
 .filters {
   position: relative;
-  display: flex;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 16px;
   margin: 32px 0 64px ;
   width: 100%;
   box-sizing: border-box;
@@ -14,6 +15,7 @@
     padding: 0 16px;
     gap: 16px;
     height: 48px;
+    width: 100%;
     border-radius: 30px;
     box-sizing: border-box;
     background-color: #111213;
@@ -32,14 +34,18 @@
   &__filter {
     position: absolute;
     right: 0;
-    width: 100%;
+    
     background-color: black;
     border-bottom: 2px solid rgb(17, 18, 19);
     animation-duration: 0.3s;
     box-sizing: border-box;
+    @include on-tablet {
+      width: 100%;
+    }
 
     &--active {
       border: 2px solid rgb(73, 80, 87);
+      width: 100%;
       border-radius: 30px;
       background: rgb(7, 8, 9);
     }
@@ -58,15 +64,25 @@
     }
 
     &-title {
-      color: white;
+      display: none;
 
-      @include popins20;
+      @include on-tablet {
+        display: block;
+        color: white;
+
+        @include popins20;
+      }
     }
 
     &-placeholder {
-      color: #495057;
+      display: none;
+      
+      @include on-desktop {
+        display: block;
+        color: #495057;
 
-      @include namu16;
+        @include namu16;
+      }
     }
 
     &-left {
@@ -76,8 +92,15 @@
     }
 
     &-arrow {
-      animation-duration: 0.3s;
-      transition: 0.3s;
+      display: none;
+
+      @include on-tablet {
+        display: block;
+        animation-duration: 0.3s;
+        transition: 0.3s;
+      }
+
+
       &-active {
         animation-duration: 0.3s;
         transition: 0.3s;
@@ -103,7 +126,11 @@
       color: white;
       transition: all 0.3s ease;
 
-      @include popins20;
+      @include popins16;
+
+      @include on-tablet {
+        @include popins20;
+      }
 
       &:hover {
         color: yellow;

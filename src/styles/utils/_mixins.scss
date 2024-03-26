@@ -6,6 +6,12 @@
   }
 }
 
+@mixin on-phone {
+  @media (min-width: 0) {
+    @content;
+  }
+}
+
 @mixin on-desktop {
   @media (min-width: $desktop-width) {
     @content;

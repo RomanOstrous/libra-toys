@@ -81,7 +81,7 @@ export const Filters: React.FC<Props> = ({
 
   return (
     <div className="filters grid">
-      <div className="filters__search grid__item--desktop-1-4 grid__item--tablet-1-3">
+      <div className="filters__search grid__item--phone-1-2 grid__item--desktop-1-4 grid__item--tablet-1-2">
         <input 
           type="text" 
           className='filters__search-input'
@@ -93,7 +93,7 @@ export const Filters: React.FC<Props> = ({
       </div>
 
       <div 
-        className={classNames("filters__filter grid__item--desktop-5-6 grid__item--tablet-4-5", {
+        className={classNames("filters__filter grid__item--phone-2-3 grid__item--desktop-5-6 grid__item--tablet-3-4", {
           'filters__filter--active': sortActive === true
         })} 
         ref={sortRef}
@@ -141,7 +141,7 @@ export const Filters: React.FC<Props> = ({
       </div>
 
       <div 
-        className={classNames("filters__filter grid__item--desktop-7-8 grid__item--tablet-5-6", {
+        className={classNames("filters__filter grid__item--phone-3-4 grid__item--desktop-7-8 grid__item--tablet-5-6", {
           'filters__filter--active': filterActive=== true
         })} 
         ref={filterRef}

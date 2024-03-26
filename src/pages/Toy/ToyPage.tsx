@@ -81,7 +81,7 @@ export const ToyPage = () => {
     <>
       <div className="toy">
         <div className="toy__box container grid">
-          <h1 className="toy__title">Іграшки</h1>
+          <h1 className="toy__title grid__item--desktop-1-8 grid__item--tablet-1-6">Іграшки</h1>
 
           <div className="toy__params grid__item--desktop-1-8 grid__item--tablet-1-6">
             <Filters 
