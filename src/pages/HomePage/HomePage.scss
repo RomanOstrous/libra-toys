@@ -20,6 +20,9 @@
   }
 
   &__box {
+    display: flex;
+    flex-direction: column;
+    
     gap: 48px;
     padding: 48px 16px;
 

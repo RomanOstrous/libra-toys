@@ -16,6 +16,7 @@ import { LoginPage } from './pages/Login/LoginPage';
 import { SigninPage } from './pages/Signin/SigninPage';
 import { Provider } from 'react-redux';
 import store from './app/store';
+import ToyDetalPage from "./pages/ToyDetal/ToyDetalPage";
 
 const container = document.getElementById('root') as HTMLElement;
 
@@ -28,6 +29,7 @@ createRoot(container).render(
 
           <Route path={Path.Toys}>
             <Route index element={<ToyPage/>} />
+            <Route path=":productId" element={<ToyDetalPage />} />
           </Route>
 
           <Route path={Path.About} element={<AboutPage />} />

@@ -26,13 +26,26 @@
     }
   }
 
-  
-
   &__toys {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 120px;
+
+    @include on-tablet {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 160px;
+    }
+
+    @include on-desktop {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 180px;
+    }
   }
 
   &__img {
