@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ToyDetalPage.scss';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { client } from '../../services/httpClient';
 import { ProductDetalType } from '../../types/ProductDetalsType';
 import ButtonBack from '../../assets/icons/buttonBack.svg';
@@ -25,7 +25,12 @@ export default function ToyDetalPage() {
     <>
       {info && (
         <div className='info container'>
-          <p className="info__title">{info.title}</p>
+          <div className="info__top">
+            <Link to=".." className="info__back">
+              <img src={ButtonBack} alt="back"/>
+            </Link>
+            <p className="info__title">{info.title}</p>
+          </div>
 
           <div className="info__container">
             <div className="info__imgs grid__item--desktop-1-5">
@@ -40,7 +45,10 @@ export default function ToyDetalPage() {
               <div className="info__right-container">
                 <p className="info__right-title">Про {info.category.title}</p>
                 <p className="info__right-description">{info.description}</p>
-                <p className="info__right-title">Ціна: {info.price}₴</p>
+                <div className="info__right-count">
+                  <p className="info__right-title">Ціна:</p>
+                  <p className="info__right-title">{info.price}₴</p>
+                </div>
               </div>
               <div className="info__right-buttons">
                 <button className="info__right-cart">Додати в кошик</button>
@@ -55,23 +63,23 @@ export default function ToyDetalPage() {
             </div>
           </div>
 
-          <p className="info__title-list">Зріст негідника:</p>
-          <ul className="info__list">
-            <li className="info__list-text">{info.size} сантиметрів</li>
-          </ul>
-
-          <p className="info__title-list">Матеріали:</p>
-          <ul className="info__list">
-            {info.materials.map(item => (
-              <li className="info__list-text" key={item.name}>
-                {item.name}
-              </li>
-            ))}
-          </ul>
+          <div className="info__bottom">
+            <p className="info__title-list">Зріст негідника:</p>
+            <ul className="info__list">
+              <li className="info__list-text">{info.size} сантиметрів</li>
+            </ul>
+    
+            <p className="info__title-list">Матеріали:</p>
+            <ul className="info__list">
+              {info.materials.map(item => (
+                <li className="info__list-text" key={item.name}>
+                  {item.name}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      )
-        
-      }
+      )}
     </>
   )
 }
