@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/libra-toys/static/css/main.4c0d012e.css",
-    "main.js": "/libra-toys/static/js/main.f6807949.js",
+    "main.css": "/libra-toys/static/css/main.f29613b4.css",
+    "main.js": "/libra-toys/static/js/main.f41dd5c3.js",
     "static/media/Vectours.png": "/libra-toys/static/media/Vectours.64d9d00b93d24db617df.png",
     "static/media/fa-solid-900.ttf": "/libra-toys/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
     "static/media/NAMU-Pro.ttf": "/libra-toys/static/media/NAMU-Pro.b30d0e0cc330be936b3e.ttf",
@@ -24,6 +24,7 @@
     "static/media/sort.svg": "/libra-toys/static/media/sort.799eb6bd5d2505d17134b4f6f4301ad6.svg",
     "static/media/google.svg": "/libra-toys/static/media/google.7e0e41dfe0a290aefb93bcb610d5cd2e.svg",
     "static/media/cross.svg": "/libra-toys/static/media/cross.4749fd53ec62d326207759c845ee14da.svg",
+    "static/media/buttonBack.svg": "/libra-toys/static/media/buttonBack.8fbf635482e42c50913bdbdfb11446d9.svg",
     "static/media/person.svg": "/libra-toys/static/media/person.86c25f2a2b35b3e8f39bca69b215c1d7.svg",
     "static/media/search.svg": "/libra-toys/static/media/search.271d5958829c19b2ce2c4ab388b48f6e.svg",
     "static/media/arrow.svg": "/libra-toys/static/media/arrow.8797dc8bd0af31161a0a9fd6ba4583d6.svg",
@@ -33,11 +34,11 @@
     "index.html": "/libra-toys/index.html",
     "static/media/filter.svg": "/libra-toys/static/media/filter.1b14882f593f4cde0e6f50ae090e7388.svg",
     "static/media/burger.svg": "/libra-toys/static/media/burger.ae8663732b4dd5c330204d6d12368cf0.svg",
-    "main.4c0d012e.css.map": "/libra-toys/static/css/main.4c0d012e.css.map",
-    "main.f6807949.js.map": "/libra-toys/static/js/main.f6807949.js.map"
+    "main.f29613b4.css.map": "/libra-toys/static/css/main.f29613b4.css.map",
+    "main.f41dd5c3.js.map": "/libra-toys/static/js/main.f41dd5c3.js.map"
   },
   "entrypoints": [
-    "static/css/main.4c0d012e.css",
-    "static/js/main.f6807949.js"
+    "static/css/main.f29613b4.css",
+    "static/js/main.f41dd5c3.js"
   ]
 }
