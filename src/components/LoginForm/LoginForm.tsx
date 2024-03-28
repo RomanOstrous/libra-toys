@@ -67,10 +67,10 @@ function LoginForm() {
         dispatch(actions.login());
         navigate('/account');
 
-        console.log('Registration successful:', response);
+        console.log('Логін успішний:', response);
       } catch (error) {
         console.log('Схоже сталась помилка, перевірте правильність почти та паролю', error);
-        // setError('Схоже сталась помилка, перевірте правильність почти та паролю');
+
         setEmail('');
         setPassword('');
         setTimeout(() =>{
