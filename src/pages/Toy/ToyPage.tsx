@@ -70,7 +70,7 @@ export const ToyPage = () => {
   };
 
   const filteredProducts = filter.length > 0
-  ? sortedProducts().filter(item => filter.includes(item.category.toString())) 
+  ? sortedProducts().filter(item => filter.includes(item.category.id.toString())) 
   : sortedProducts();
 
   const visibleProducts = query

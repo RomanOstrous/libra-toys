@@ -6,22 +6,40 @@ import { ProductDetalType } from '../../types/ProductDetalsType';
 import ButtonBack from '../../assets/icons/buttonBack.svg';
 import Heart from '../../assets/icons/heart.svg';
 import RedHeart from '../../assets/icons/heartfilled.svg';
+import { useAppDispatch, useAppSelector } from '../../app/hook';
+import { actions } from '../../app/Slices/cartSlice';
 
 export default function ToyDetalPage() {
   const [info, setInfo] = useState<ProductDetalType>();
-  const [buttonActive, setButtonActive] = useState(false);
-  const [buttonCrt, setButtonCart] = useState(false);
+  const [buttonActive, setButtonActive] = useState<boolean>();
   const { productId } = useParams();
 
+  const { cart } = useAppSelector(state => state.cart);
+  
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    client.get<ProductDetalType>(`shop/products/${productId}`)
-    .then(response => setInfo(response))
-    .catch(error => console.log(error))
-    .finally()
-  }, [productId]);
+    if (productId !== undefined) {
+      client.get<ProductDetalType>(`shop/products/${productId}`)
+        .then(response => {
+          setInfo(response);
+        })
+        .catch(error => console.log(error));
+    }
 
-  console.log(info)
+    console.log("рендер", cart);
+  }, [productId, cart]);
 
+  const handleCartButton = () => {
+    if (productId && cart.includes(+productId)) {
+      dispatch(actions.take(+productId));
+
+    } else if (productId) {
+      dispatch(actions.add(+productId));
+    }
+  };
+  
+  console.log("korzuha", cart);
   return (
     <>
       {info && (
@@ -52,8 +70,8 @@ export default function ToyDetalPage() {
                 </div>
               </div>
               <div className="info__right-buttons">
-                <button className="info__right-cart" onClick={()=> setButtonCart(!buttonCrt)}>
-                  {buttonCrt
+                <button className="info__right-cart" onClick={()=> handleCartButton()}>
+                  {productId && cart.includes(+productId)
                     ? <p className="info__right-fav-text">Додано в кошик</p>
                     : <p className="info__right-fav-text">Додати в кошик</p>
                   }

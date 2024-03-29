@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Heart from '../../assets/icons/heart.svg';
 import RedHeart from '../../assets/icons/heartfilled.svg';
 
+
 type Props = {
   product: Product;
 }
@@ -29,7 +30,7 @@ export const ProductCard: React.FC<Props> = ({product}) => {
             src={images[0].image} 
             alt={title} 
           />
-          <p className='product-card__category'>{category}</p>
+          <p className='product-card__category'>{category.title}</p>
           <p className='product-card__title'>{title}</p>
         </Link>
       </div>
