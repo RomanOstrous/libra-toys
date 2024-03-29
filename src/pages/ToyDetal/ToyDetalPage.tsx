@@ -10,6 +10,7 @@ import RedHeart from '../../assets/icons/heartfilled.svg';
 export default function ToyDetalPage() {
   const [info, setInfo] = useState<ProductDetalType>();
   const [buttonActive, setButtonActive] = useState(false);
+  const [buttonCrt, setButtonCart] = useState(false);
   const { productId } = useParams();
 
   useEffect(() => {
@@ -51,9 +52,18 @@ export default function ToyDetalPage() {
                 </div>
               </div>
               <div className="info__right-buttons">
-                <button className="info__right-cart">Додати в кошик</button>
+                <button className="info__right-cart" onClick={()=> setButtonCart(!buttonCrt)}>
+                  {buttonCrt
+                    ? <p className="info__right-fav-text">Додано в кошик</p>
+                    : <p className="info__right-fav-text">Додати в кошик</p>
+                  }
+                </button>
+
                 <button className="info__right-fav" onClick={() => setButtonActive(!buttonActive)}>
-                  <p className="info__right-fav-text">Додати в обране</p>
+                  {buttonActive
+                    ? <p className="info__right-fav-text">Додано в обране</p>
+                    : <p className="info__right-fav-text">Додати в обране</p>
+                  }
                   {buttonActive
                     ? <img className="info__right-fav-button" src={RedHeart} alt="favourite" />
                     : <img className="info__right-fav-button" src={Heart} alt="favourite" />
