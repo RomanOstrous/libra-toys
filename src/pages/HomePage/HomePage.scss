@@ -22,12 +22,11 @@
   &__box {
     display: flex;
     flex-direction: column;
-    
     gap: 48px;
-    padding: 48px 16px;
+    padding: 48px 16px 0;
 
     @include on-desktop {
-      padding: 120px 0;
+      padding: 120px 0 0;
       gap: 75px;
     }
   }
@@ -102,6 +101,57 @@
 
       @include on-desktop {
         @include namu20;
+      }
+    }
+  }
+
+  &__slider {
+    width: 100%;
+    padding: 0 16px;
+    margin-bottom: 120px;
+    box-sizing: border-box;
+
+    @include on-tablet {
+      padding: 0 32px;
+      margin-bottom: 140px;
+    }
+
+    @include on-desktop {
+      padding: 0 48px;
+      margin-bottom: 180px;
+    }
+
+    &-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+
+      @include on-tablet {
+        margin-bottom: 32px;
+      }
+    }
+
+    &-button {
+      border: none;
+      padding: 0;
+      outline: none;
+      background: none;
+      rotate: 180deg;
+      transition: 0.3s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    &-title {
+      color: white;
+
+      @include libra40;
+
+      @include on-desktop {
+        @include libra56;
       }
     }
   }

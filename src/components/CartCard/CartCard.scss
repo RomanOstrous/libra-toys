@@ -69,8 +69,8 @@
     flex-direction: column;
     gap: 2px;
 
-    @include on-tablet {
-      gap: 8px;
+    @include on-desktop {
+      gap: 4px;
     }
 
     &-item {

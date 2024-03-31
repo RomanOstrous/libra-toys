@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import './ToyPage.scss';
-import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { initProduct } from "../../app/Slices/productSlice";
+import { useAppSelector } from "../../app/hook";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
 import { debounce } from 'lodash';
 import end from '../../assets/images/End.png';
@@ -9,18 +8,12 @@ import { Filters } from "../../components/Filters/Filters";
 import { useSearchParams } from "react-router-dom";
 
 export const ToyPage = () => {
-  const dispatch = useAppDispatch();
   const { product, loading, error } = useAppSelector(state => state.product);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
   const sort = searchParams.get('sort') || 'idUp';
   const filter = searchParams.getAll('filter') || [];
-
   const [apliedQuery, setApliedQuery] = useState('');
-
-  useEffect(() => {
-    dispatch(initProduct());
-  }, [dispatch]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const aplyQuery = useCallback(

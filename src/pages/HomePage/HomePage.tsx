@@ -3,8 +3,14 @@ import './HomePage.scss';
 import imgV from '../../assets/images/Vectours.png';
 import img1 from '../../assets/images/chort.png';
 import img2 from '../../assets/images/Group.png';
+import Button from '../../assets/icons/buttonBack.svg';
+import { SwipeToSlide } from "../../components/Slider/Slider";
+import { useNavigate } from "react-router-dom";
+
 
 export const HomePage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="home">
@@ -61,6 +67,23 @@ export const HomePage = () => {
               </p>
             </div>
           </div>
+
+          <div className="home__slider-container grid__item--desktop-2-7 grid__item--tablet-1-6">
+            <p className="home__slider-title">
+              Скоріш{' '}
+              <span style={{ color: '#0087BB' }}>дивись</span>{' '}
+              на цю{' '}
+              <span style={{ color: '#EA513F' }}>жуууууть</span>
+              !
+            </p>
+            <button onClick={() => navigate('/toys')} className="home__slider-button">
+              <img src={Button} alt="back"/>
+            </button>
+          </div>
+        </div>
+
+        <div className="home__slider container">
+          <SwipeToSlide />
         </div>
       </div>
     </>

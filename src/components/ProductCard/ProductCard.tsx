@@ -24,7 +24,7 @@ export const ProductCard: React.FC<Props> = ({product}) => {
           }
         </button>
 
-        <Link to={`${slug}`} className='product-card__img'>
+        <Link to={`/toys/${slug}`} className='product-card__img'>
           <img 
             className='product-card__img'
             src={images[0].image} 

@@ -17,7 +17,6 @@ export default function ToyDetalPage() {
   const dispatch = useAppDispatch();
   const { product} = useAppSelector(state => state.product);
 
-
   useEffect(() => {
     if (slug) {
       const selectId = product.filter(el => slug.includes(el.slug)).map(el => el.id);
@@ -41,6 +40,7 @@ export default function ToyDetalPage() {
         : dispatch(actions.add(info.id));
     }
   }
+  
   return (
     <>
       {info && (

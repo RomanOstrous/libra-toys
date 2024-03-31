@@ -26,6 +26,8 @@ export const Header = () => {
   const token = Cookies.get('refresh_token');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const {cart} = useAppSelector(state => state.cart);
+  const counter = cart.length;
 
 useEffect(() => {
   if (!token?.length) {
@@ -59,7 +61,13 @@ useEffect(() => {
         <div className="header__right">
           <div className="header__nav-item">
             <NavLink to={Path.Cart} className={getLinkClass}>
-              <img src={CartIco} alt="" />
+              <img src={CartIco} alt="" className="header__cart"/>
+
+              {cart.length > 0 && (
+                <span className="header__counter">
+                  {counter}
+                </span>
+              )}
             </NavLink>
           </div>
 
@@ -89,7 +97,13 @@ useEffect(() => {
         <div className="header__phone">
           <div className="header__nav-item">
             <NavLink to={Path.Cart} className={getLinkClass}>
-              <img src={CartIco} alt="" />
+              <img src={CartIco} alt="" className="header__cart"/>
+
+              {cart.length > 0 && (
+                <span className="header__counter">
+                  {counter}
+                </span>
+              )}
             </NavLink>
           </div>
 
