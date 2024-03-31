@@ -17,6 +17,7 @@ import { SigninPage } from './pages/Signin/SigninPage';
 import { Provider } from 'react-redux';
 import store from './app/store';
 import ToyDetalPage from "./pages/ToyDetal/ToyDetalPage";
+import PasswordResetPage from "./pages/PasswordReset/PasswordResetPage";
 
 const container = document.getElementById('root') as HTMLElement;
 
@@ -29,7 +30,7 @@ createRoot(container).render(
 
           <Route path={Path.Toys}>
             <Route index element={<ToyPage/>} />
-            <Route path=":productId" element={<ToyDetalPage />} />
+            <Route path=":slug?" element={<ToyDetalPage />} />
           </Route>
 
           <Route path={Path.About} element={<AboutPage />} />
@@ -43,6 +44,8 @@ createRoot(container).render(
           <Route path={Path.Login} element={<LoginPage/>} />
 
           <Route path={Path.Account} element={<AccountPage />} />
+
+          <Route path={Path.ResetPassword} element={<PasswordResetPage />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>

@@ -12,34 +12,35 @@ import { actions } from '../../app/Slices/cartSlice';
 export default function ToyDetalPage() {
   const [info, setInfo] = useState<ProductDetalType>();
   const [buttonActive, setButtonActive] = useState<boolean>();
-  const { productId } = useParams();
-
   const { cart } = useAppSelector(state => state.cart);
-  
+  const { slug } = useParams();
   const dispatch = useAppDispatch();
+  const { product} = useAppSelector(state => state.product);
+
 
   useEffect(() => {
-    if (productId !== undefined) {
-      client.get<ProductDetalType>(`shop/products/${productId}`)
+    if (slug) {
+      const selectId = product.filter(el => slug.includes(el.slug)).map(el => el.id);
+    
+      client.get<ProductDetalType>(`shop/products/${selectId}`)
         .then(response => {
           setInfo(response);
         })
         .catch(error => console.log(error));
+      
+      console.log("рендер");
     }
+  }, [slug, product]);
 
-    console.log("рендер", cart);
-  }, [productId, cart]);
+  console.log(cart);
 
   const handleCartButton = () => {
-    if (productId && cart.includes(+productId)) {
-      dispatch(actions.take(+productId));
-
-    } else if (productId) {
-      dispatch(actions.add(+productId));
+    if (info) {
+      cart.includes(info.id) 
+        ? dispatch(actions.take(info.id))
+        : dispatch(actions.add(info.id));
     }
-  };
-  
-  console.log("korzuha", cart);
+  }
   return (
     <>
       {info && (
@@ -71,7 +72,7 @@ export default function ToyDetalPage() {
               </div>
               <div className="info__right-buttons">
                 <button className="info__right-cart" onClick={()=> handleCartButton()}>
-                  {productId && cart.includes(+productId)
+                  {info.id && cart.includes(info.id)
                     ? <p className="info__right-fav-text">Додано в кошик</p>
                     : <p className="info__right-fav-text">Додати в кошик</p>
                   }

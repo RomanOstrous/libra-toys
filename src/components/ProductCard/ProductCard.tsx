@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const ProductCard: React.FC<Props> = ({product}) => {
-  const {title, images, id, category} = product;
+  const {title, images, category, slug} = product;
   const [buttonActive, setButtonActive] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ export const ProductCard: React.FC<Props> = ({product}) => {
           }
         </button>
 
-        <Link to={`${id}`} className='product-card__img'>
+        <Link to={`${slug}`} className='product-card__img'>
           <img 
             className='product-card__img'
             src={images[0].image} 

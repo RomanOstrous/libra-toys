@@ -5,6 +5,8 @@ import { ProductDetalType } from '../../types/ProductDetalsType';
 import { actions } from '../../app/Slices/cartSlice';
 import { useAppDispatch } from '../../app/hook';
 import './CartCard.scss';
+import { Link } from 'react-router-dom';
+import Close from "../../assets/icons/cross.svg";
 
 type Props = {
   toy: Product,
@@ -27,24 +29,36 @@ const CartCard: React.FC<Props> = ({toy}) => {
     })
     .catch(error => console.log(error))
   }, [toy.id]);
+  
   return (
     <div className='cart'>
-      <div className='cart__top'>
+      <div className='cart__top-mob'>
         <p className='cart__title'>{toy.title}</p>
-        <button className='cart__button' onClick={() => handleRemove()}>X</button>
+        <button className='cart__button' onClick={() => handleRemove()}>
+          <img src={Close} alt="" />
+        </button>
       </div>
       <div className='cart__container'>
-        <img className='cart__img' src={toy.images[0].image} alt={toy.title}/>
+        <Link to={`/toys/${toy.slug}`} className='cart__link'>
+          <img className='cart__img' src={toy.images[0].image} alt={toy.title}/>
+        </Link>
+        
 
-        <div>
-          <div>
+        <div className='cart__box'>
+          <div className='cart__top-pc'>
+            <p className='cart__title'>{toy.title}</p>
+            <button className='cart__button' onClick={() => handleRemove()}>
+              <img src={Close} alt="" />
+            </button>
+          </div>
+          <div className='cart__materials'>
             {materials?.materials.map(el => 
-              <p key={el.name}>{el.name}</p>
+              <p className='cart__materials-item' key={el.name}>• {el.name}</p>
             )}
           </div>
-          <div>
-            <p>Ціна:</p>
-            <p>{toy.price}</p>
+          <div className='cart__count'>
+            <p className='cart__count-text'>Ціна:</p>
+            <p className='cart__count-text'>{toy.price}</p>
           </div>
         </div>
       </div>
