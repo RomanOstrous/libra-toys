@@ -20,7 +20,18 @@ export const SwipeToSlide = () => {
     slidesToScroll: 1,
     infinite: true,
     cssEase: "linear",
-    variableWidth: true, 
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          autoplay: false,
+          pauseOnHover: false,
+          swipeToSlide: true,
+        }
+      },
+
+    ] 
   };
 
   return (

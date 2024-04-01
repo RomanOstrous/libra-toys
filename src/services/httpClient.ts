@@ -2,7 +2,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosRequestConfig } from 'axios';
 
-const BASE_URL = 'https://toy-shop-api.onrender.com/api/';
+const base = process.env.REACT_APP_BASE_URL;
+
+console.log(base);
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -13,7 +15,7 @@ function request<T>(
 ): Promise<T> {
   const config: AxiosRequestConfig = {
     method: method,
-    url: BASE_URL + url,
+    url: base + url,
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
     },
