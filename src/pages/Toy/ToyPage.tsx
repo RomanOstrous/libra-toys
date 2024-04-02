@@ -15,8 +15,6 @@ export const ToyPage = () => {
   const filter = searchParams.getAll('filter') || [];
   const [apliedQuery, setApliedQuery] = useState('');
 
-  console.log(product)
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const aplyQuery = useCallback(
     debounce(setApliedQuery, 1000),

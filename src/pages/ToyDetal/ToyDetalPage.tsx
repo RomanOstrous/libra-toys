@@ -11,7 +11,7 @@ import { actions } from '../../app/Slices/cartSlice';
 import { Loader } from '../../components/Loader/Loader';
 
 export const ToyDetalPage = () => {
-  const [info, setInfo] = useState<ProductDetalType>();
+  const [info, setInfo] = useState<ProductDetalType | null> (null);
   const [buttonActive, setButtonActive] = useState<boolean>();
   const [loader, setLoader] = useState(true);
   const { cart } = useAppSelector(state => state.cart);
@@ -19,25 +19,20 @@ export const ToyDetalPage = () => {
   const { product } = useAppSelector(state => state.product);
   const dispatch = useAppDispatch();
 
+  const selectproduct = product.find(el => el.slug === slug);
+
   useEffect(() => {
-    if (slug) {
-      const selectId = product.filter(el => slug.includes(el.slug)).map(el => el.id);
-    
+    if (slug && product.length && selectproduct) {
+      const selectId = selectproduct.id;
+    console.log('селект',selectId);
       client.get<ProductDetalType>(`shop/products/${selectId}`)
         .then(response => {
           setInfo(response);
         })
         .catch(error => console.log(error))
         .finally(() => setLoader(false));
-      
-      console.log("рендер");
     }
-  }, [slug, product]);
-
-  console.log('корзина', cart);
-  console.log('серчпараметер', slug);
-  console.log('продукти', product);
-  console.log('деталі товару', info);
+  }, [slug, product, selectproduct]);
 
   const handleCartButton = () => {
     if (info) {
@@ -53,7 +48,7 @@ export const ToyDetalPage = () => {
         <Loader />
       )}
 
-      {info?.id && (
+      {info && (
         <div className='info container'>
           <div className="info__top">
             <Link to=".." className="info__back">
