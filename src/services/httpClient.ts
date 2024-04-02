@@ -4,8 +4,6 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 const base = process.env.REACT_APP_BASE_URL;
 
-console.log(base);
-
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 function request<T>(

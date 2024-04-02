@@ -1,11 +1,7 @@
 export type Product = {
   id: number;
   title: string;
-  category: {
-    "id": number,
-    "title": string,
-    "slug": string
-  },
+  category: number,
   images: [
     {
       image: string;

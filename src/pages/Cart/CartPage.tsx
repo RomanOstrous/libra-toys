@@ -10,7 +10,7 @@ import Button from '../../assets/icons/buttonBack.svg';
 
 export const CartPage = () => {
   const { product } = useAppSelector(state => state.product);
-  const {cart} = useAppSelector(state => state.cart);
+  const { cart } = useAppSelector(state => state.cart);
 
   const visibleToys = product.filter(item => cart.includes(item.id));
   console.log("korzuha", cart);

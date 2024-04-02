@@ -6,10 +6,13 @@ import img2 from '../../assets/images/Group.png';
 import Button from '../../assets/icons/buttonBack.svg';
 import { SwipeToSlide } from "../../components/Slider/Slider";
 import { useNavigate } from "react-router-dom";
-
+import { useAppSelector } from "../../app/hook";
+import { Loader } from "../../components/Loader/Loader";
 
 export const HomePage = () => {
   const navigate = useNavigate();
+  const { loading } = useAppSelector(state => state.product);
+  const { load } = useAppSelector(state => state.category);
 
   return (
     <>
@@ -83,7 +86,10 @@ export const HomePage = () => {
         </div>
 
         <div className="home__slider container">
-          <SwipeToSlide />
+          {(load && loading) 
+            ? <Loader />
+            : <SwipeToSlide />
+            }
         </div>
       </div>
     </>

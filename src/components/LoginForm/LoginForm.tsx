@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../app/hook';
 import { actions } from '../../app/Slices/authSlice';
 import { client } from '../../services/httpClient';
 import Google from "../../assets/icons/google.svg";
+import { set } from "lodash";
 
 interface TokenResponse {
   access: string;
@@ -19,7 +20,7 @@ function LoginForm() {
   const [hasEmailError, setHasEmailError] = useState('');
 
   const [password, setPassword] = useState('');
-  // const [error, setError] = useState('');
+  const [error, setError] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
 
@@ -75,15 +76,15 @@ function LoginForm() {
         Cookies.set('refresh_token', refresh);
         dispatch(actions.login());
         navigate('/account');
-
-        console.log('Логін успішний:', response);
-      } catch (error) {
-        console.log('Схоже сталась помилка, перевірте правильність почти та паролю', error);
-
         setEmail('');
         setPassword('');
+
+        console.log('Логін успішний:', response);
+      } catch {
+        setError('Схоже сталась помилка, перевірте правильність почти та паролю');
+
         setTimeout(() =>{
-          // setError('');
+          setError('');
         }, 5000);
       } finally {
         setLoader(false);
@@ -150,6 +151,12 @@ function LoginForm() {
           <button className="login__button" disabled={disable}>
             {loader ? 'Загрузка...' : 'Увійти'}
           </button>
+          
+          {error ? (
+              <p className='login__input-error'>{error}</p>
+            ) : (
+              <p className='login__input-noerror'></p>
+            )}
         </form>
 
         <button
@@ -158,8 +165,8 @@ function LoginForm() {
         >
           Забув пароль?
         </button>
+
       </div>
-      
         <div className="login__bottom grid__item--desktop-3-6 grid__item--tablet-2-5">
           <p className="login__question">Не маєш облікового запису?</p>
           <Link to='/signin' className="login__link">Зареєструватись</Link>

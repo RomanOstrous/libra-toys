@@ -1,7 +1,13 @@
 import React from "react";
+import './FavouritePage.scss';
+import { Loader } from "../../components/Loader/Loader";
+
+
 
 export const FavouritePage = () => {
   return (
-    <h1> FavouritePage </h1>
+    <>
+    <Loader/>
+    </>
   );
 };

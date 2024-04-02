@@ -15,6 +15,8 @@ export const ToyPage = () => {
   const filter = searchParams.getAll('filter') || [];
   const [apliedQuery, setApliedQuery] = useState('');
 
+  console.log(product)
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const aplyQuery = useCallback(
     debounce(setApliedQuery, 1000),
@@ -63,7 +65,7 @@ export const ToyPage = () => {
   };
 
   const filteredProducts = filter.length > 0
-  ? sortedProducts().filter(item => filter.includes(item.category.id.toString())) 
+  ? sortedProducts().filter(item => filter.includes(item.category.toString())) 
   : sortedProducts();
 
   const visibleProducts = query

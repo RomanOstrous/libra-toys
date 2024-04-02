@@ -24,7 +24,7 @@ function SigninForm() {
   
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
-  //const [error, setError] = useState('');
+  const [error, setError] = useState('');
   
   let hasError = false;
   const navigate = useNavigate();
@@ -126,17 +126,18 @@ function SigninForm() {
         setLoader(true);
         const response = await client.post('user/registration/', data);
         navigate('../login');
-        console.log('Реєстрація успішна', response);
-      } catch (error) {
-        console.log('Не вдалось створити аккаунт', error);
         setName('');
-        setLastName('')
+        setLastName('');
         setEmail('');
         setPassword('');
         setPasswordOk('');
-        // setError('Не вдалось створити аккаунт! Перевірте правильність даних.')
+
+        console.log('Реєстрація успішна', response);
+      } catch {
+        setError('Не вдалось створити аккаунт! Спробуте ще.')
+        
         setTimeout(() =>{
-          // setError('');
+          setError('');
         }, 5000);
       } finally {
         setLoader(false);
@@ -280,6 +281,13 @@ function SigninForm() {
             <button className="signin__button" disabled={disable}>
               {loader ? 'Загрузка...' : 'Зареєструватись'}
             </button>
+
+            {error ? (
+              <p className='signin__input-error'>{error}</p>
+            ) : (
+              <p className='signin__input-noerror'></p>
+            )}
+
           </form>
 
           <Link to='/login' className="signin__link">

@@ -16,12 +16,13 @@ export default function UserInfo() {
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
   const [edit, setEdit] = useState(true);
+  const base = process.env.REACT_APP_BASE_URL;
 
   const token = Cookies.get('access_token');
   let hasError = false;
 
   useEffect(() => {
-    axios.get('https://toy-shop-api.onrender.com/api/user/me/', {
+    axios.get( base + 'user/me/', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -38,7 +39,7 @@ export default function UserInfo() {
     .catch(error => {
       console.log('херня вийшла', error);
     });
-  }, [token]);
+  }, [token, base]);
 
   const startsWithCapitalLetter = (str: string) => {
     return str[0] === str[0].toUpperCase();
@@ -90,7 +91,7 @@ export default function UserInfo() {
         last_name: lastName,
       };
 
-      axios.patch('https://toy-shop-api.onrender.com/api/user/me/', data, {
+      axios.patch(base + 'user/me/', data, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
