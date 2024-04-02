@@ -24,7 +24,7 @@ export const ToyDetalPage = () => {
   useEffect(() => {
     if (slug && product.length && selectproduct) {
       const selectId = selectproduct.id;
-    console.log('селект',selectId);
+    
       client.get<ProductDetalType>(`shop/products/${selectId}`)
         .then(response => {
           setInfo(response);

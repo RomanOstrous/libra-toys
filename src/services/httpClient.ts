@@ -3,7 +3,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 const base = process.env.REACT_APP_BASE_URL;
-const forwarded = process.env.REACT_APP_X;
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -17,7 +16,6 @@ function request<T>(
     url: base + url,
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'X-Forwarded-For': forwarded,
     },
   };
 

@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./helpers/scrool";
 import { initProduct } from "./app/Slices/productSlice";
 import { initCategory } from "./app/Slices/categorySlice";
+import axios from "axios";
 
 export const App = () => {
   const refreshToken = Cookies.get('refresh_token');
