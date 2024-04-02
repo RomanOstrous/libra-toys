@@ -7,6 +7,7 @@ import arrowIco from "../../assets/icons/arrow.svg";
 import sortIco from "../../assets/icons/sort.svg";
 import searchIco from "../../assets/icons/search.svg";
 import classNames from 'classnames';
+import { useAppSelector } from '../../app/hook';
 
 
 interface Props {
@@ -51,17 +52,13 @@ export const Filters: React.FC<Props> = ({
   filter,
 }) => {
 
-  const [category, setCategory] = useState<CategoryType[]>([]);
+
   const [filterActive, setFilterActive] = useState(false);
   const [sortActive, setSortActive] = useState(false);
   const [placeholder, setPlaceholder] = useState('Старе до нового');
   const filterRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    client.get<CategoryType[]>('shop/categories/')
-      .then(response => setCategory(response));
-  }, []);
+  const { categ } =useAppSelector(state => state.category)
 
   const handleClickOutside = (event: MouseEvent) => {
     if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
@@ -159,7 +156,7 @@ export const Filters: React.FC<Props> = ({
 
         {filterActive === true && (
           <div className="filters__filter-list">
-            {category.map(el =>
+            {categ.map(el =>
               <button key={el.id} onClick={() => handleFilterChange(el.id.toString())} className={classNames('filters__filter-item', { "filters__filter-item--active": filter.includes(el.id.toString()) })}>
                 {el.title}
               </button>

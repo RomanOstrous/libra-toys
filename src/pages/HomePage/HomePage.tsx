@@ -12,7 +12,6 @@ import { Loader } from "../../components/Loader/Loader";
 export const HomePage = () => {
   const navigate = useNavigate();
   const { loading } = useAppSelector(state => state.product);
-  const { load } = useAppSelector(state => state.category);
 
   return (
     <>
@@ -86,7 +85,7 @@ export const HomePage = () => {
         </div>
 
         <div className="home__slider container">
-          {(load && loading) 
+          {loading
             ? <Loader />
             : <SwipeToSlide />
             }

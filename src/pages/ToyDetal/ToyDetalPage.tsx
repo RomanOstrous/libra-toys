@@ -8,14 +8,16 @@ import Heart from '../../assets/icons/heart.svg';
 import RedHeart from '../../assets/icons/heartfilled.svg';
 import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { actions } from '../../app/Slices/cartSlice';
+import { Loader } from '../../components/Loader/Loader';
 
-export default function ToyDetalPage() {
+export const ToyDetalPage = () => {
   const [info, setInfo] = useState<ProductDetalType>();
   const [buttonActive, setButtonActive] = useState<boolean>();
+  const [loader, setLoader] = useState(true);
   const { cart } = useAppSelector(state => state.cart);
   const { slug } = useParams();
+  const { product } = useAppSelector(state => state.product);
   const dispatch = useAppDispatch();
-  const { product} = useAppSelector(state => state.product);
 
   useEffect(() => {
     if (slug) {
@@ -25,17 +27,21 @@ export default function ToyDetalPage() {
         .then(response => {
           setInfo(response);
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => setLoader(false));
       
       console.log("рендер");
     }
   }, [slug, product]);
 
-  console.log(cart);
+  console.log('корзина', cart);
+  console.log('серчпараметер', slug);
+  console.log('продукти', product);
+  console.log('деталі товару', info);
 
   const handleCartButton = () => {
     if (info) {
-      cart.includes(info.id) 
+      cart.includes(info.id)
         ? dispatch(actions.take(info.id))
         : dispatch(actions.add(info.id));
     }
@@ -43,7 +49,11 @@ export default function ToyDetalPage() {
   
   return (
     <>
-      {info && (
+      {loader && (
+        <Loader />
+      )}
+
+      {info?.id && (
         <div className='info container'>
           <div className="info__top">
             <Link to=".." className="info__back">

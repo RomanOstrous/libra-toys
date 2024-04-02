@@ -16,8 +16,9 @@ import { LoginPage } from './pages/Login/LoginPage';
 import { SigninPage } from './pages/Signin/SigninPage';
 import { Provider } from 'react-redux';
 import store from './app/store';
-import ToyDetalPage from "./pages/ToyDetal/ToyDetalPage";
+
 import PasswordResetPage from "./pages/PasswordReset/PasswordResetPage";
+import { ToyDetalPage } from "./pages/ToyDetal/ToyDetalPage";
 
 const container = document.getElementById('root') as HTMLElement;
 
