@@ -24,7 +24,7 @@ const container = document.getElementById('root') as HTMLElement;
 
 createRoot(container).render(
   <Provider store={store}>
-    <Router>
+    <Router >
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
