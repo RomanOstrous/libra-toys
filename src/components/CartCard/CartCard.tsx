@@ -7,13 +7,14 @@ import { useAppDispatch } from '../../app/hook';
 import './CartCard.scss';
 import { Link } from 'react-router-dom';
 import Close from "../../assets/icons/cross.svg";
+import { Loader } from '../Loader/Loader';
 
 type Props = {
   toy: Product,
 }
 
 const CartCard: React.FC<Props> = ({toy}) => {
-  const [materials, setMaterials] = useState<ProductDetalType>()
+  const [materials, setMaterials] = useState<ProductDetalType | null >(null)
 
   const dispatch = useAppDispatch();
 
@@ -52,8 +53,11 @@ const CartCard: React.FC<Props> = ({toy}) => {
             </button>
           </div>
           <div className='cart__materials'>
-            {materials?.materials.map(el => 
-              <p className='cart__materials-item' key={el.name}>• {el.name}</p>
+            {materials 
+              ? materials.materials.map(el => 
+                <p className='cart__materials-item' key={el.name}>• {el.name}</p>
+              ) : (
+              <Loader/>
             )}
           </div>
           <div className='cart__count'>

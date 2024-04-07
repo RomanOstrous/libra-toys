@@ -1,9 +1,10 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+const base = process.env.REACT_APP_BASE_URL;
 
 export function tokenRefresh(refreshToken: string) {
   try {
-    axios.post('https://toy-shop-api.onrender.com/api/user/token/refresh/', { 
+    axios.post(base + 'user/token/refresh/', { 
       refresh: refreshToken
     })
     .then(response => {

@@ -4,7 +4,14 @@ import { Product } from '../../types/ProductType';
 import { Link } from 'react-router-dom';
 import Heart from '../../assets/icons/heart.svg';
 import RedHeart from '../../assets/icons/heartfilled.svg';
-import { useAppSelector } from '../../app/hook';
+import { useAppDispatch, useAppSelector } from '../../app/hook';
+import { 
+  addToWishlist, 
+  removeFromWishlist, 
+  setWishlistLoading, 
+  setWishlist, 
+  updateWishlist 
+} from "../../app/Slices/wishListSlice";
 
 type Props = {
   product: Product;
@@ -12,15 +19,31 @@ type Props = {
 
 export const ProductCard: React.FC<Props> = ({product}) => {
   const {title, images, category, slug} = product;
-  const [buttonActive, setButtonActive] = useState(false);
   const {categ} = useAppSelector(state => state.category);
+  const {fav} = useAppSelector(state => state.wishlist);
   const categoryTitle = categ.find(cat => cat.id === category)?.title || '';
+  const dispatch = useAppDispatch();
+  const [buttonActive, setButtonActive] = useState<boolean>(fav.includes(product.id));
+
+  const handleFav = (id: number) => {
+    if (fav.includes(id)) {
+      setButtonActive(false);
+      dispatch(removeFromWishlist(product.id));
+      
+    } else {
+      setButtonActive(true);
+      dispatch(addToWishlist(id));
+    }
+
+    dispatch(updateWishlist());
+  };
+
 
   return (
     <>
       <div className='product-card'>
-        <button className="product-card__fav" onClick={() => setButtonActive(!buttonActive)}>
-          {buttonActive
+        <button className="product-card__fav" onClick={() => handleFav(product.id)}>
+          {buttonActive === true
             ? <img className="product-card-fav-button" src={RedHeart} alt="favourite" />
             : <img className="product-card-fav-button" src={Heart} alt="favourite" />
           }

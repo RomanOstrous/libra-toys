@@ -1,14 +1,17 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { WishType } from '../../types/wishType';
 
 interface WishlistState {
-  wishs: number[];
+  wishs: WishType[];
+  fav: number[];
   isLoading: boolean;
 }
 
 const initialState: WishlistState = {
   wishs: [],
+  fav: [],
   isLoading: false,
 };
 
@@ -16,10 +19,10 @@ const token = Cookies.get('access_token');
 const base = process.env.REACT_APP_BASE_URL;
 
 const addToWishlistOnServer = (productId: number) => {
-  return axios.post(base + `user/wishlist/`, { productId }, {
+  return axios.post(base + `user/wishlist/`, {"product": productId}, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
     }
   }).then(response => response.data);
 };
@@ -32,19 +35,19 @@ const removeFromWishlistOnServer = (productId: number) => {
     }
   }).then(response => {
     if (!response.data.ok) {
-      throw new Error('Failed to remove product from wishlist');
+      throw new Error('Не видалилось');
     }
   });
 };
 
-const fetchWishlistFromServer = (): Promise<number[]> => {
+const fetchWishlistFromServer = (): Promise<WishType[]> => {
   return axios.get(base + 'user/wishlist/', {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     }
   }).then(response => {
-    return response.data.wishs;
+    return response.data;
   });
 };
 
@@ -54,25 +57,31 @@ const wishlistSlice = createSlice({
   reducers: {
     addToWishlist(state, action: PayloadAction<number>) {
       const productId = action.payload;
-      state.wishs.push(productId);
-      addToWishlistOnServer(productId).catch(error => {
-        console.error('вішліст помилка:', error);
-      });
+      state.fav.push(productId);
+      if (productId) {
+        addToWishlistOnServer(productId)
+        .catch(error => {
+          console.error('вішліст помилка:', error);
+        });
+      }
     },
 
     removeFromWishlist(state, action: PayloadAction<number>) {
       const productId = action.payload;
-      state.wishs = state.wishs.filter(id => id !== productId);
-      removeFromWishlistOnServer(productId).catch(error => {
-        console.error('вішліст помилка:', error);
-      });
+      state.fav = state.fav.filter(id => id !== productId);
+      if (productId) {
+        removeFromWishlistOnServer(productId)
+        .catch(error => {
+          console.error('вішліст помилка:', error);
+        });
+      }
     },
 
     setWishlistLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
 
-    setWishlist(state, action: PayloadAction<number[]>) {
+    setWishlist(state, action: PayloadAction<WishType[]>) {
       state.wishs = action.payload;
     },
   },
@@ -86,7 +95,7 @@ export const updateWishlist = () => async (dispatch: Dispatch) => {
     const wishlist = await fetchWishlistFromServer();
     dispatch(setWishlist(wishlist));
   } catch (error) {
-    console.error('Error fetching wishlist:', error);
+    console.error('Помилка загрузки вішліста:', error);
   } finally {
     dispatch(setWishlistLoading(false));
   }
