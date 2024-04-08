@@ -19,6 +19,7 @@ import store from './app/store';
 
 import PasswordResetPage from "./pages/PasswordReset/PasswordResetPage";
 import { ToyDetalPage } from "./pages/ToyDetal/ToyDetalPage";
+import BuyPage from "./pages/Buy/BuyPage";
 
 const container = document.getElementById('root') as HTMLElement;
 
@@ -37,6 +38,8 @@ createRoot(container).render(
           <Route path={Path.About} element={<AboutPage />} />
 
           <Route path={Path.Cart} element={<CartPage />} />
+
+          <Route path={Path.Buy} element={<BuyPage />} />
 
           <Route path={Path.Favourites} element={<FavouritePage />} />
 

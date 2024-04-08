@@ -44,9 +44,15 @@ export default function PhoneMenu({burger}: Props) {
           Про нас
         </NavLink>
 
-        <NavLink to={Path.Favourites} className={getLinkClass}>
-          Вподобайки
-        </NavLink>
+        {isLoggedIn ? (
+          <NavLink to={Path.Favourites} className={getLinkClass}>
+            Вподобайки
+          </NavLink>
+        ):(
+          <NavLink to={Path.Login} className={getLinkClass}>
+            Вподобайки
+          </NavLink>
+        )}
 
         {isLoggedIn ? (
           <NavLink to={Path.Account} className={getLinkClass}>

@@ -71,11 +71,19 @@ useEffect(() => {
             </NavLink>
           </div>
 
-          <div className="header__nav-item">
-            <NavLink to={Path.Favourites} className={getLinkClass}>
-              <img src={HeartIco} alt="" />
-            </NavLink>
-          </div>
+          {!isLoggedIn ? (
+            <div className="header__nav-item">
+              <NavLink to={Path.Login} className={getLinkClass}>
+                <img src={HeartIco} alt="" />
+              </NavLink>
+            </div>
+          ):(
+            <div className="header__nav-item">
+              <NavLink to={Path.Favourites} className={getLinkClass}>
+                <img src={HeartIco} alt="" />
+              </NavLink>
+            </div>
+          )}
 
           {!isLoggedIn && (
               <div className="header__nav-item">

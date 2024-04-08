@@ -40,7 +40,7 @@ export const CartPage = () => {
                   <p className="cart-page__text">Всього:</p>
                   <p className="cart-page__text">{total}₴</p>
                 </div>
-                <button className="cart-page__button">
+                <button className="cart-page__button" onClick={() => navigate('/buy')}>
                   Придбати
                 </button>
               </div>

@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
 import './FavouritePage.scss';
 import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { 
-  addToWishlist, 
-  removeFromWishlist, 
-  setWishlistLoading, 
-  setWishlist, 
-  updateWishlist 
-} from "../../app/Slices/wishListSlice";
+import { updateWishlist } from "../../app/Slices/wishListSlice";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
 
 export const FavouritePage = () => {
@@ -31,18 +25,18 @@ export const FavouritePage = () => {
         <p>Вподобайки</p>
       </div>
 
-    {wishs && (
+    {wishs.length > 0 ? (
       <div className="favorit__container">
         {visibleFav.map(el =>
           <ProductCard key={el.id} product={el}/>
         )}
       </div>
+    ):(
+      <p className="cart-page__empty">
+        А тут ще нічого <br />
+        не має(
+      </p>
     )}
-
-        <p className="cart-page__empty">
-          А тут ще нічого <br />
-          не має(
-        </p>
     </div>
   );
 };

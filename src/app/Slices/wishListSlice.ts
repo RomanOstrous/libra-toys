@@ -5,13 +5,11 @@ import { WishType } from '../../types/wishType';
 
 interface WishlistState {
   wishs: WishType[];
-  fav: number[];
   isLoading: boolean;
 }
 
 const initialState: WishlistState = {
   wishs: [],
-  fav: [],
   isLoading: false,
 };
 
@@ -57,7 +55,6 @@ const wishlistSlice = createSlice({
   reducers: {
     addToWishlist(state, action: PayloadAction<number>) {
       const productId = action.payload;
-      state.fav.push(productId);
       if (productId) {
         addToWishlistOnServer(productId)
         .catch(error => {
@@ -68,7 +65,6 @@ const wishlistSlice = createSlice({
 
     removeFromWishlist(state, action: PayloadAction<number>) {
       const productId = action.payload;
-      state.fav = state.fav.filter(id => id !== productId);
       if (productId) {
         removeFromWishlistOnServer(productId)
         .catch(error => {

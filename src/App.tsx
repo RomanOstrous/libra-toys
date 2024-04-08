@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./helpers/scrool";
 import { initProduct } from "./app/Slices/productSlice";
 import { initCategory } from "./app/Slices/categorySlice";
+import { updateWishlist } from "./app/Slices/wishListSlice";
 
 export const App = () => {
   const refreshToken = Cookies.get('refresh_token');
@@ -18,7 +19,11 @@ export const App = () => {
   useEffect(() => {
     dispatch(initProduct());
     dispatch(initCategory());
-  }, [dispatch]);
+
+    if(isLoggedIn) {
+      dispatch(updateWishlist());
+    }
+  }, [dispatch, isLoggedIn]);
 
   useEffect(() => {
     if (refreshToken) {

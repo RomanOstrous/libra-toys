@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductCard.scss';
 import { Product } from '../../types/ProductType';
 import { Link } from 'react-router-dom';
@@ -8,8 +8,6 @@ import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { 
   addToWishlist, 
   removeFromWishlist, 
-  setWishlistLoading, 
-  setWishlist, 
   updateWishlist 
 } from "../../app/Slices/wishListSlice";
 
@@ -20,24 +18,54 @@ type Props = {
 export const ProductCard: React.FC<Props> = ({product}) => {
   const {title, images, category, slug} = product;
   const {categ} = useAppSelector(state => state.category);
-  const {fav} = useAppSelector(state => state.wishlist);
+  const {wishs} = useAppSelector(state => state.wishlist);
   const categoryTitle = categ.find(cat => cat.id === category)?.title || '';
   const dispatch = useAppDispatch();
-  const [buttonActive, setButtonActive] = useState<boolean>(fav.includes(product.id));
+  const [buttonActive, setButtonActive] = useState<boolean>(false);
+  const ids = wishs.map(el => el.product);
 
-  const handleFav = (id: number) => {
-    if (fav.includes(id)) {
-      setButtonActive(false);
-      dispatch(removeFromWishlist(product.id));
-      
-    } else {
+  useEffect(() => {
+    if (ids.includes(product.id)) {
       setButtonActive(true);
-      dispatch(addToWishlist(id));
+    } else {
+      setButtonActive(false);
     }
+  }, [ids, wishs]);
 
-    dispatch(updateWishlist());
+  console.log('fav',ids)
+
+  const handleAddToWishlist = async (productId: number) => {
+    try {
+      await dispatch(addToWishlist(productId));
+      dispatch(updateWishlist());
+    } catch (error) {
+      console.error('Помилка додавання до вішліста:', error);
+    }
   };
 
+  const handleRemoveToWishlist = async (productId: number) => {
+    try {
+      await dispatch(removeFromWishlist(productId));
+      dispatch(updateWishlist());
+    } catch (error) {
+      console.error('Помилка додавання до вішліста:', error);
+    }
+  };
+
+  const handleFav = (id: number) => {
+    if (ids.includes(id)) {
+
+      handleRemoveToWishlist(id);
+      
+    } else {
+
+      handleAddToWishlist(id);
+    }
+
+    setTimeout(() => {
+      dispatch(updateWishlist());
+    }, 100);
+  };
 
   return (
     <>
