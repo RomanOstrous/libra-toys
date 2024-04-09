@@ -54,11 +54,8 @@ export const ProductCard: React.FC<Props> = ({product}) => {
 
   const handleFav = (id: number) => {
     if (ids.includes(id)) {
-
       handleRemoveToWishlist(id);
-      
     } else {
-
       handleAddToWishlist(id);
     }
 

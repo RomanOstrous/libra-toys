@@ -3,10 +3,10 @@ import './CartPage.scss';
 import { useAppSelector } from "../../app/hook";
 import CartCard from "../../components/CartCard/CartCard";
 
-import ButtonBack from '../../assets/icons/buttonBack.svg';
 import { useNavigate } from "react-router-dom";
 import { SwipeToSlide } from "../../components/Slider/Slider";
-import Button from '../../assets/icons/buttonBack.svg';
+import ButtonBack from "../../components/ButtonBack/ButtonBack";
+import Back from '../../assets/icons/buttonBack.svg';
 
 export const CartPage = () => {
   const { product } = useAppSelector(state => state.product);
@@ -18,16 +18,12 @@ export const CartPage = () => {
   const count = visibleToys.map(item => item.price);
   const total = count.reduce((acc, item) => acc + item, 0);
   const navigate = useNavigate();
+  const title = 'Кошик';
 
   return (
     <div className="cart-page">
         <div className="container cart-page__container">
-          <div className="cart-page__top">
-            <button className="cart-page__back" onClick={() => navigate(-1)}>
-              <img src={ButtonBack} alt="back"/>
-            </button>
-            <p className="cart-page__title">Кошик</p>
-          </div>
+          <ButtonBack text={title}/>
 
           {cart.length > 0 ? ( 
             <>
@@ -60,7 +56,7 @@ export const CartPage = () => {
           Тобі також сподобаеться
         </p>
         <button onClick={() => navigate('/toys')} className="cart-page__slider-button">
-          <img src={Button} alt="back"/>
+          <img src={Back} alt="back"/>
         </button>
       </div>
 

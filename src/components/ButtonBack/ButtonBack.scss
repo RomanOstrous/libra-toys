@@ -1,0 +1,42 @@
+@import "../../styles/utils/utils";
+
+.button-back {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 24px;
+
+  @include on-tablet {
+    margin-bottom: 32px;
+  }
+
+  @include on-desktop {
+    margin-bottom: 40px;
+  }
+
+  &__back {
+    outline: none;
+    border: none;
+    background: none;
+    padding: 0;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      transform: scale(0.9);
+    }
+  }
+  
+  &__title {
+    color: white;
+  
+    @include libra40;
+  
+    @include on-tablet {
+      @include libra48;
+    }
+  
+    @include on-desktop {
+      @include libra56;
+    }
+  }
+}

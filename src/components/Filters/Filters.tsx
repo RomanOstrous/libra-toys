@@ -1,7 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './Filters.scss';
-import { client } from '../../services/httpClient';
-import { CategoryType } from '../../types/categoryType';
 import filterIco from "../../assets/icons/filter.svg";
 import arrowIco from "../../assets/icons/arrow.svg";
 import sortIco from "../../assets/icons/sort.svg";
@@ -43,7 +41,6 @@ const sortVaribles = [
 ]
 
 export const Filters: React.FC<Props> = ({
-
   handleFilterChange,
   handleSortChange,
   handleQueryChange,
@@ -51,7 +48,6 @@ export const Filters: React.FC<Props> = ({
   sort, 
   filter,
 }) => {
-
 
   const [filterActive, setFilterActive] = useState(false);
   const [sortActive, setSortActive] = useState(false);
