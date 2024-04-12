@@ -1,0 +1,73 @@
+@import "../../styles/utils/utils";
+
+.not-found {
+  padding: 16px;
+  padding-left: 56px;
+
+  @include on-tablet {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 32px;
+    padding-left: 72px;
+  }
+
+  &__imgs {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  &__shadow {
+    position: absolute;
+    z-index: -1;
+    left: -40px;
+    top: 20px;
+    width: 100%;
+    max-width: 300px;
+    
+    @include on-desktop {
+      max-width: 370px;
+    }
+  }
+
+  &__img {
+    width: 100%;
+    max-width: 300px;
+
+    @include on-desktop {
+      max-width: 370px;
+    }
+  }
+
+
+  &__title {
+    margin-bottom: 16px;
+    color: white;
+
+    @include libra40;
+
+    @include on-tablet {
+      margin-bottom: 32px;
+
+      @include libra56;
+    }
+  }
+
+  &__box {
+    display: flex;
+  }
+
+  &__text {
+    color: white;
+    @include namu20;
+
+    @include on-tablet {
+      @include namu24;
+    }
+  }
+
+  &__link {
+    margin-left: 5px;
+    color: #1976D2;
+  }
+}
