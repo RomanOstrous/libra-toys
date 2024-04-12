@@ -13,17 +13,14 @@ export const CartPage = () => {
   const { cart } = useAppSelector(state => state.cart);
 
   const visibleToys = product.filter(item => cart.includes(item.id));
-  console.log("korzuha", cart);
-
   const count = visibleToys.map(item => item.price);
   const total = count.reduce((acc, item) => acc + item, 0);
   const navigate = useNavigate();
-  const title = 'Кошик';
 
   return (
     <div className="cart-page">
         <div className="container cart-page__container">
-          <ButtonBack text={title}/>
+          <ButtonBack text={'Кошик'}/>
 
           {cart.length > 0 ? ( 
             <>
