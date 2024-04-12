@@ -11,6 +11,7 @@ import Back from '../../assets/icons/buttonBack.svg';
 export const CartPage = () => {
   const { product } = useAppSelector(state => state.product);
   const { cart } = useAppSelector(state => state.cart);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
   const visibleToys = product.filter(item => cart.includes(item.id));
   const count = visibleToys.map(item => item.price);
@@ -33,7 +34,14 @@ export const CartPage = () => {
                   <p className="cart-page__text">Всього:</p>
                   <p className="cart-page__text">{total}₴</p>
                 </div>
-                <button className="cart-page__button" onClick={() => navigate('/buy')}>
+                <button 
+                  className="cart-page__button" 
+                  onClick={() => {
+                    if (isLoggedIn) {
+                      navigate('/buy')
+                    } else {navigate('/login')}
+                  }}
+                >
                   Придбати
                 </button>
               </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ToyDetalPage.scss';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { client } from '../../services/httpClient';
 import { ProductDetalType } from '../../types/ProductDetalsType';
 import ButtonBack from '../../assets/icons/buttonBack.svg';
@@ -9,15 +9,25 @@ import RedHeart from '../../assets/icons/heartfilled.svg';
 import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { actions } from '../../app/Slices/cartSlice';
 import { Loader } from '../../components/Loader/Loader';
+import { 
+  addToWishlist, 
+  removeFromWishlist, 
+  updateWishlist 
+} from "../../app/Slices/wishListSlice";
 
 export const ToyDetalPage = () => {
   const [info, setInfo] = useState<ProductDetalType | null> (null);
   const [buttonActive, setButtonActive] = useState<boolean>();
   const [loader, setLoader] = useState(true);
   const { cart } = useAppSelector(state => state.cart);
+  const {wishs} = useAppSelector(state => state.wishlist);
   const { slug } = useParams();
   const { product } = useAppSelector(state => state.product);
   const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const navigate = useNavigate();
+
+  const ids = wishs.map(el => el.product);
 
   const selectproduct = product.find(el => el.slug === slug);
 
@@ -33,6 +43,50 @@ export const ToyDetalPage = () => {
         .finally(() => setLoader(false));
     }
   }, [slug, product, selectproduct]);
+
+  useEffect(() => {
+    if (info) {
+      if (ids.includes(info.id)) {
+        setButtonActive(true);
+      } else {
+        setButtonActive(false);
+      }
+    }
+  }, [ids, wishs, info]);
+
+  const handleAddToWishlist = async (productId: number) => {
+    try {
+      await dispatch(addToWishlist(productId));
+      dispatch(updateWishlist());
+    } catch (error) {
+      console.error('Помилка додавання до вішліста:', error);
+    }
+  };
+
+  const handleRemoveToWishlist = async (productId: number) => {
+    try {
+      await dispatch(removeFromWishlist(productId));
+      dispatch(updateWishlist());
+    } catch (error) {
+      console.error('Помилка додавання до вішліста:', error);
+    }
+  };
+
+  const handleFav = (id: number) => {
+    if (!isLoggedIn) {
+      navigate('/login')
+    } else {
+      if (ids.includes(id)) {
+        handleRemoveToWishlist(id);
+      } else {
+        handleAddToWishlist(id);
+      }
+  
+      setTimeout(() => {
+        dispatch(updateWishlist());
+      }, 100);
+    }
+  };
 
   const handleCartButton = () => {
     if (info) {
@@ -83,7 +137,7 @@ export const ToyDetalPage = () => {
                   }
                 </button>
 
-                <button className="info__right-fav" onClick={() => setButtonActive(!buttonActive)}>
+                <button className="info__right-fav" onClick={() => handleFav(info.id)}>
                   {buttonActive
                     ? <p className="info__right-fav-text">Додано в обране</p>
                     : <p className="info__right-fav-text">Додати в обране</p>

@@ -74,6 +74,7 @@
 
   &__card {
     transition: 0.3s ease;
+    margin-bottom: 20px;
 
     &:hover {
       background-color: #111213;
@@ -89,5 +90,16 @@
     color: white;
 
     @include namu16
+  }
+
+  &__empty {
+    text-align: center;
+    color: #495057;
+
+    @include libra40;
+
+    @include on-tablet {
+      @include libra48
+    }
   }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ProductCard.scss';
 import { Product } from '../../types/ProductType';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Heart from '../../assets/icons/heart.svg';
 import RedHeart from '../../assets/icons/heartfilled.svg';
 import { useAppDispatch, useAppSelector } from '../../app/hook';
@@ -23,6 +23,8 @@ export const ProductCard: React.FC<Props> = ({product}) => {
   const dispatch = useAppDispatch();
   const [buttonActive, setButtonActive] = useState<boolean>(false);
   const ids = wishs.map(el => el.product);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (ids.includes(product.id)) {
@@ -53,15 +55,19 @@ export const ProductCard: React.FC<Props> = ({product}) => {
   };
 
   const handleFav = (id: number) => {
-    if (ids.includes(id)) {
-      handleRemoveToWishlist(id);
+    if (!isLoggedIn) {
+      navigate('/login')
     } else {
-      handleAddToWishlist(id);
+      if (ids.includes(id)) {
+        handleRemoveToWishlist(id);
+      } else {
+        handleAddToWishlist(id);
+      }
+  
+      setTimeout(() => {
+        dispatch(updateWishlist());
+      }, 100);
     }
-
-    setTimeout(() => {
-      dispatch(updateWishlist());
-    }, 100);
   };
 
   return (

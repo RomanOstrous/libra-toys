@@ -68,11 +68,11 @@ export default function PhoneMenu({burger}: Props) {
       {!isLoggedIn && (
         <>
           <div className="phone-menu__buttons">
-            <button className="" onClick={() => navigate(Path.Login)}>
+            <button className="phone-menu__button" onClick={() => navigate(Path.Login)}>
               Вхід
             </button>
 
-            <button className="" onClick={() => navigate(Path.Login)}>
+            <button className="phone-menu__button" onClick={() => navigate(Path.Signin)}>
               Зареєструватись
             </button>
           </div>

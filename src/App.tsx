@@ -20,7 +20,7 @@ export const App = () => {
     dispatch(initProduct());
     dispatch(initCategory());
 
-    if(isLoggedIn) {
+    if (isLoggedIn) {
       dispatch(updateWishlist());
     }
   }, [dispatch, isLoggedIn]);

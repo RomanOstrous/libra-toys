@@ -47,6 +47,13 @@ export const AccountPage = () => {
           </button>
 
           <div className={`account__info ${button === true ? 'account__info--visible' : ''}`}>
+            {orders.length < 0 && (
+              <p className="account__empty">
+                Ой... А ти ще нічого( <br />
+                не заказав(
+              </p>
+            )}
+
             {orders.map(el => (
               <div key={el.id} className="account__card">
                 <p className="account__order">Заказ № {el.id}</p>
