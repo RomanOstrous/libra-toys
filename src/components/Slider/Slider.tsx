@@ -11,6 +11,7 @@ import {  useAppSelector } from "../../app/hook";
 export const SwipeToSlide = () => {
 
   const { product} = useAppSelector(state => state.product);
+  console.log(product)
 
   const settings = {
     autoplay: true,
@@ -29,8 +30,7 @@ export const SwipeToSlide = () => {
           pauseOnHover: false,
           swipeToSlide: true,
         }
-      },
-
+      }
     ] 
   };
 

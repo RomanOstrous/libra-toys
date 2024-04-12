@@ -25,7 +25,6 @@ export const NotFound = () => {
             <Link to="/" className="not-found__link not-found__text">на головну</Link>
           </div>
         </div>
-
       </div>
   );
 };

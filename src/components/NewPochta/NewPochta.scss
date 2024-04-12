@@ -34,7 +34,7 @@
     transition: 0.5s;
     
     &--visible {
-      max-height: 300px;
+      max-height: 1000px;
     }
   }
   
@@ -95,6 +95,12 @@
     color: white;
 
     @include namu20;
+
+    @include on-tablet {
+    }
+
+    @include on-desktop {
+    }
   }
 
   &__options {
@@ -105,6 +111,7 @@
     overflow-y: auto;
     background: rgb(17, 18, 19);
     box-sizing: border-box;
+    z-index: 2;
 
     @include on-tablet {
       left: 32px;
@@ -112,9 +119,9 @@
     }
 
     @include on-desktop {
+      width: 50%;
       left: 42px;
       right: 42px;
-      max-width: 580px;
     }
   }
 

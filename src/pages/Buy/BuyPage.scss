@@ -40,12 +40,19 @@
       border-radius: 44px;
     }
 
-    &:hover {
+    &:disabled {
+      background-color: #FDDE8880;
       color: white;
+      cursor: not-allowed;
     }
 
     &:focus {
       background-color: #FAC155;
+    }
+
+    &:hover {
+      border: 1px solid white;
+      color: white;
     }
   }
 }

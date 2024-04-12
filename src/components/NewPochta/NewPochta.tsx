@@ -6,6 +6,9 @@ import axios from 'axios';
 import classNames from 'classnames';
 
 const NewPochta = () => {
+  const [firstName, setFirstName] = useState(sessionStorage.getItem('first') || '');
+  const [lastName, setLastName] = useState(sessionStorage.getItem('last') || '');
+  const [midleName, setMidleName] = useState(sessionStorage.getItem('midle') || '');
   const [phone, setPhone] = useState(sessionStorage.getItem('phone') || '');
   const [city, setCity] = useState(sessionStorage.getItem('city') || '');
   const [warehouse, setWarehouse] = useState(sessionStorage.getItem('warehouse') || '');
@@ -14,10 +17,13 @@ const NewPochta = () => {
   const [button, setButton] = useState(false);
 
   const saveToSessionStorage = useCallback(() => {
+    sessionStorage.setItem('first', firstName);
+    sessionStorage.setItem('last', lastName);
+    sessionStorage.setItem('midle', midleName);
     sessionStorage.setItem('phone', phone);
     sessionStorage.setItem('city', city);
     sessionStorage.setItem('warehouse', warehouse);
-  }, [phone, city, warehouse]);
+  }, [phone, city, warehouse, firstName, lastName, midleName]);
 
   useEffect(() => {
     saveToSessionStorage();
@@ -74,6 +80,21 @@ const NewPochta = () => {
     [city]
   );
 
+  const handleChangeLast = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newText = e.target.value;
+    setLastName(newText);
+  };
+
+  const handleChangeFirst = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newText = e.target.value;
+    setFirstName(newText);
+  };
+
+  const handleChangeMidle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newText = e.target.value;
+    setMidleName(newText);
+  };
+
   const handleChangePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     setPhone(newText);
@@ -92,7 +113,6 @@ const NewPochta = () => {
     setoptionsWarehouse([]);
   };
 
-
   const handleChangeWarehouse = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     setWarehouse(newText);
@@ -109,92 +129,145 @@ const NewPochta = () => {
       <button className="newp__select" onClick={() => setButton(!button)}>
         <p className="newp__title">Доставка Новою Поштою</p>
         <img 
-          src={arrow} alt=""
+          src={arrow} alt="стрілка"
           className={classNames("newp__arrow", {
               "newp__arrow-active": button === false 
             })} />
       </button>
       
+      <div className={`newp__info ${button === true ? 'newp__info--visible' : ''}`}>
+        <div className="newp__box">
+          <p className="newp__text">
+            Прізвище
+            <span style={{color: '#DD2525'}}>*</span>
+          </p>
 
-        <div className={`newp__info ${button === true ? 'newp__info--visible' : ''}`}>
-          <div className="newp__box">
-            <p className="newp__text">
-              Номер телефону 
-              <span style={{color: '#DD2525'}}>*</span>
-            </p>
-            <input 
-              className="newp__input"
-              type="text" 
-              name="телефон" 
-              value={phone}
-              onChange={handleChangePhone}
-              placeholder='Введи свій телефон'
-              autoComplete='off'
-            />
-          </div>
-
-          <div className="newp__container">
-            <div className="newp__box">
-              <p className="newp__text">
-                Місто
-                <span style={{color: '#DD2525'}}>*</span>
-              </p>
-              <input
-                autoComplete='off'
-                className="newp__input"
-                type="text"
-                value={city}
-                name="населений пункт" 
-                onChange={handleChangeCity}
-                placeholder="Введи своє місто"
-                onBlur={() => setTimeout(() => {
-                  setoptionsCity([]);
-                }, 100)}
-              />
-
-              <div className="newp__options">
-                <ul className="newp__options-list">
-                  {optionsCity.map((option, index) => (
-                    <li className="newp__option" key={index} onClick={() => handleSelectCity(option)}>
-                      {option}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="newp__box">
-              <p className="newp__text">
-                Відділення пошти 
-                <span style={{color: '#DD2525'}}>*</span>
-              </p>
-              <input
-                className="newp__input"
-                type="text"
-                value={warehouse}
-                name="відділення"
-                autoComplete='off' 
-                onChange={handleChangeWarehouse}
-                onFocus={handleChangeWarehouse}
-                placeholder="Введи своє відділення"
-                onBlur={() => setTimeout(() => {
-                  setoptionsWarehouse([]);
-                }, 100)}
-              />
-
-              <div className="newp__options">
-                <ul className="newp__options-list">
-                  {optionsWarehouse.map((option, index) => (
-                    <li className="newp__option" key={index} onClick={() => handleSelectWarehouse(option)}>
-                      {option}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
+          <input 
+            className="newp__input"
+            type="text" 
+            name="прізвище" 
+            value={lastName}
+            onChange={handleChangeLast}
+            placeholder='Введи своє прізвище'
+            autoComplete='off'
+          />
         </div>
 
+        <div className="newp__box">
+          <p className="newp__text">
+            Ім&apos;я
+            <span style={{color: '#DD2525'}}>*</span>
+          </p>
+
+          <input 
+            className="newp__input"
+            type="text" 
+            name="Ім'я" 
+            value={firstName}
+            onChange={handleChangeFirst}
+            placeholder="Введи свіоє ім'я"
+            autoComplete='off'
+          />
+        </div>
+
+        <div className="newp__box">
+          <p className="newp__text">
+            Ім&apos;я по батькові
+            <span style={{color: '#DD2525'}}>*</span>
+          </p>
+
+          <input 
+            className="newp__input"
+            type="text"
+            name="ім'я по батькові"
+            value={midleName}
+            onChange={handleChangeMidle}
+            placeholder="Введи своє ім'я по батькові"
+            autoComplete='off'
+          />
+        </div>
+
+        <div className="newp__box">
+          <p className="newp__text">
+            Номер телефону 
+            <span style={{color: '#DD2525'}}>*</span>
+          </p>
+
+          <input 
+            className="newp__input"
+            type="text" 
+            name="телефон" 
+            value={phone}
+            onChange={handleChangePhone}
+            placeholder='Введи свій телефон'
+            autoComplete='off'
+          />
+        </div>
+
+        <div className="newp__container">
+          <div className="newp__box">
+            <p className="newp__text">
+              Місто
+              <span style={{color: '#DD2525'}}>*</span>
+            </p>
+
+            <input
+              autoComplete='off'
+              className="newp__input"
+              type="text"
+              value={city}
+              name="населений пункт" 
+              onChange={handleChangeCity}
+              placeholder="Введи своє місто"
+              onBlur={() => setTimeout(() => {
+                setoptionsCity([]);
+              }, 100)}
+            />
+
+            <div className="newp__options">
+              <ul className="newp__options-list">
+                {optionsCity.map((option, index) => (
+                  <li className="newp__option" key={index} onClick={() => handleSelectCity(option)}>
+                    {option}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="newp__box">
+            <p className="newp__text">
+              Відділення 
+              <span style={{color: '#DD2525'}}>*</span>
+            </p>
+
+            <input
+              className="newp__input"
+              type="text"
+              value={warehouse}
+              name="відділення"
+              autoComplete='off' 
+              onChange={handleChangeWarehouse}
+              onFocus={handleChangeWarehouse}
+              placeholder="Введи своє відділення"
+              onBlur={() => setTimeout(() => {
+                setoptionsWarehouse([]);
+              }, 100)}
+            />
+
+            <div className="newp__options">
+              <ul className="newp__options-list">
+                {optionsWarehouse.map((option, index) => (
+                  <li className="newp__option" key={index} onClick={() => handleSelectWarehouse(option)}>
+                    {option}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -10,7 +10,6 @@ import ScrollToTop from "./helpers/scrool";
 import { initProduct } from "./app/Slices/productSlice";
 import { initCategory } from "./app/Slices/categorySlice";
 import { updateWishlist } from "./app/Slices/wishListSlice";
-import { actions } from "./app/Slices/authSlice";
 
 export const App = () => {
   const refreshToken = Cookies.get('refresh_token');
@@ -36,12 +35,9 @@ export const App = () => {
         clearInterval(intervalId);
       };
     } else {
-      Cookies.remove('access_token');
-      Cookies.remove('refresh_token');
-      dispatch(actions.logout());
       console.log('Користувач не загружений');
     }
-  }, [isLoggedIn, refreshToken, dispatch]);
+  }, [isLoggedIn, refreshToken,]);
 
   return (
     <>

@@ -11,4 +11,9 @@ export type OrderType = {
   delivery_warehouse: string,
   total_price: string,
   created_at: string
+  first_name: string,
+  last_name: string,
+  middle_name: string,
+  phone_number: string,
+  track_number: string,
 }
