@@ -1,6 +1,7 @@
 @import "../../styles/utils/utils";
 
 .newp {
+position: relative;
 
   &__select {
     display: flex;
@@ -60,7 +61,6 @@
     flex-grow: 1;
   }
 
-
   &__input {
     position: relative;
     width: 100%;
@@ -96,39 +96,29 @@
 
     @include namu20;
 
-    @include on-tablet {
-    }
-
-    @include on-desktop {
+    &--red {
+      margin-bottom: 10px;
+      color: #DD2525;
+      
+      @include namu20;
     }
   }
 
   &__options {
     position: absolute;
-    left: 16px;
-    right: 16px;
+    z-index: 2;
+    left: 0;
+    width: 100%;
     max-height: 120px;
     overflow-y: auto;
     background: rgb(17, 18, 19);
     box-sizing: border-box;
-    z-index: 2;
-
-    @include on-tablet {
-      left: 32px;
-      right: 32px;
-    }
-
-    @include on-desktop {
-      width: 50%;
-      left: 42px;
-      right: 42px;
-    }
   }
 
   &__option {
     color: white;
     background-color: black;
     cursor: pointer;
-    border-bottom: 1px solid rgb(17, 18, 19);
+    border-bottom: 2px solid #495057;
   }
 }

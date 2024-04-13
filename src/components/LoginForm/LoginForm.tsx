@@ -8,7 +8,6 @@ import { useAppDispatch } from '../../app/hook';
 import { actions } from '../../app/Slices/authSlice';
 import { client } from '../../services/httpClient';
 import Google from "../../assets/icons/google.svg";
-import { set } from "lodash";
 
 interface TokenResponse {
   access: string;

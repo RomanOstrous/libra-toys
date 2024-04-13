@@ -1,20 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
 import './NewPochta.scss';
 import { debounce } from 'lodash';
 import arrow from '../../assets/icons/arrow.svg';
 import axios from 'axios';
 import classNames from 'classnames';
+import { useAppDispatch } from '../../app/hook';
+import { actions } from '../../app/Slices/buySlice';
 
 const NewPochta = () => {
   const [firstName, setFirstName] = useState(sessionStorage.getItem('first') || '');
+  const [firstError, setFirstEror] =useState(false);
+
   const [lastName, setLastName] = useState(sessionStorage.getItem('last') || '');
+  const [lastError, setLastEror] =useState(false);
+
   const [midleName, setMidleName] = useState(sessionStorage.getItem('midle') || '');
+  const [midleError, setMidleEror] =useState(false);
+
   const [phone, setPhone] = useState(sessionStorage.getItem('phone') || '');
+  const [phoneError, setPhoneEror] =useState(false);
+
   const [city, setCity] = useState(sessionStorage.getItem('city') || '');
+  const [cityError, setCityEror] =useState(false);
+
   const [warehouse, setWarehouse] = useState(sessionStorage.getItem('warehouse') || '');
+  const [warehouseError, setWarehouseEror] =useState(false);
+
   const [optionsCity, setoptionsCity] = useState<string[]>([]);
   const [optionsWarehouse, setoptionsWarehouse] = useState<string[]>([]);
   const [button, setButton] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const saveToSessionStorage = useCallback(() => {
     sessionStorage.setItem('first', firstName);
@@ -25,9 +43,17 @@ const NewPochta = () => {
     sessionStorage.setItem('warehouse', warehouse);
   }, [phone, city, warehouse, firstName, lastName, midleName]);
 
+  const validation = firstName && lastName && midleName && phone && city && warehouse; 
+
   useEffect(() => {
     saveToSessionStorage();
   }, [saveToSessionStorage]);
+
+  useEffect(() => {
+    if(validation) {
+      dispatch(actions.valid())
+    } else {dispatch(actions.notValid())}
+  }, [validation]);
 
   const debouncedSearchCity = useCallback(
     debounce(async (text: string) => {
@@ -76,34 +102,39 @@ const NewPochta = () => {
       } catch (error) {
         console.error('Помилка:', error);
       }
-    }, 1000), 
+    }, 1000),
     [city]
   );
 
   const handleChangeLast = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     setLastName(newText);
+    setLastEror(false);
   };
 
   const handleChangeFirst = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     setFirstName(newText);
+    setFirstEror(false);
   };
 
   const handleChangeMidle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     setMidleName(newText);
+    setMidleEror(false);
   };
 
   const handleChangePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     setPhone(newText);
+    setPhoneEror(false);
   };
 
   const handleChangeCity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     setCity(newText);
     debouncedSearchCity(newText);
+    setCityEror(false);
   };
 
   const handleSelectCity = (option: string) => {
@@ -111,17 +142,65 @@ const NewPochta = () => {
     setoptionsCity([]);
     setWarehouse('');
     setoptionsWarehouse([]);
+    setCityEror(false);
   };
 
   const handleChangeWarehouse = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     setWarehouse(newText);
     debouncedSearchWarehouse(newText);
+    setWarehouseEror(false);
   };
 
   const handleSelectWarehouse = (option: string) => {
     setWarehouse(option);
     setoptionsWarehouse([]);
+    setWarehouseEror(false);
+
+  };
+
+  const handleLastBlur = () => {
+    if (!lastName) {
+      setLastEror(true);
+    } 
+  };
+
+  const handleFirstBlur = () => {
+    if (!firstName) {
+      setFirstEror(true);
+    } 
+  };
+
+  const handleMidleBlur = () => {
+    if (!midleName) {
+      setMidleEror(true);
+    } 
+  };
+
+  const handlePhoneBlur = () => {
+    if (!phone) {
+      setPhoneEror(true);
+    } 
+  };
+
+  const handleCityBlur = () => {
+    if (!city) {
+      setCityEror(true);
+    } 
+
+    setTimeout(() => {
+      setoptionsCity([]);
+    }, 100)
+  };
+
+  const handleWarehouseBlur = () => {
+    if (!warehouse) {
+      setWarehouseEror(true);
+    }
+
+    setTimeout(() => {
+      setoptionsWarehouse([]);
+    }, 100)
   };
 
   return (
@@ -137,7 +216,7 @@ const NewPochta = () => {
       
       <div className={`newp__info ${button === true ? 'newp__info--visible' : ''}`}>
         <div className="newp__box">
-          <p className="newp__text">
+          <p className={`${lastError === false ? 'newp__text' : 'newp__text--red'}`}>
             Прізвище
             <span style={{color: '#DD2525'}}>*</span>
           </p>
@@ -150,11 +229,12 @@ const NewPochta = () => {
             onChange={handleChangeLast}
             placeholder='Введи своє прізвище'
             autoComplete='off'
+            onBlur={() => handleLastBlur()}
           />
         </div>
 
         <div className="newp__box">
-          <p className="newp__text">
+          <p className={`${firstError === false ? 'newp__text' : 'newp__text--red'}`}>
             Ім&apos;я
             <span style={{color: '#DD2525'}}>*</span>
           </p>
@@ -167,11 +247,12 @@ const NewPochta = () => {
             onChange={handleChangeFirst}
             placeholder="Введи свіоє ім'я"
             autoComplete='off'
+            onBlur={() => handleFirstBlur()}
           />
         </div>
 
         <div className="newp__box">
-          <p className="newp__text">
+          <p className={`${midleError === false ? 'newp__text' : 'newp__text--red'}`}>
             Ім&apos;я по батькові
             <span style={{color: '#DD2525'}}>*</span>
           </p>
@@ -184,11 +265,12 @@ const NewPochta = () => {
             onChange={handleChangeMidle}
             placeholder="Введи своє ім'я по батькові"
             autoComplete='off'
+            onBlur={() => handleMidleBlur()}
           />
         </div>
 
         <div className="newp__box">
-          <p className="newp__text">
+          <p className={`${phoneError === false ? 'newp__text' : 'newp__text--red'}`}>
             Номер телефону 
             <span style={{color: '#DD2525'}}>*</span>
           </p>
@@ -201,12 +283,13 @@ const NewPochta = () => {
             onChange={handleChangePhone}
             placeholder='Введи свій телефон'
             autoComplete='off'
+            onBlur={() => handlePhoneBlur()}
           />
         </div>
 
         <div className="newp__container">
           <div className="newp__box">
-            <p className="newp__text">
+            <p className={`${cityError === false ? 'newp__text' : 'newp__text--red'}`}>
               Місто
               <span style={{color: '#DD2525'}}>*</span>
             </p>
@@ -219,9 +302,7 @@ const NewPochta = () => {
               name="населений пункт" 
               onChange={handleChangeCity}
               placeholder="Введи своє місто"
-              onBlur={() => setTimeout(() => {
-                setoptionsCity([]);
-              }, 100)}
+              onBlur={() => handleCityBlur()}
             />
 
             <div className="newp__options">
@@ -236,7 +317,7 @@ const NewPochta = () => {
           </div>
 
           <div className="newp__box">
-            <p className="newp__text">
+            <p className={`${warehouseError === false ? 'newp__text' : 'newp__text--red'}`}>
               Відділення 
               <span style={{color: '#DD2525'}}>*</span>
             </p>
@@ -250,9 +331,7 @@ const NewPochta = () => {
               onChange={handleChangeWarehouse}
               onFocus={handleChangeWarehouse}
               placeholder="Введи своє відділення"
-              onBlur={() => setTimeout(() => {
-                setoptionsWarehouse([]);
-              }, 100)}
+              onBlur={() => handleWarehouseBlur()}
             />
 
             <div className="newp__options">
@@ -264,7 +343,6 @@ const NewPochta = () => {
                 ))}
               </ul>
             </div>
-
           </div>
         </div>
       </div>

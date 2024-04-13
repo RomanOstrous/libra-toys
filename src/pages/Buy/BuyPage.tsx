@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './BuyPage.scss';
 import ButtonBack from '../../components/ButtonBack/ButtonBack';
 import NewPochta from '../../components/NewPochta/NewPochta';
 import { useAppSelector } from '../../app/hook';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-
 
 const BuyPage = () => {
   const { product } = useAppSelector(state => state.product);
@@ -18,10 +17,8 @@ const BuyPage = () => {
   const warehouse = sessionStorage.getItem('warehouse');
   const token = Cookies.get('access_token');
   const base = process.env.REACT_APP_BASE_URL;
-
-  const [disable, setDisable] = useState(false);
-
   const visibleToys = product.filter(item => cart.includes(item.id));
+  const valid = useAppSelector(state => state.buy.npValidate)
   console.log("korzuha", cart);
 
   const infoObj = visibleToys.map(el => ({
@@ -58,12 +55,12 @@ const BuyPage = () => {
         </div>
         
         <div className="grid__item--desktop-1-4 grid__item--tablet-1-4">
-          <NewPochta />
+          <NewPochta  />
 
           <button 
             className="buy__button grid__item--desktop-1-4 grid__item--tablet-1-4"
             onClick={() => handleBuy()}
-            disabled={disable}
+            disabled={valid}
           >
             Придбати
           </button>
