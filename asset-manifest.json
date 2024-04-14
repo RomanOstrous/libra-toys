@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/libra-toys/static/css/main.e185a7c5.css",
-    "main.js": "/libra-toys/static/js/main.7a751ca4.js",
+    "main.css": "/libra-toys/static/css/main.20aeed2c.css",
+    "main.js": "/libra-toys/static/js/main.7bc78aef.js",
     "static/media/Vectours.png": "/libra-toys/static/media/Vectours.64d9d00b93d24db617df.png",
     "static/media/fa-solid-900.ttf": "/libra-toys/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
     "static/media/NAMU-Pro.ttf": "/libra-toys/static/media/NAMU-Pro.b30d0e0cc330be936b3e.ttf",
@@ -16,6 +16,7 @@
     "static/media/demon.png": "/libra-toys/static/media/demon.274a14c5b85b434a6bce.png",
     "static/media/End.png": "/libra-toys/static/media/End.e0a1c8d345216b295e62.png",
     "static/media/Libra_font_Regular.otf": "/libra-toys/static/media/Libra_font_Regular.3a9ab7b43fdc73985da2.otf",
+    "static/media/notfound.png": "/libra-toys/static/media/notfound.44b63862451182020d80.png",
     "static/media/Group.png": "/libra-toys/static/media/Group.962e973f1afb413a69e2.png",
     "static/media/fa-v4compatibility.ttf": "/libra-toys/static/media/fa-v4compatibility.2eb7b3ef25042305f3ff.ttf",
     "static/media/fa-v4compatibility.woff2": "/libra-toys/static/media/fa-v4compatibility.b3049b13a93f07e026fc.woff2",
@@ -38,11 +39,11 @@
     "index.html": "/libra-toys/index.html",
     "static/media/filter.svg": "/libra-toys/static/media/filter.1b14882f593f4cde0e6f50ae090e7388.svg",
     "static/media/burger.svg": "/libra-toys/static/media/burger.ae8663732b4dd5c330204d6d12368cf0.svg",
-    "main.e185a7c5.css.map": "/libra-toys/static/css/main.e185a7c5.css.map",
-    "main.7a751ca4.js.map": "/libra-toys/static/js/main.7a751ca4.js.map"
+    "main.20aeed2c.css.map": "/libra-toys/static/css/main.20aeed2c.css.map",
+    "main.7bc78aef.js.map": "/libra-toys/static/js/main.7bc78aef.js.map"
   },
   "entrypoints": [
-    "static/css/main.e185a7c5.css",
-    "static/js/main.7a751ca4.js"
+    "static/css/main.20aeed2c.css",
+    "static/js/main.7bc78aef.js"
   ]
 }
