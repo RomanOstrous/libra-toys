@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import './ProductCard.scss';
 import { Product } from '../../types/ProductType';
@@ -33,8 +34,6 @@ export const ProductCard: React.FC<Props> = ({product}) => {
       setButtonActive(false);
     }
   }, [ids, wishs]);
-
-  console.log('fav',ids)
 
   const handleAddToWishlist = async (productId: number) => {
     try {

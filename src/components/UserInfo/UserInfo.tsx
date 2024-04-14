@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import axios from "axios";
 import classNames from "classnames";
 import Cookies from "js-cookie";
@@ -11,6 +11,7 @@ export default function UserInfo() {
 
   const [lastName, setLastName] = useState('');
   const [hasLastNameError, setHasLastNameError] = useState('');
+  const [id, setId] = useState('');
 
   const [email, setEmail] = useState('');
   const [loader, setLoader] = useState(false);
@@ -20,6 +21,14 @@ export default function UserInfo() {
 
   const token = Cookies.get('access_token');
   let hasError = false;
+
+  const saveToSessionStorage = useCallback(() => {
+    sessionStorage.setItem('userID', id);
+  }, [id]);
+
+  useEffect(() => {
+    saveToSessionStorage();
+  }, [saveToSessionStorage]);
 
   useEffect(() => {
     axios.get( base + 'user/me/', {
@@ -31,6 +40,7 @@ export default function UserInfo() {
       
       console.log('чотко', response);
 
+      setId(response.data.id)
       setName(response.data.first_name);
       setLastName(response.data.last_name);
       setEmail(response.data.email);
@@ -124,7 +134,7 @@ export default function UserInfo() {
           className={classNames('user__input', {
             'user__input--is-danger': hasNameError,
           })}
-          name="email" 
+          name="name" 
           placeholder="Ім'я"
           autoComplete='off'
           value={name}

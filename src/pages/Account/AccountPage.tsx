@@ -10,6 +10,7 @@ import OrderCard from "../../components/OrderCard/OrderCard";
 import { useAppSelector } from "../../app/hook";
 import arrow from '../../assets/icons/arrow.svg';
 import classNames from "classnames";
+import PasswordReset from "../../components/PasswordReset/PasswordReset";
 
 export const AccountPage = () => {
   const [orders, setOrders] = useState<OrderType[]>([]);
@@ -36,6 +37,7 @@ export const AccountPage = () => {
         <div className="account__container grid__item--desktop-1-4 grid__item--tablet-1-4">
           <UserInfo />
           <LogOut />
+          <PasswordReset />
 
           <button className="account__select" onClick={() => setButton(!button)}>
             <p className="account__title">Закази</p>
@@ -47,7 +49,6 @@ export const AccountPage = () => {
           </button>
 
           <div className={`account__info ${button === true ? 'account__info--visible' : ''}`}>
-
             {orders.length < 0 && (
               <p className="account__empty">
                 Ой... А ти ще нічого( <br />
