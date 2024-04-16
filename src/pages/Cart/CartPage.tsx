@@ -49,7 +49,7 @@ export const CartPage = () => {
           ) : (
         <p className="cart-page__empty">
           А тут ще нічого <br />
-          не має(
+          немає(
         </p>
       )}
     </div>
@@ -58,7 +58,7 @@ export const CartPage = () => {
     <div className="cart-page__slider container">
       <div className="cart-page__slider-container">
         <p className="cart-page__slider-title">
-          Тобі також сподобаеться
+          Тобі також сподобається
         </p>
         <button onClick={() => navigate('/toys')} className="cart-page__slider-button">
           <img src={Back} alt="back"/>

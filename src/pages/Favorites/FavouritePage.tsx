@@ -33,7 +33,7 @@ export const FavouritePage = () => {
       ):(
         <p className="cart-page__empty">
           А тут ще нічого <br />
-          не має(
+          немає(
         </p>
       )}
     </div>

@@ -145,7 +145,7 @@ export const Filters: React.FC<Props> = ({
         >
           <div className="filters__filter-left">
             <img src={filterIco} alt="filter" />
-            <p className="filters__filter-title">Фільтер</p>
+            <p className="filters__filter-title">Фільтр</p>
           </div>
           <img src={arrowIco} alt="" className={classNames("filters__filter-arrow", { "filters__filter-arrow-active": filterActive === false })} />
         </button>

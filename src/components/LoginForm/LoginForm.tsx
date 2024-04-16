@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import './LoginForm.scss';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
@@ -8,9 +8,8 @@ import { useAppDispatch } from '../../app/hook';
 import { actions } from '../../app/Slices/authSlice';
 import { client } from '../../services/httpClient';
 import Google from "../../assets/icons/google.svg";
-import { GoogleLogin } from 'react-google-login';
-import { GoogleLogout } from 'react-google-login';
 import {gapi} from 'gapi-script';
+import axios from "axios";
 
 interface TokenResponse {
   access: string;
@@ -95,45 +94,48 @@ function LoginForm() {
     }
   };
 
+  const base = process.env.REACT_APP_BASE_URL;
   const clientId = "88092891520-fd4c7t6lrqmgubjs2dtg4bqvfj2v513u.apps.googleusercontent.com";
 
-  useEffect(() => {
-    function start() {
-      gapi.load('auth2', function() {
-        gapi.auth2.init({
-          client_id: clientId,
-          scope: ''
+  const handleGoogle = () => {
+    gapi.load('auth2', () => {
+      gapi.auth2.init({
+        client_id: clientId,
+        prompt: 'select_account', // Налаштовуємо параметр prompt на 'select_account'
+      }).then(() => {
+        const auth2 = gapi.auth2.getAuthInstance();
+        auth2.signIn().then((googleUser: any) => {
+          const idToken = googleUser.getAuthResponse().id_token;
+  
+          axios.post(base + 'user/social-auth/google/', {
+            "auth_token": idToken
+          }).then(resp => {
+            Cookies.set('access_token', resp.data.tokens.access);
+            Cookies.set('refresh_token', resp.data.tokens.refresh);
+            dispatch(actions.login());
+            navigate('/account');
+            setEmail('');
+            setPassword('');
+            console.log(resp);
+          });
+        }).catch((error: any) => {
+          console.error('Помилка авторизації Google:', error);
         });
       });
-    }
-    gapi.load('client:auth2', start);
-  }, []);
-
-  const handleClick = () => {
-    gapi.auth2.getAuthInstance().signIn()
-      .then((response: any)=> {
-        console.log(response);
-
-        client.post('user/social-auth/google/', {
-          "auth_token": response.xc.id_token
-        }).then((response: any)=> {
-          console.log('токен гугла пішов', response)})
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
-  };
+    });
+  }
 
   return (
     <>
       <div className="login container grid ">
         <div className="login__container grid__item--desktop-3-6 grid__item--tablet-2-5">
           <h1 className='login__title'>Вхід</h1>
-          <button className='login__google' onClick={handleClick}>
+
+          <button className='login__google' onClick={() => handleGoogle()}>
             <img src={Google} alt="Google" className='login__google-ico'/>
             <p className='login__google-text'>Через Google</p>
           </button>
-
+          
           
           <div className="login__decor">
             <span className="login__decor-line"></span>
