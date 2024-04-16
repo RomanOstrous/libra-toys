@@ -5,6 +5,11 @@ import classNames from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 import { client } from '../../services/httpClient';
 import Google from "../../assets/icons/google.svg";
+import { gapi } from "gapi-script";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { useAppDispatch } from "../../app/hook";
+import { actions } from "../../app/Slices/authSlice";
 
 function SigninForm() {
   const [name, setName] = useState('');
@@ -27,6 +32,7 @@ function SigninForm() {
   const [error, setError] = useState('');
   
   let hasError = false;
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const startsWithCapitalLetter = (str: string) => {
@@ -146,12 +152,43 @@ function SigninForm() {
     }
   };
 
+  const base = process.env.REACT_APP_BASE_URL;
+  const clientId = "88092891520-fd4c7t6lrqmgubjs2dtg4bqvfj2v513u.apps.googleusercontent.com";
+
+  const handleGoogle = () => {
+    gapi.load('auth2', () => {
+      gapi.auth2.init({
+        client_id: clientId,
+        prompt: 'select_account', // Налаштовуємо параметр prompt на 'select_account'
+      }).then(() => {
+        const auth2 = gapi.auth2.getAuthInstance();
+        auth2.signIn().then((googleUser: any) => {
+          const idToken = googleUser.getAuthResponse().id_token;
+  
+          axios.post(base + 'user/social-auth/google/', {
+            "auth_token": idToken
+          }).then(resp => {
+            Cookies.set('access_token', resp.data.tokens.access);
+            Cookies.set('refresh_token', resp.data.tokens.refresh);
+            dispatch(actions.login());
+            navigate('/account');
+            setEmail('');
+            setPassword('');
+            console.log(resp);
+          });
+        }).catch((error: any) => {
+          console.error('Помилка авторизації Google:', error);
+        });
+      });
+    });
+  }
+
   return (
     <>
       <div className="signin container grid ">
         <div className="signin__container grid__item--desktop-3-6 grid__item--tablet-2-5">
           <h1 className='signin__title'>Зареєструватись</h1>
-          <button className='signin__google'>
+          <button className='signin__google' onClick={() => handleGoogle()}>
             <img src={Google} alt="" className='signin__google-ico'/>
             <p className='signin__google-text'>Через Google</p>
           </button>
