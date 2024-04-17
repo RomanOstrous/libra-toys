@@ -35,15 +35,6 @@ function LoginForm() {
     setHasEmailError('');
   };
 
-  const handleForgotPasswordClick = () => {
-    if (!email) {
-      setHasEmailError('Введіть адресу електронної пошти');
-    } else {
-      navigate('/resetPassword');
-      localStorage.setItem('email', (email))
-    }
-  };
-
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setPassword(value);
@@ -194,7 +185,7 @@ function LoginForm() {
         </form>
 
         <button
-          onClick={handleForgotPasswordClick}
+          onClick={() => navigate('/res-password')}
           className="login__link"
         >
           Забув пароль?

@@ -164,7 +164,6 @@ function SigninForm() {
         const auth2 = gapi.auth2.getAuthInstance();
         auth2.signIn().then((googleUser: any) => {
           const idToken = googleUser.getAuthResponse().id_token;
-  
           axios.post(base + 'user/social-auth/google/', {
             "auth_token": idToken
           }).then(resp => {
