@@ -33,7 +33,6 @@ useEffect(() => {
   if (!token?.length) {
     localStorage.setItem("isLoggedIn", "false");
     dispatch(actions.logout());
-    navigate('/');
   }
 },[token?.length])
 

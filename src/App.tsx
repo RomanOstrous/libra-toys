@@ -37,7 +37,7 @@ export const App = () => {
     } else {
       console.log('Користувач не загружений');
     }
-  }, [isLoggedIn, refreshToken,]);
+  }, [isLoggedIn, refreshToken]);
 
   return (
     <>
