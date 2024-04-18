@@ -4,6 +4,8 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Path } from './types/pathName';
 import './styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
+import { Provider } from 'react-redux';
+import store from './app/store';
 import { App } from './App';
 import { HomePage } from './pages/HomePage/HomePage';
 import { ToyPage } from './pages/Toy/ToyPage';
@@ -14,19 +16,17 @@ import { NotFound } from './pages/NotFound/NotFound';
 import { AccountPage } from './pages/Account/AccountPage';
 import { LoginPage } from './pages/Login/LoginPage';
 import { SigninPage } from './pages/Signin/SigninPage';
-import { Provider } from 'react-redux';
-import store from './app/store';
-
-import PasswordResetPage from "./pages/PasswordReset/PasswordResetPage";
 import { ToyDetalPage } from "./pages/ToyDetal/ToyDetalPage";
 import BuyPage from "./pages/Buy/BuyPage";
+import PasswordRecoveryPage from "./pages/PasswordReset/PasswordRecoveryPage";
+import PasswordResetPage from "./pages/PasswordReset/PasswordResetPage";
 
 const container = document.getElementById('root') as HTMLElement;
 
 createRoot(container).render(
   <Provider store={store}>
     <Router>
-      <Routes>
+      <Routes >
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
 
@@ -48,6 +48,8 @@ createRoot(container).render(
           <Route path={Path.Login} element={<LoginPage/>} />
 
           <Route path={Path.Account} element={<AccountPage />} />
+
+          <Route path={Path.RecoveryPassword} element={<PasswordRecoveryPage />} />
 
           <Route path={Path.ResetPassword} element={<PasswordResetPage />} />
 

@@ -1,40 +1,57 @@
 import React, { useState } from 'react';
-import './PasswordResetPage.scss';
+import '../../styles/style/PasswordReset.scss';
 import classNames from 'classnames';
 import { client } from '../../services/httpClient';
 
 
 export default function PasswordResetPage() {
-  const [email, setEmail] = useState('');
-  const [hasEmailError, setHasEmailError] = useState('');
+  const [password, setPassword] = useState('');
+  const [hasPasswordError, setHasPasswordError] = useState('');
+
+  const [passwordAgain, setPasswordAgain] = useState('');
+  const [hasPasswordAgainError, setHasPasswordAgainError] = useState('');
   
   const [message, setMessage] = useState('');
   const [loader, setLoader] = useState(false);
-  const [disable, setDisable] = useState(false);
+  const [disable, setDisable] = useState(true);
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setEmail(value);
-    setHasEmailError('');
-    setDisable(false);
+    setPassword(value);
+    setHasPasswordError('');
+  };
 
-    if (value.length < 0) {
-      setDisable(true);
+  const handlePasswordBlur = () => {
+    if (password.length < 8) {
+      setHasPasswordError('Пароль має містити мінімум 8 символів');
     }
   };
 
-  const handleEmailBlur = () => {
-    if (!email.includes('@')) {
-      setHasEmailError('Введіть коректну адресу електронної пошти');
-      setDisable(true);
+  const handlePasswordAgainChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setPasswordAgain(value);
+    setHasPasswordAgainError('');
+    
+
+    if (value === password) {
+      setDisable(false);
     }
+  };
+
+  const handlePasswordAgainBlur = () => {
+    if (passwordAgain !== password) {
+      setHasPasswordAgainError('Схоже ви допустили помилку');
+      setDisable(true);
+    } else {setHasPasswordAgainError('')}
   };
 
   const handleClick = () => {
+    handlePasswordAgainBlur();
+    handlePasswordBlur();
     setLoader(true);
 
     client.post('user/password_reset/', {
-      email: email,
+      pasword: password,
     })
     .then((response: any) => {
       setLoader(false);
@@ -49,47 +66,69 @@ export default function PasswordResetPage() {
   }
 
   return (
-    <div className="password container grid">
-        <div className="login__container grid__item--desktop-3-6 grid__item--tablet-2-5">
-          <p className='login__title'>Відновлення паролю</p>
-
-          <p className='login__form-text'>
-            Для відновлення парою введи свою почту, на неї ми відправимо посилання за яким ти зможеш перейти та створити новий пароль.
-            Прибуття може зайняти хвилину.
-          </p>
+    <div className="password-reset container grid">
+        <div className="password-reset__container grid__item--desktop-3-6 grid__item--tablet-2-5">
+          <p className='password-reset__title'>Новий паароль</p>
           
-          <p className='login__form-text'>
-            Пошта
-          </p>
+          <div className="password-reset__box">
+            <p className='password-reset__text'>
+              Новий пароль
+            </p>
 
             <input
-              className={classNames('login__input', {
-                'login__input--is-danger': hasEmailError,
-                'login__input--is-ok': !hasEmailError && email
+              className={classNames('password-reset__input', {
+                'password-reset__input--is-danger': hasPasswordError,
+                'password-reset__input--is-ok': !hasPasswordError && password
               })}
-              name="email" 
-              placeholder="Введи свою почту"
+              name="Password" 
+              type='password'
+              placeholder="Введи новий пароль"
               autoComplete='off'
-              value={email}
-              onChange={handleEmailChange}
-              onBlur={handleEmailBlur}
+              value={password}
+              onChange={handlePasswordChange}
+              onBlur={handlePasswordBlur}
             />
 
-            {hasEmailError ? (
-              <p className='login__input-error'>{hasEmailError}</p>
+            {hasPasswordError ? (
+              <p className='password-reset__input-error'>{hasPasswordError}</p>
             ) : (
-              <p className='login__input-noerror'></p>
+              <p className='password-reset__input-noerror'></p>
             )}
 
 
-          <button className="login__button" disabled={disable} onClick={handleClick}>
+            <p className='password-reset__text'>
+              Повторно введи новий пароль
+            </p>
+
+            <input
+              className={classNames('password-reset__input', {
+                'password-reset__input--is-danger': hasPasswordAgainError,
+                'password-reset__input--is-ok': !hasPasswordAgainError && passwordAgain
+              })}
+              name="Password" 
+              type='password'
+              placeholder="Повторно введи новий пароль"
+              autoComplete='off'
+              value={passwordAgain}
+              onChange={handlePasswordAgainChange}
+              onBlur={handlePasswordAgainBlur}
+            />
+
+            {hasPasswordAgainError ? (
+              <p className='password-reset__input-error'>{hasPasswordAgainError}</p>
+            ) : (
+              <p className='password-reset__input-noerror'></p>
+            )}
+          </div>
+
+          <button className="password-reset__button" disabled={disable} onClick={handleClick}>
             {loader ? 'Відправка...' : 'Відправити'}
           </button>
           
           {message ? (
-              <p className='login__input-error'>{message}</p>
+              <p className='password-reset__input-error'>{message}</p>
             ) : (
-              <p className='login__input-noerror'></p>
+              <p className='password-reset__input-noerror'></p>
             )}
         </div>
       </div>
