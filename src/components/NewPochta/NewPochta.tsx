@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
-import './NewPochta.scss';
+import '../../styles/style/NewPochta.scss';
 import { debounce } from 'lodash';
 import arrow from '../../assets/icons/arrow.svg';
 import axios from 'axios';
@@ -12,22 +12,16 @@ import { actions } from '../../app/Slices/buySlice';
 const NewPochta = () => {
   const [firstName, setFirstName] = useState(sessionStorage.getItem('first') || '');
   const [firstError, setFirstEror] =useState(false);
-
   const [lastName, setLastName] = useState(sessionStorage.getItem('last') || '');
   const [lastError, setLastEror] =useState(false);
-
   const [midleName, setMidleName] = useState(sessionStorage.getItem('midle') || '');
   const [midleError, setMidleEror] =useState(false);
-
   const [phone, setPhone] = useState(sessionStorage.getItem('phone') || '');
   const [phoneError, setPhoneEror] =useState(false);
-
   const [city, setCity] = useState(sessionStorage.getItem('city') || '');
   const [cityError, setCityEror] =useState(false);
-
   const [warehouse, setWarehouse] = useState(sessionStorage.getItem('warehouse') || '');
   const [warehouseError, setWarehouseEror] =useState(false);
-
   const [optionsCity, setoptionsCity] = useState<string[]>([]);
   const [optionsWarehouse, setoptionsWarehouse] = useState<string[]>([]);
   const [button, setButton] = useState(false);
@@ -171,7 +165,6 @@ const NewPochta = () => {
     setWarehouse(option);
     setoptionsWarehouse([]);
     setWarehouseEror(false);
-
   };
 
   const handleLastBlur = () => {
@@ -360,7 +353,6 @@ const NewPochta = () => {
             </div>
           </div>
         </div>
-
 
         <div className="newp__container">
           <p className='newp__text'>

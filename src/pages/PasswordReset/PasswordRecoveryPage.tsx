@@ -4,11 +4,10 @@ import '../../styles/style/PasswordReset.scss';
 import classNames from 'classnames';
 import { client } from '../../services/httpClient';
 
-
 export default function PasswordRecoveryPage() {
   const [email, setEmail] = useState('');
   const [hasEmailError, setHasEmailError] = useState('');
-  
+
   const [message, setMessage] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(true);
@@ -51,50 +50,50 @@ export default function PasswordRecoveryPage() {
 
   return (
     <div className="password container grid">
-        <div className="password-reset__container grid__item--desktop-3-6 grid__item--tablet-2-5">
-          <p className='password-reset__title'>Відновлення паролю</p>
+      <div className="password-reset__container grid__item--desktop-3-6 grid__item--tablet-2-5">
+        <p className='password-reset__title'>Відновлення паролю</p>
 
-          <p className='password-reset__info'>
-          Щоб відновити пароль, будь ласка, введіть свою пошту. Ми надішлемо на неї посилання, за яким ви зможете створити новий пароль.
-          Будь ласка, зачекайте, це може зайняти кілька хвилин, щоб лист до вас дійшов.
+        <p className='password-reset__info'>
+        Щоб відновити пароль, будь ласка, введіть свою пошту. Ми надішлемо на неї посилання, за яким ви зможете створити новий пароль.
+        Будь ласка, зачекайте, це може зайняти кілька хвилин, щоб лист до вас дійшов.
+        </p>
+        
+        <div className="password-reset__box">
+          <p className='password-reset__text'>
+            Пошта
           </p>
-          
-          <div className="password-reset__box">
-            <p className='password-reset__text'>
-              Пошта
-            </p>
 
-            <input
-              className={classNames('password-reset__input', {
-                'password-reset__input--is-danger': hasEmailError,
-                'password-reset__input--is-ok': !hasEmailError && email
-              })}
-              name="email" 
-              placeholder="Введи свою почту"
-              autoComplete='off'
-              value={email}
-              onChange={handleEmailChange}
-              onBlur={handleEmailBlur}
-            />
+          <input
+            className={classNames('password-reset__input', {
+              'password-reset__input--is-danger': hasEmailError,
+              'password-reset__input--is-ok': !hasEmailError && email
+            })}
+            name="email" 
+            placeholder="Введи свою почту"
+            autoComplete='off'
+            value={email}
+            onChange={handleEmailChange}
+            onBlur={handleEmailBlur}
+          />
 
-            {hasEmailError ? (
-              <p className='password-reset__input-error'>{hasEmailError}</p>
-            ) : (
-              <p className='password-reset__input-noerror'></p>
-            )}
-          </div>
-
-
-          <button className="password-reset__button" disabled={disable} onClick={handleClick}>
-            {loader ? 'Відправка...' : 'Відправити'}
-          </button>
-          
-          {message ? (
-              <p className='password-reset__input-error'>{message}</p>
-            ) : (
-              <p className='password-reset__input-noerror'></p>
-            )}
+          {hasEmailError ? (
+            <p className='password-reset__input-error'>{hasEmailError}</p>
+          ) : (
+            <p className='password-reset__input-noerror'></p>
+          )}
         </div>
+
+
+        <button className="password-reset__button" disabled={disable} onClick={handleClick}>
+          {loader ? 'Відправка...' : 'Відправити'}
+        </button>
+        
+        {message ? (
+            <p className='password-reset__input-error'>{message}</p>
+          ) : (
+            <p className='password-reset__input-noerror'></p>
+          )}
       </div>
+    </div>
   )
 }

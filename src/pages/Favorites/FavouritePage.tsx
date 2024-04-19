@@ -9,7 +9,6 @@ export const FavouritePage = () => {
   const {product} = useAppSelector(state => state.product);
   const {wishs} = useAppSelector(state => state.wishlist);
   const dispatch = useAppDispatch();
-
   const ids = wishs.map(el => el.product);
   const visibleFav = product.filter(el => ids.includes(el.id));
 

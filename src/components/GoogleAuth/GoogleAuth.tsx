@@ -5,7 +5,6 @@ import GoogleLogin from 'react-google-login';
 import './GoogleAuth.scss'
 
 const GoogleAuth = () => {
-
   const clientId = "88092891520-fd4c7t6lrqmgubjs2dtg4bqvfj2v513u.apps.googleusercontent.com";
   const responseGoogle = (response: any) => {
     console.log('відповідь',response);

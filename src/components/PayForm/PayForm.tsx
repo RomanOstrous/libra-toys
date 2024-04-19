@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import './PayForm.scss';
+import '../../styles/style/NewPochta.scss';
 import arrow from '../../assets/icons/arrow.svg';
 import classNames from 'classnames';
 import { useAppDispatch } from '../../app/hook';
@@ -10,19 +10,14 @@ import { actions } from '../../app/Slices/buySlice';
 const PayForm = () => {
   const [button, setButton] = useState(false);
   const [check, setCheck] = useState(false);
-
   const [firstName, setFirstName] = useState('');
   const [firstError, setFirstEror] = useState(false);
-
   const [lastName, setLastName] = useState('');
   const [lastError, setLastEror] = useState(false);
-
   const [card, setCard] = useState('');
   const [cardError, setCardEror] = useState(false);
-
   const [date, setDate] = useState('');
   const [dateError, setDateEror] = useState(false);
-
   const [CVV, setCVV] = useState('');
   const [CVVError, setCVVEror] = useState(false);
 
@@ -75,7 +70,6 @@ const PayForm = () => {
     setCVVEror(false);
   };
 
-
   const handleLastBlur = () => {
     if (!lastName || validName(lastName)) {
       setLastEror(true);
@@ -99,7 +93,6 @@ const PayForm = () => {
       setDateEror(true);
     } 
   };
-
 
   const handleCVVBlur = () => {
     if (CVV.length < 3) {

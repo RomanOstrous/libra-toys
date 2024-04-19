@@ -9,14 +9,11 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 export default function PasswordResetPage() {
   const [password, setPassword] = useState('');
   const [hasPasswordError, setHasPasswordError] = useState('');
-
   const [passwordAgain, setPasswordAgain] = useState('');
   const [hasPasswordAgainError, setHasPasswordAgainError] = useState('');
-  
   const [message, setMessage] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(true);
-
   const [searchParams] = useSearchParams();
   const navigate= useNavigate();
   const token = searchParams.get('token');
@@ -75,70 +72,69 @@ export default function PasswordResetPage() {
 
   return (
     <div className="password-reset container grid">
-        <div className="password-reset__container grid__item--desktop-3-6 grid__item--tablet-2-5">
-          <p className='password-reset__title'>Новий паароль</p>
-          
-          <div className="password-reset__box">
-            <p className='password-reset__text'>
-              Новий пароль
-            </p>
+      <div className="password-reset__container grid__item--desktop-3-6 grid__item--tablet-2-5">
+        <p className='password-reset__title'>Новий паароль</p>
+        
+        <div className="password-reset__box">
+          <p className='password-reset__text'>
+            Новий пароль
+          </p>
 
-            <input
-              className={classNames('password-reset__input', {
-                'password-reset__input--is-danger': hasPasswordError,
-                'password-reset__input--is-ok': !hasPasswordError && password
-              })}
-              name="Password" 
-              type='password'
-              placeholder="Введи новий пароль"
-              autoComplete='off'
-              value={password}
-              onChange={handlePasswordChange}
-              onBlur={handlePasswordBlur}
-            />
+          <input
+            className={classNames('password-reset__input', {
+              'password-reset__input--is-danger': hasPasswordError,
+              'password-reset__input--is-ok': !hasPasswordError && password
+            })}
+            name="Password" 
+            type='password'
+            placeholder="Введи новий пароль"
+            autoComplete='off'
+            value={password}
+            onChange={handlePasswordChange}
+            onBlur={handlePasswordBlur}
+          />
 
-            {hasPasswordError ? (
-              <p className='password-reset__input-error'>{hasPasswordError}</p>
-            ) : (
-              <p className='password-reset__input-noerror'></p>
-            )}
+          {hasPasswordError ? (
+            <p className='password-reset__input-error'>{hasPasswordError}</p>
+          ) : (
+            <p className='password-reset__input-noerror'></p>
+          )}
 
+          <p className='password-reset__text'>
+            Повторно введи новий пароль
+          </p>
 
-            <p className='password-reset__text'>
-              Повторно введи новий пароль
-            </p>
+          <input
+            className={classNames('password-reset__input', {
+              'password-reset__input--is-danger': hasPasswordAgainError,
+              'password-reset__input--is-ok': !hasPasswordAgainError && passwordAgain
+            })}
+            name="Password" 
+            type='password'
+            placeholder="Повторно введи новий пароль"
+            autoComplete='off'
+            value={passwordAgain}
+            onChange={handlePasswordAgainChange}
+            onBlur={handlePasswordAgainBlur}
+          />
 
-            <input
-              className={classNames('password-reset__input', {
-                'password-reset__input--is-danger': hasPasswordAgainError,
-                'password-reset__input--is-ok': !hasPasswordAgainError && passwordAgain
-              })}
-              name="Password" 
-              type='password'
-              placeholder="Повторно введи новий пароль"
-              autoComplete='off'
-              value={passwordAgain}
-              onChange={handlePasswordAgainChange}
-              onBlur={handlePasswordAgainBlur}
-            />
-
-            {hasPasswordAgainError ? (
-              <p className='password-reset__input-error'>{hasPasswordAgainError}</p>
-            ) : (
-              <p className='password-reset__input-noerror'></p>
-            )}
-          </div>
-
-          <button className="password-reset__button" disabled={disable} onClick={handleClick}>
-            {loader ? 'Підтверджую...' : 'Підтвердити'}
-          </button>
-          
-          {message ? (
-              <p className='password-reset__input-error'>{message}</p>
-            ) : (
-              <p className='password-reset__input-noerror'></p>
-            )}
+          {hasPasswordAgainError ? (
+            <p className='password-reset__input-error'>{hasPasswordAgainError}</p>
+          ) : (
+            <p className='password-reset__input-noerror'></p>
+          )}
         </div>
+
+        <button className="password-reset__button" disabled={disable} onClick={handleClick}>
+          {loader ? 'Підтверджую...' : 'Підтвердити'}
+        </button>
+        
+        {message ? (
+            <p className='password-reset__input-error'>{message}</p>
+          ) : (
+            <p className='password-reset__input-noerror'></p>
+          )}
       </div>
+    </div>
   )
 }

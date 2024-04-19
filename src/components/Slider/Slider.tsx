@@ -7,11 +7,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {  useAppSelector } from "../../app/hook";
 
-
 export const SwipeToSlide = () => {
-
   const { product} = useAppSelector(state => state.product);
-  console.log(product)
 
   const settings = {
     autoplay: true,

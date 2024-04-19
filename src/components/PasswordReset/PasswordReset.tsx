@@ -8,13 +8,10 @@ import axios from "axios";
 const PasswordReset = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [oldPasswordError, setOldPasswordError] = useState('');
-
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordError, setNewPasswordError] = useState('');
-
   const [checkPassword, setCheckPassword] = useState('');
   const [checkPasswordError, setCheckPasswordError] = useState('');
-
   const [button, setButton] = useState(false);
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(true);
@@ -126,102 +123,101 @@ useEffect(() => {
       </button>
 
       <div className={`password__info ${button === true ? 'password__info--visible' : ''}`}>
+        <form className='password__form' onSubmit={onFinish}>
+          <p className='password__form-text'>
+            Старий пароль
+          </p>
 
-          <form className='password__form' onSubmit={onFinish}>
-            <p className='password__form-text'>
-              Старий пароль
-            </p>
+          <input
+            className={classNames('password__input', {
+              'password__input--is-danger': oldPasswordError,
+            })}
+            type="password"
+            name="старий пароль" 
+            placeholder="Введи старий пароль"
+            autoComplete='off'
+            value={oldPassword}
+            onChange={handleOldChange}
+            onBlur={handleOldBlur}
+            readOnly={edit}
+          />
 
-            <input
-              className={classNames('password__input', {
-                'password__input--is-danger': oldPasswordError,
-              })}
-              type="password"
-              name="старий пароль" 
-              placeholder="Введи старий пароль"
-              autoComplete='off'
-              value={oldPassword}
-              onChange={handleOldChange}
-              onBlur={handleOldBlur}
-              readOnly={edit}
-            />
+          {oldPasswordError? (
+            <p className='password__input-error'>{oldPasswordError}</p>
+          ) : (
+            <p className='password__input-noerror'></p>
+          )}
 
-            {oldPasswordError? (
-              <p className='password__input-error'>{oldPasswordError}</p>
-            ) : (
-              <p className='password__input-noerror'></p>
-            )}
+          <p className='password__form-text'>
+            Новий пароль
+          </p>
 
-            <p className='password__form-text'>
-              Новий пароль
-            </p>
+          <input
+            className={classNames('password__input', {
+              'password__input--is-danger': newPasswordError,
+            })}
+            type="password"
+            name="новий пароль" 
+            placeholder="Введи новий пароль"
+            autoComplete='off'
+            value={newPassword}
+            onChange={handleNewChange}
+            onBlur={handleNewBlur}
+            readOnly={edit}
+          />
 
-            <input
-              className={classNames('password__input', {
-                'password__input--is-danger': newPasswordError,
-              })}
-              type="password"
-              name="новий пароль" 
-              placeholder="Введи новий пароль"
-              autoComplete='off'
-              value={newPassword}
-              onChange={handleNewChange}
-              onBlur={handleNewBlur}
-              readOnly={edit}
-            />
+          {newPasswordError? (
+            <p className='password__input-error'>{newPasswordError}</p>
+          ) : (
+            <p className='password__input-noerror'></p>
+          )}
 
-            {newPasswordError? (
-              <p className='password__input-error'>{newPasswordError}</p>
-            ) : (
-              <p className='password__input-noerror'></p>
-            )}
+          <p className='password__form-text'>
+            Повторно введи новий пароль
+          </p>
 
-            <p className='password__form-text'>
-              Повторно введи новий пароль
-            </p>
+          <input
+            className={classNames('password__input', {
+              'password__input--is-danger': checkPasswordError,
+            })}
+            type="password"
+            name="спідтвердження паролю" 
+            placeholder="Повторно введи новий пароль"
+            autoComplete='off'
+            value={checkPassword}
+            onChange={handleCheckChange}
+            onBlur={handleCheckBlur}
+            readOnly={edit}
+          />
 
-            <input
-              className={classNames('password__input', {
-                'password__input--is-danger': checkPasswordError,
-              })}
-              type="password"
-              name="спідтвердження паролю" 
-              placeholder="Повторно введи новий пароль"
-              autoComplete='off'
-              value={checkPassword}
-              onChange={handleCheckChange}
-              onBlur={handleCheckBlur}
-              readOnly={edit}
-            />
+          {checkPasswordError? (
+            <p className='password__input-error'>{checkPasswordError}</p>
+          ) : (
+            <p className='password__input-noerror'></p>
+          )}
 
-            {checkPasswordError? (
-              <p className='password__input-error'>{checkPasswordError}</p>
-            ) : (
-              <p className='password__input-noerror'></p>
-            )}
-
-            {edit === false && (
-              <button 
-                type="submit"
-                className="password__button" 
-                disabled={disable} 
-              >
-                {loader ? 'Загрузка...' : 'Підтвердити'}
-              </button>
-            )}
-          </form>
-
-          {edit === true && (
+          {edit === false && (
             <button 
-              type="button"
-              className="password__button"
-              onClick={() => setEdit(false)}
+              type="submit"
+              className="password__button" 
+              disabled={disable} 
             >
-              Змінити
+              {loader ? 'Загрузка...' : 'Підтвердити'}
             </button>
           )}
-        </div>
+        </form>
+
+        {edit === true && (
+          <button 
+            type="button"
+            className="password__button"
+            onClick={() => setEdit(false)}
+          >
+            Змінити
+          </button>
+        )}
       </div>
+    </div>
   )
 }
 

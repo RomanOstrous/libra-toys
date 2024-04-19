@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import './LoginForm.scss';
+import '../../styles/style/LoginForm.scss';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
 import classNames from 'classnames';
@@ -20,12 +20,13 @@ interface TokenResponse {
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [hasEmailError, setHasEmailError] = useState('');
-
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
 
+  const base = process.env.REACT_APP_BASE_URL;
+  const clientId = "88092891520-fd4c7t6lrqmgubjs2dtg4bqvfj2v513u.apps.googleusercontent.com";
   let hasError = false;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -85,9 +86,6 @@ function LoginForm() {
       }
     }
   };
-
-  const base = process.env.REACT_APP_BASE_URL;
-  const clientId = "88092891520-fd4c7t6lrqmgubjs2dtg4bqvfj2v513u.apps.googleusercontent.com";
 
   const handleGoogle = () => {
     gapi.load('auth2', () => {

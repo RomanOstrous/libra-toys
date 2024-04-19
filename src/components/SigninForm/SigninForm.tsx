@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import './SigninForm.scss';
+import '../../styles/style/LoginForm.scss';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,19 +15,14 @@ import { actions } from "../../app/Slices/authSlice";
 function SigninForm() {
   const [name, setName] = useState('');
   const [hasNameError, setHasNameError] = useState('');
-
   const [lastName, setLastName] = useState('');
   const [hasLastNameError, setHasLastNameError] = useState('');
-
   const [email, setEmail] = useState('');
   const [hasEmailError, setHasEmailError] = useState('');
-
   const [password, setPassword] = useState('');
   const [hasPasswordError, setHasPasswordError] = useState('');
-
   const [passwordOk, setPasswordOk] = useState('');
   const [hasPasswordErrorOk, setHasPasswordErrorOk] = useState('');
-  
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
   const [error, setError] = useState('');
@@ -185,29 +180,29 @@ function SigninForm() {
 
   return (
     <>
-      <div className="signin container grid ">
-        <div className="signin__container grid__item--desktop-3-6 grid__item--tablet-2-5">
-          <h1 className='signin__title'>Зареєструватись</h1>
-          <button className='signin__google' onClick={() => handleGoogle()}>
+      <div className="login container grid ">
+        <div className="login__container grid__item--desktop-3-6 grid__item--tablet-2-5">
+          <h1 className='login__title'>Зареєструватись</h1>
+          <button className='login__google' onClick={() => handleGoogle()}>
             <img src={Google} alt="" className='signin__google-ico'/>
-            <p className='signin__google-text'>Через Google</p>
+            <p className='login__google-text'>Через Google</p>
           </button>
           
-          <div className="signin__decor">
-            <span className="signin__decor-line"></span>
-            <span className="signin__decor-text">або</span>
-            <span className="signin__decor-line"></span>
+          <div className="login__decor">
+            <span className="login__decor-line"></span>
+            <span className="login__decor-text">або</span>
+            <span className="login__decor-line"></span>
           </div>
 
-          <form className='signin__form' onSubmit={onFinish}>
-            <p className='signin__form-text'>
+          <form className='login__form' onSubmit={onFinish}>
+            <p className='login__form-text'>
               Ім&apos;я
             </p>
 
             <input
-              className={classNames('signin__input', {
-                'signin__input--is-danger': hasNameError,
-                'signin__input--is-ok': !hasNameError && name
+              className={classNames('login__input', {
+                'login__input--is-danger': hasNameError,
+                'login__input--is-ok': !hasNameError && name
               })}
               name="email" 
               placeholder="Введи своє ім'я"
@@ -218,19 +213,19 @@ function SigninForm() {
             />
 
             {hasNameError? (
-              <p className='signin__input-error'>{hasNameError}</p>
+              <p className='login__input-error'>{hasNameError}</p>
             ) : (
-              <p className='signin__input-noerror'></p>
+              <p className='login__input-noerror'></p>
             )}
 
-            <p className='signin__form-text'>
+            <p className='login__form-text'>
               Прізвище
             </p>
 
             <input
-              className={classNames('signin__input', {
-                'signin__input--is-danger': hasLastNameError,
-                'signin__input--is-ok': !hasLastNameError && lastName
+              className={classNames('login__input', {
+                'login__input--is-danger': hasLastNameError,
+                'login__input--is-ok': !hasLastNameError && lastName
               })}
               name="last name" 
               placeholder="Введи своє прізвище"
@@ -241,19 +236,19 @@ function SigninForm() {
             />
 
             {hasLastNameError ? (
-              <p className='signin__input-error'>{hasLastNameError}</p>
+              <p className='login__input-error'>{hasLastNameError}</p>
             ) : (
-              <p className='signin__input-noerror'></p>
+              <p className='login__input-noerror'></p>
             )}
 
-            <p className='signin__form-text'>
+            <p className='login__form-text'>
               Пошта
             </p>
 
             <input
-              className={classNames('signin__input', {
-                'signin__input--is-danger': hasEmailError,
-                'signin__input--is-ok': !hasEmailError && email
+              className={classNames('login__input', {
+                'login__input--is-danger': hasEmailError,
+                'login__input--is-ok': !hasEmailError && email
               })}
               name="email" 
               placeholder="Введи свою почту"
@@ -264,19 +259,19 @@ function SigninForm() {
             />
 
             {hasEmailError ? (
-              <p className='signin__input-error'>{hasEmailError}</p>
+              <p className='login__input-error'>{hasEmailError}</p>
             ) : (
-              <p className='signin__input-noerror'></p>
+              <p className='login__input-noerror'></p>
             )}
 
-            <p className='signin__form-text'>
+            <p className='login__form-text'>
               Пароль
             </p>
 
             <input 
-              className={classNames('signin__input', {
-                'signin__input--is-danger': hasPasswordError,
-                'signin__input--is-ok': !hasPasswordError && password
+              className={classNames('login__input', {
+                'login__input--is-danger': hasPasswordError,
+                'login__input--is-ok': !hasPasswordError && password
               })} 
               type="password" 
               name="password" 
@@ -287,19 +282,19 @@ function SigninForm() {
             />
 
             {hasPasswordError ? (
-              <p className='signin__input-error'>{hasPasswordError}</p>
+              <p className='login__input-error'>{hasPasswordError}</p>
             ) : (
-              <p className='signin__input-noerror'></p>
+              <p className='login__input-noerror'></p>
             )}
 
-            <p className='signin__form-text'>
+            <p className='login__form-text'>
               Підтвердити пароль
             </p>
 
             <input 
-              className={classNames('signin__input', {
-                'signin__input--is-danger': hasPasswordErrorOk,
-                'signin__input--is-ok': !hasPasswordErrorOk && passwordOk
+              className={classNames('login__input', {
+                'login__input--is-danger': hasPasswordErrorOk,
+                'login__input--is-ok': !hasPasswordErrorOk && passwordOk
               })} 
               type="password" 
               name="password" 
@@ -310,24 +305,24 @@ function SigninForm() {
             />
 
             {hasPasswordErrorOk ? (
-              <p className='signin__input-error'>{hasPasswordErrorOk}</p>
+              <p className='login__input-error'>{hasPasswordErrorOk}</p>
             ) : (
-              <p className='signin__input-noerror'></p>
+              <p className='login__input-noerror'></p>
             )}
 
-            <button className="signin__button" disabled={disable}>
+            <button className="login__button" disabled={disable}>
               {loader ? 'Загрузка...' : 'Зареєструватись'}
             </button>
 
             {error ? (
-              <p className='signin__input-error'>{error}</p>
+              <p className='login__input-error'>{error}</p>
             ) : (
-              <p className='signin__input-noerror'></p>
+              <p className='login__input-noerror'></p>
             )}
 
           </form>
 
-          <Link to='/login' className="signin__link">
+          <Link to='/login' className="login__link">
             Повернутись до входу
           </Link>
         </div>

@@ -30,7 +30,6 @@ const OrderCard: FC<Props> = ({toy}) => {
           <img className='order__img' src={toy?.images[0].image} alt={toy?.title}/>
         </Link>
         
-
         <div className='order__box'>
           <p className='order__info'>Доставляється</p>
           <div className='order__materials'>

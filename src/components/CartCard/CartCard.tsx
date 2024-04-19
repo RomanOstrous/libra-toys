@@ -15,13 +15,11 @@ type Props = {
 
 const CartCard: React.FC<Props> = ({toy}) => {
   const [materials, setMaterials] = useState<ProductDetalType | null >(null)
-
   const dispatch = useAppDispatch();
-
+  
   const handleRemove = () => {
     dispatch(actions.take(toy.id));
   }
-
 
   useEffect(() => {
     client.get<ProductDetalType>(`shop/products/${toy.id}`)

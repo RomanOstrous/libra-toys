@@ -26,9 +26,7 @@ export const ToyDetalPage = () => {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
-
   const ids = wishs.map(el => el.product);
-
   const selectproduct = product.find(el => el.slug === slug);
 
   useEffect(() => {
@@ -156,7 +154,6 @@ export const ToyDetalPage = () => {
             <ul className="info__list">
               <li className="info__list-text">{info.size} сантиметрів</li>
             </ul>
-    
             <p className="info__title-list">Матеріали:</p>
             <ul className="info__list">
               {info.materials.map(item => (

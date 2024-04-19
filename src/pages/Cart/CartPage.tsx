@@ -2,7 +2,6 @@ import React from "react";
 import './CartPage.scss';
 import { useAppSelector } from "../../app/hook";
 import CartCard from "../../components/CartCard/CartCard";
-
 import { useNavigate } from "react-router-dom";
 import { SwipeToSlide } from "../../components/Slider/Slider";
 import ButtonBack from "../../components/ButtonBack/ButtonBack";
@@ -12,7 +11,6 @@ export const CartPage = () => {
   const { product } = useAppSelector(state => state.product);
   const { cart } = useAppSelector(state => state.cart);
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-
   const visibleToys = product.filter(item => cart.includes(item.id));
   const count = visibleToys.map(item => item.price);
   const total = count.reduce((acc, item) => acc + item, 0);
@@ -53,7 +51,6 @@ export const CartPage = () => {
         </p>
       )}
     </div>
-
 
     <div className="cart-page__slider container">
       <div className="cart-page__slider-container">

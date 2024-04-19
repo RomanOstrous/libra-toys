@@ -7,7 +7,6 @@ import searchIco from "../../assets/icons/search.svg";
 import classNames from 'classnames';
 import { useAppSelector } from '../../app/hook';
 
-
 interface Props {
   handleSortChange: (value: string) => void;
   handleFilterChange: (value: string) => void;

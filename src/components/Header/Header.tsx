@@ -7,7 +7,6 @@ import { Path } from "../../types/pathName";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import Cookies from "js-cookie";
 import { actions } from "../../app/Slices/authSlice";
-
 import Logo from "../../assets/images/Logo.svg";
 import BurgerIco from "../../assets/icons/burger.svg";
 import CloseIco from "../../assets/icons/cross.svg";
@@ -28,12 +27,12 @@ export const Header = () => {
   const {cart} = useAppSelector(state => state.cart);
   const counter = cart.length;
 
-useEffect(() => {
-  if (!token?.length) {
-    localStorage.setItem("isLoggedIn", "false");
-    dispatch(actions.logout());
-  }
-},[token?.length, dispatch])
+  useEffect(() => {
+    if (!token?.length) {
+      localStorage.setItem("isLoggedIn", "false");
+      dispatch(actions.logout());
+    }
+  },[token?.length, dispatch])
 
   return (
     <div className="header">

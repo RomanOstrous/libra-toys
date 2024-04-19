@@ -8,11 +8,9 @@ import { useEffect, useState } from "react";
 export default function UserInfo() {
   const [name, setName] = useState('');
   const [hasNameError, setHasNameError] = useState('');
-
   const [lastName, setLastName] = useState('');
   const [hasLastNameError, setHasLastNameError] = useState('');
   const [id, setId] = useState('');
-
   const [email, setEmail] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
@@ -37,9 +35,7 @@ export default function UserInfo() {
       }
     })
     .then(response => {
-      
       console.log('чотко', response);
-
       setId(response.data.id)
       setName(response.data.first_name);
       setLastName(response.data.last_name);
