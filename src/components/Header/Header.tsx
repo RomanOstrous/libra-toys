@@ -115,7 +115,11 @@ export const Header = () => {
           <button
             type="button"
             className="header__burger"
-            onBlur={() => setBurger(false)}
+            onBlur={() => {
+              setTimeout(() => {
+                setBurger(false)
+              },300)
+            }}
             onClick={() => {
               setBurger(!burger);
             }}
