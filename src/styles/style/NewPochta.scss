@@ -50,6 +50,11 @@ position: relative;
     }
   }
 
+  &__cont{
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -88,6 +93,11 @@ position: relative;
     &:focus {
       border: 1px solid white;
     }
+  }
+
+  &__check {
+    width: 20px;
+    height: 20px;
   }
 
   &__text {

@@ -204,19 +204,18 @@ const PayForm = () => {
           </div>
         </div>
 
-        <div className="newp__cont">
+        <label htmlFor="checkbox" className="newp__cont">
           <p className='newp__text'>
             Я прочитав та згоден-(на) з правилами купівлі та конфіденційності
           </p>
-
           <input
+            id="checkbox"
             className="newp__check"
             type="checkbox"
             checked={check}
             onChange={() => setCheck(!check)}
-            placeholder="CVV"
           />
-        </div>
+        </label>
       </div>
     </div>
   )

@@ -184,7 +184,7 @@ function SigninForm() {
         <div className="login__container grid__item--desktop-3-6 grid__item--tablet-2-5">
           <h1 className='login__title'>Зареєструватись</h1>
           <button className='login__google' onClick={() => handleGoogle()}>
-            <img src={Google} alt="" className='signin__google-ico'/>
+            <img src={Google} alt="" className='login__google-ico'/>
             <p className='login__google-text'>Через Google</p>
           </button>
           

@@ -354,18 +354,17 @@ const NewPochta = () => {
           </div>
         </div>
 
-        <div className="newp__container">
+        <label htmlFor="chec" className="newp__cont">
           <p className='newp__text'>
             Оплата при отриманні
           </p>
-
           <input
+            id="chec"
             className="newp__check"
             type="checkbox"
             onChange={() => handleCheck()}
-            placeholder="CVV"
           />
-        </div>
+        </label>
       </div>
     </div>
   )
