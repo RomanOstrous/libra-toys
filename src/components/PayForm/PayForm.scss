@@ -56,9 +56,20 @@ position: relative;
     gap: 20px;
   }
 
+  &__cont {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
   &__box {
     width: 100%;
     flex-grow: 1;
+  }
+
+  &__check {
+    width: 24px;
+    height: 24px;
   }
 
   &__input {

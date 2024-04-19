@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import './LoginForm.scss';
 import Cookies from 'js-cookie';

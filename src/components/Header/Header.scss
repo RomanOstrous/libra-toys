@@ -10,7 +10,7 @@
   height: 88px;
   width: 100%;
   z-index: 5;
-  border-bottom: 1px solid rgb(17, 18, 19);
+  border-bottom: 1px solid #111213;
 
   @include on-tablet {
     position: static;
@@ -79,10 +79,10 @@
 
   &__nav-link {
     position: relative;
-    @include namu24;
-
     color: aliceblue;
     text-decoration: none;
+
+    @include namu24;
   }
 
   &__is-active {

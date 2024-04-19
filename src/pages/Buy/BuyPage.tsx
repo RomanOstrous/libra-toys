@@ -5,10 +5,12 @@ import NewPochta from '../../components/NewPochta/NewPochta';
 import { useAppSelector } from '../../app/hook';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import PayForm from '../../components/PayForm/PayForm';
 
 const BuyPage = () => {
   const { product } = useAppSelector(state => state.product);
   const { cart } = useAppSelector(state => state.cart);
+  const { pay }= useAppSelector(state => state.buy);
   const last = sessionStorage.getItem('last');
   const first = sessionStorage.getItem('first');
   const midle = sessionStorage.getItem('midle');
@@ -55,7 +57,11 @@ const BuyPage = () => {
         </div>
         
         <div className="grid__item--desktop-1-4 grid__item--tablet-1-4">
-          <NewPochta  />
+          <NewPochta />
+
+          { pay === false && (
+            <PayForm />
+          )}
 
           <button 
             className="buy__button grid__item--desktop-1-4 grid__item--tablet-1-4"

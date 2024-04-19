@@ -6,7 +6,7 @@ import { debounce } from 'lodash';
 import arrow from '../../assets/icons/arrow.svg';
 import axios from 'axios';
 import classNames from 'classnames';
-import { useAppDispatch } from '../../app/hook';
+import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { actions } from '../../app/Slices/buySlice';
 
 const NewPochta = () => {
@@ -31,8 +31,19 @@ const NewPochta = () => {
   const [optionsCity, setoptionsCity] = useState<string[]>([]);
   const [optionsWarehouse, setoptionsWarehouse] = useState<string[]>([]);
   const [button, setButton] = useState(false);
-
+  const [check, setCheck] = useState(false);
   const dispatch = useAppDispatch();
+  const pay = useAppSelector(state => state.buy.pay);
+
+  const handleCheck = () => {
+    if (pay === true) {
+      dispatch(actions.payNot());
+      setCheck(false);
+    } else {
+      dispatch(actions.payOk());
+      setCheck(true);
+    }
+  }
 
   const saveToSessionStorage = useCallback(() => {
     sessionStorage.setItem('first', firstName);
@@ -50,10 +61,10 @@ const NewPochta = () => {
   }, [saveToSessionStorage]);
 
   useEffect(() => {
-    if(validation) {
+    if(validation && check === true) {
       dispatch(actions.valid())
     } else {dispatch(actions.notValid())}
-  }, [validation]);
+  }, [validation, check]);
 
   const debouncedSearchCity = useCallback(
     debounce(async (text: string) => {
@@ -105,6 +116,10 @@ const NewPochta = () => {
     }, 1000),
     [city]
   );
+
+  const validName = (name: string) => {
+    return name.charAt(0) !== name.charAt(0).toUpperCase();
+  };
 
   const handleChangeLast = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
@@ -160,19 +175,19 @@ const NewPochta = () => {
   };
 
   const handleLastBlur = () => {
-    if (!lastName) {
+    if (!lastName || validName(lastName)) {
       setLastEror(true);
     } 
   };
 
   const handleFirstBlur = () => {
-    if (!firstName) {
+    if (!firstName || validName(firstName)) {
       setFirstEror(true);
     } 
   };
 
   const handleMidleBlur = () => {
-    if (!midleName) {
+    if (!midleName || validName(midleName)) {
       setMidleEror(true);
     } 
   };
@@ -277,7 +292,7 @@ const NewPochta = () => {
 
           <input 
             className="newp__input"
-            type="text" 
+            type="number" 
             name="телефон" 
             value={phone}
             onChange={handleChangePhone}
@@ -344,6 +359,20 @@ const NewPochta = () => {
               </ul>
             </div>
           </div>
+        </div>
+
+
+        <div className="newp__container">
+          <p className='newp__text'>
+            Оплата при отриманні
+          </p>
+
+          <input
+            className="newp__check"
+            type="checkbox"
+            onChange={() => handleCheck()}
+            placeholder="CVV"
+          />
         </div>
       </div>
     </div>

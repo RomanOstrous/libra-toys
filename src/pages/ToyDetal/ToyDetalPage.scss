@@ -122,6 +122,7 @@
     &-title {
       margin-bottom: 24px;
       color: white;
+
       @include namu24;
   
       @include on-desktop {
@@ -141,6 +142,7 @@
     &-description {
       margin-bottom: 24px;
       color: #868E96;
+
       @include namu16;
     }
 
@@ -163,6 +165,7 @@
       box-sizing: border-box;
       background-color: #F9B129;
       transition: all 0.3s ease;
+
       @include namu20;
   
       @include on-desktop {
@@ -196,6 +199,7 @@
       background: none;
       transition: all 0.3s ease;
       color: white;
+      
       @include namu20;
   
       @include on-desktop {

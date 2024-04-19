@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import GoogleLogin from 'react-google-login';

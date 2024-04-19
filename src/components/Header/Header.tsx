@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import './Header.scss'
 import classNames from "classnames";
 import { Path } from "../../types/pathName";
@@ -24,7 +24,6 @@ export const Header = () => {
   const [burger, setBurger] = useState(false);
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const token = Cookies.get('refresh_token');
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {cart} = useAppSelector(state => state.cart);
   const counter = cart.length;
@@ -34,7 +33,7 @@ useEffect(() => {
     localStorage.setItem("isLoggedIn", "false");
     dispatch(actions.logout());
   }
-},[token?.length])
+},[token?.length, dispatch])
 
   return (
     <div className="header">

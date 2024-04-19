@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import '../../styles/style/PasswordReset.scss';
 import classNames from 'classnames';
@@ -54,8 +55,8 @@ export default function PasswordRecoveryPage() {
           <p className='password-reset__title'>Відновлення паролю</p>
 
           <p className='password-reset__info'>
-            Для відновлення парою введи свою почту, на неї ми відправимо посилання за яким ти зможеш перейти та створити новий пароль.
-            Прибуття може зайняти хвилину.
+          Щоб відновити пароль, будь ласка, введіть свою пошту. Ми надішлемо на неї посилання, за яким ви зможете створити новий пароль.
+          Будь ласка, зачекайте, це може зайняти кілька хвилин, щоб лист до вас дійшов.
           </p>
           
           <div className="password-reset__box">

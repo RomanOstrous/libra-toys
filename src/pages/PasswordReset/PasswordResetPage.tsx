@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import '../../styles/style/PasswordReset.scss';
 import classNames from 'classnames';
 import { client } from '../../services/httpClient';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 
 export default function PasswordResetPage() {
@@ -14,6 +16,10 @@ export default function PasswordResetPage() {
   const [message, setMessage] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(true);
+
+  const [searchParams] = useSearchParams();
+  const navigate= useNavigate();
+  const token = searchParams.get('token');
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -50,12 +56,14 @@ export default function PasswordResetPage() {
     handlePasswordBlur();
     setLoader(true);
 
-    client.post('user/password_reset/', {
-      pasword: password,
+    client.post('user/password_reset/confirm/', {
+      "password": password,
+      "token": token,
     })
     .then((response: any) => {
       setLoader(false);
       setMessage('Посилання успішно надіслано');
+      navigate('/login')
       console.log(response);
     })
     .catch((err: any) => {
@@ -122,7 +130,7 @@ export default function PasswordResetPage() {
           </div>
 
           <button className="password-reset__button" disabled={disable} onClick={handleClick}>
-            {loader ? 'Відправка...' : 'Відправити'}
+            {loader ? 'Підтверджую...' : 'Підтвердити'}
           </button>
           
           {message ? (

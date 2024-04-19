@@ -59,6 +59,7 @@
 
   &__text {
     color: white;
+    
     @include namu20;
 
     @include on-tablet {
