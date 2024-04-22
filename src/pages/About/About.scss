@@ -73,7 +73,7 @@
 
     &-title {
       margin-bottom: 16px;
-      color: white;
+      color: $c-white;
 
       @include libra40;
 
@@ -84,7 +84,7 @@
 
     &-subtitle {
       margin-bottom: 8px;
-      color: #CED4DA;
+      color: $c-gray-4;
 
       @include namu20;
 
@@ -95,7 +95,7 @@
 
     &-text {
       text-align: left;
-      color: #868E96;
+      color: $c-gray-2;
       
       @include namu16;
 

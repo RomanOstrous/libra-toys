@@ -24,7 +24,7 @@
     border-radius: 44px;
     border: none;
     outline: none;
-    background-color: #F9B129;
+    background-color: $c-orange-1;
     transition: 0.3s ease;
 
 
@@ -41,18 +41,18 @@
     }
 
     &:disabled {
-      background-color: #FDDE8880;
-      color: white;
+      background-color: $c-orange-3;
+      color: $c-white;
       cursor: not-allowed;
     }
 
     &:focus {
-      background-color: #FAC155;
+      background-color: $c-orange-2;
     }
 
     &:hover {
-      border: 1px solid white;
-      color: white;
+      border: 1px solid $c-white;
+      color: $c-white;
     }
   }
 }

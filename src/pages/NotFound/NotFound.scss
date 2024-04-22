@@ -42,7 +42,7 @@
 
   &__title {
     margin-bottom: 16px;
-    color: white;
+    color: $c-white;
 
     @include libra40;
 
@@ -58,7 +58,7 @@
   }
 
   &__text {
-    color: white;
+    color: $c-white;
     
     @include namu20;
 
@@ -69,6 +69,6 @@
 
   &__link {
     margin-left: 5px;
-    color: #1976D2;
+    color: $c-blue-1;
   }
 }

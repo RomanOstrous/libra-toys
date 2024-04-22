@@ -31,7 +31,7 @@
   }
 
   &__title {
-    color: white;
+    color: $c-white;
 
     @include libra40;
 
@@ -121,7 +121,7 @@
 
     &-title {
       margin-bottom: 24px;
-      color: white;
+      color: $c-white;
 
       @include namu24;
   
@@ -141,7 +141,7 @@
 
     &-description {
       margin-bottom: 24px;
-      color: #868E96;
+      color: $c-gray-2;
 
       @include namu16;
     }
@@ -163,7 +163,7 @@
       border: none;
       border-radius: 44px;
       box-sizing: border-box;
-      background-color: #F9B129;
+      background-color: $c-orange-1;
       transition: all 0.3s ease;
 
       @include namu20;
@@ -176,12 +176,12 @@
       }
   
       &:focus {
-        background-color: #FAC155;
+        background-color: $c-orange-2;
       }
   
       &:hover {
-        color: white;
-        border: 1px solid white;
+        color: $c-white;
+        border: 1px solid $c-white;
       }
     }
 
@@ -193,12 +193,12 @@
       max-width: 600px;
       width: 100%;
       height: 44px;
-      border: 1px solid white;
+      border: 1px solid $c-white;
       border-radius: 44px;
       box-sizing: border-box;
       background: none;
       transition: all 0.3s ease;
-      color: white;
+      color: $c-white;
       
       @include namu20;
   
@@ -210,7 +210,7 @@
       }
   
       &:hover {
-        border: 1px solid #EA513F;
+        border: 1px solid $c-red-2;
       }
 
       &-button {
@@ -228,7 +228,7 @@
   }
 
   &__title-list {
-    color: white;
+    color: $c-white;
 
     @include namu24;
   
@@ -246,7 +246,7 @@
 
     &-text {
       margin-left: 24px;
-      color: #868E96;
+      color: $c-gray-2;
       text-decoration: dashed;
 
       @include namu16;

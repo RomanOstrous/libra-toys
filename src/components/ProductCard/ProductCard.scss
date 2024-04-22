@@ -46,7 +46,7 @@
     left: 0;
     bottom: 0;
     padding: 16px;
-    color: white;
+    color: $c-white;
     z-index: 1;
 
     @include libra32;
@@ -58,8 +58,8 @@
     left: 0;
     margin: 16px;
     padding: 4px 16px;
-    color: black;
-    background-color: #56C0E3;
+    color: $c-black;
+    background-color: $c-blue-2;
     border-radius: 15px;
 
     @include namu16;

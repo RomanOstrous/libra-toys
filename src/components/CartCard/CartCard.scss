@@ -10,7 +10,7 @@
   transition: 0.3s ease;
 
   &:hover {
-    background-color: #111213;
+    background-color: $c-black-1;
   }
 
   @include on-tablet {
@@ -19,7 +19,7 @@
   }
 
   &__title {
-    color: white;
+    color: $c-white;
 
     @include namu24;
 
@@ -77,7 +77,7 @@
 
     &-item {
       padding-left: 10px;
-      color: #868E96;
+      color: $c-gray-2;
 
       @include namu14;
 
@@ -92,7 +92,7 @@
     justify-content: space-between;
 
     &-text {
-      color: #ADB5BD;
+      color: $c-gray-3;
 
       @include namu16;
 

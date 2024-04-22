@@ -3,14 +3,14 @@
 .header {
   position: fixed;
   top: 0;
-  background-color: black;
+  background-color: $c-black;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
   height: 88px;
   width: 100%;
   z-index: 5;
-  border-bottom: 1px solid #111213;
+  border-bottom: 1px solid $c-black-1;
 
   @include on-tablet {
     position: static;
@@ -79,7 +79,7 @@
 
   &__nav-link {
     position: relative;
-    color: aliceblue;
+    color: $c-gray-5;
     text-decoration: none;
 
     @include namu24;
@@ -110,9 +110,9 @@
     padding: 8px;
     width: 1px;
     height: 1px;
-    background-color: #F9B129;
+    background-color: $c-orange-1;
     border-radius: 50%;
-    color: black;
+    color: $c-black;
 
     @include namu14;
   }

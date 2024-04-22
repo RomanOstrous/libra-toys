@@ -25,11 +25,11 @@
     background: none;
     outline: none;
     border: none;
-    border-bottom: 2px solid #868E96;
+    border-bottom: 2px solid $c-gray-2;
   }
 
   &__title {
-    color: #F1F3F5;
+    color: $c-gray-5;
 
     @include namu24;
   }
@@ -52,7 +52,7 @@
 
   &__order {
     margin-bottom: 4px;
-    color: #F9B129;
+    color: $c-orange-1;
 
     @include namu16
   }
@@ -77,7 +77,7 @@
     margin-bottom: 20px;
 
     &:hover {
-      background-color: #111213;
+      background-color: $c-black-1;
     }
   }
 
@@ -87,14 +87,14 @@
   }
 
   &__text {
-    color: white;
+    color: $c-white;
 
     @include namu16
   }
 
   &__empty {
     text-align: center;
-    color: #495057;
+    color: $c-gray-1;
 
     @include libra40;
 

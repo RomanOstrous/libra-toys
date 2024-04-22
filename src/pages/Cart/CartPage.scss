@@ -29,8 +29,8 @@
     margin-top: 32px;
     padding: 16px 0;
     box-sizing: border-box;
-    border-bottom: 1px solid #495057;
-    border-top: 1px solid #495057;
+    border-bottom: 1px solid $c-gray-1;
+    border-top: 1px solid $c-gray-1;
     gap: 16px;
 
     @include on-tablet {
@@ -47,7 +47,7 @@
   }
 
   &__text {
-    color: white;
+    color: $c-white;
 
     @include namu24;
 
@@ -62,7 +62,7 @@
     border-radius: 44px;
     border: none;
     outline: none;
-    background-color: #F9B129;
+    background-color: $c-orange-1;
     transition: 0.3s ease;
 
 
@@ -81,11 +81,11 @@
     }
 
     &:hover {
-      color: white;
+      color: $c-white;
     }
 
     &:focus {
-      background-color: #FAC155;
+      background-color: $c-orange-2;
     }
   }
 
@@ -130,7 +130,7 @@
     }
 
     &-title {
-      color: white;
+      color: $c-white;
 
       @include libra40;
 
@@ -142,7 +142,7 @@
 
   &__empty {
     text-align: center;
-    color: #495057;
+    color: $c-gray-1;
 
     @include libra40;
 

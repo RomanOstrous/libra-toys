@@ -6,15 +6,15 @@
   height: 48px;
   margin-bottom: 16px;
   padding: 0;
-  border: 1px solid #495057;
+  border: 1px solid $c-gray-1;
   background: none;
-  background-color: red;
+  background-color: $c-red-1;
   border-radius: 48px;
   box-sizing: border-box;
   transition: all 0.3s ease;
 
   &:hover {
-    border: 1px solid white;
+    border: 1px solid $c-white;
   }
 
   @include on-tablet {

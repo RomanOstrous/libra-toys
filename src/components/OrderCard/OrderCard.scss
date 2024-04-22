@@ -14,7 +14,7 @@
   }
 
   &__title {
-    color: white;
+    color: $c-white;
 
     @include namu24;
 
@@ -28,8 +28,8 @@
     justify-content: center;
     align-items: center;
     padding: 4px 16px;
-    color: #CED4DA;
-    border: 1px solid #CED4DA;
+    color: $c-gray-4;
+    border: 1px solid $c-gray-4;
     box-sizing: border-box;
     border-radius: 40px;
 
@@ -81,7 +81,7 @@
 
     &-item {
       padding-left: 10px;
-      color: #868E96;
+      color: $c-gray-2;
 
       @include namu14;
 
@@ -96,7 +96,7 @@
     justify-content: space-between;
 
     &-text {
-      color: #ADB5BD;
+      color: $c-gray-3;
 
       @include namu16;
 

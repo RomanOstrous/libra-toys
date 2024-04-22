@@ -1,12 +1,12 @@
 @import "../../styles/utils/utils";
 
 .footer {
-  background-color: black;
+  background-color: $c-black;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
   width: 100%;
-  border-top: 1px solid #111213;
+  border-top: 1px solid $c-black-1;
 
 
   &__container {
@@ -39,14 +39,14 @@
   }
 
   &__text {
-    color: white;
+    color: $c-white;
 
     @include popins20;
   }
 
   &__text-l {
     word-break: break-all;
-    color: white;
+    color: $c-white;
 
     @include popins20;
   }
