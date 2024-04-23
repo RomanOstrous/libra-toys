@@ -94,6 +94,6 @@ The project is structured as follows:
 
 ## Conclusion
 
-This project demonstrates how to build a modern frontend application using React and related technologies. By using SCSS and BEM, we can write CSS that is more maintainable and easier to read. TypeScript adds type safety to our code, which makes it easier to catch bugs during development.Redux Toolkit simplifies the process of configuring Redux, with it we can efficiently manage complex state requirements, such as global application state or getting data from an API. This provides a more organized and scalable codebase, which makes maintenance and future improvements easier.
+This project demonstrates how to build a modern frontend application using React and related technologies. By using SCSS and BEM, we can write CSS that is more maintainable and easier to read. TypeScript adds type safety to our code, which makes it easier to catch bugs during development. Redux Toolkit simplifies the process of configuring Redux, with it we can efficiently manage complex state requirements, such as global application state or getting data from an API. This provides a more organized and scalable codebase, which makes maintenance and future improvements easier.
 
 If you have any questions or feedback about this project, please feel free to reach out to the contributors. We hope this project inspires you to build your own frontend projects using the latest web technologies!
