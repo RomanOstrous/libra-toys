@@ -149,13 +149,13 @@ function SigninForm() {
   };
 
   const base = process.env.REACT_APP_BASE_URL;
-  const clientId = "88092891520-fd4c7t6lrqmgubjs2dtg4bqvfj2v513u.apps.googleusercontent.com";
+  const clientId = process.env.REACT_APP_CLIENT_ID;
 
   const handleGoogle = () => {
     gapi.load('auth2', () => {
       gapi.auth2.init({
         client_id: clientId,
-        prompt: 'select_account', // Налаштовуємо параметр prompt на 'select_account'
+        prompt: 'select_account',
       }).then(() => {
         const auth2 = gapi.auth2.getAuthInstance();
         auth2.signIn().then((googleUser: any) => {
@@ -319,7 +319,6 @@ function SigninForm() {
             ) : (
               <p className='login__input-noerror'></p>
             )}
-
           </form>
 
           <Link to='/login' className="login__link">

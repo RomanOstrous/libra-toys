@@ -26,7 +26,7 @@ function LoginForm() {
   const [disable, setDisable] = useState(false);
 
   const base = process.env.REACT_APP_BASE_URL;
-  const clientId = "88092891520-fd4c7t6lrqmgubjs2dtg4bqvfj2v513u.apps.googleusercontent.com";
+  const clientId = process.env.REACT_APP_CLIENT_ID;
   let hasError = false;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
