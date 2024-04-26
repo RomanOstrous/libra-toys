@@ -1,11 +1,12 @@
 import React from "react";
 import './CartPage.scss';
-import { useAppSelector } from "../../app/hook";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
 import CartCard from "../../components/CartCard/CartCard";
 import { useNavigate } from "react-router-dom";
 import { SwipeToSlide } from "../../components/Slider/Slider";
 import ButtonBack from "../../components/ButtonBack/ButtonBack";
 import Back from '../../assets/icons/buttonBack.svg';
+import { actions } from "../../app/Slices/cartSlice";
 
 export const CartPage = () => {
   const { product } = useAppSelector(state => state.product);
@@ -15,6 +16,11 @@ export const CartPage = () => {
   const count = visibleToys.map(item => item.price);
   const total = count.reduce((acc, item) => acc + item, 0);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleRemove = () => {
+    dispatch(actions.clear());
+  }
 
   return (
     <div className="cart-page">
@@ -32,16 +38,26 @@ export const CartPage = () => {
                   <p className="cart-page__text">Всього:</p>
                   <p className="cart-page__text">{total}₴</p>
                 </div>
-                <button 
-                  className="cart-page__button" 
-                  onClick={() => {
-                    if (isLoggedIn) {
-                      navigate('/buy')
-                    } else {navigate('/login')}
-                  }}
-                >
-                  Придбати
-                </button>
+
+                <div className="cart-page__buttons">
+                  <button 
+                    className="cart-page__button--red cart-page__button"
+                    onClick={handleRemove} 
+                  >
+                    Очистити
+                  </button>
+
+                  <button 
+                    className="cart-page__button" 
+                    onClick={() => {
+                      if (isLoggedIn) {
+                        navigate('/buy')
+                      } else {navigate('/login')}
+                    }}
+                  >
+                    Придбати
+                  </button>
+                </div>
               </div>
             </>
           ) : (
