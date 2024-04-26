@@ -60,7 +60,7 @@ const CartCard: React.FC<Props> = ({toy}) => {
           </div>
           <div className='cart__count'>
             <p className='cart__count-text'>Ціна:</p>
-            <p className='cart__count-text'>{toy.price}</p>
+            <p className='cart__count-text'>{toy.price}₴</p>
           </div>
         </div>
       </div>

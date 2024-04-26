@@ -11,6 +11,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useAppDispatch } from "../../app/hook";
 import { actions } from "../../app/Slices/authSlice";
+import visibleOn from '../../assets/icons/visibility_on.svg';
+import visibleOff from '../../assets/icons/visibility_off.svg';
 
 function SigninForm() {
   const [name, setName] = useState('');
@@ -26,6 +28,8 @@ function SigninForm() {
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
   
   let hasError = false;
   const dispatch = useAppDispatch();
@@ -104,6 +108,14 @@ function SigninForm() {
       setHasPasswordErrorOk('Пароль не співпадає');
       hasError = true;
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const togglePasswordVisibility2 = () => {
+    setShowPassword2(!showPassword2);
   };
 
   const onFinish = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -268,18 +280,25 @@ function SigninForm() {
               Пароль
             </p>
 
-            <input 
-              className={classNames('login__input', {
-                'login__input--is-danger': hasPasswordError,
-                'login__input--is-ok': !hasPasswordError && password
-              })} 
-              type="password" 
-              name="password" 
-              placeholder="Введи свій пароль"
-              value={password}
-              onChange={handlePasswordChange}
-              onBlur={handlePasswordBlur}
-            />
+            <div className="login__password">
+              <input 
+                className={classNames('login__input', {
+                  'login__input--is-ok': password.length >= 8
+                })} 
+                type={showPassword ? 'text' : 'password'} 
+                name="password" 
+                placeholder="Введи свій пароль"
+                maxLength={30}
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <button type="button" className="login__visible" onClick={togglePasswordVisibility}>
+                {showPassword 
+                  ? <img src={visibleOn} alt="видно" />
+                  : <img src={visibleOff} alt="не видно" />
+                }
+              </button>
+            </div>
 
             {hasPasswordError ? (
               <p className='login__input-error'>{hasPasswordError}</p>
@@ -291,18 +310,28 @@ function SigninForm() {
               Підтвердити пароль
             </p>
 
-            <input 
-              className={classNames('login__input', {
-                'login__input--is-danger': hasPasswordErrorOk,
-                'login__input--is-ok': !hasPasswordErrorOk && passwordOk
-              })} 
-              type="password" 
-              name="password" 
-              placeholder="Підтверди свій пароль"
-              value={passwordOk}
-              onChange={handlePasswordOkChange}
-              onBlur={handlePasswordOkBlur}
-            />
+            <div className="login__password">
+              <input 
+                className={classNames('login__input', {
+                  'login__input--is-danger': hasPasswordErrorOk,
+                  'login__input--is-ok': !hasPasswordErrorOk && passwordOk
+                })} 
+                type={showPassword2 ? 'text' : 'password'} 
+                name="password" 
+                placeholder="Підтверди свій пароль"
+                maxLength={30}
+                value={passwordOk}
+                onChange={handlePasswordOkChange}
+                onBlur={handlePasswordOkBlur}
+              />
+              
+              <button type="button" className="login__visible" onClick={togglePasswordVisibility2}>
+                {showPassword2 
+                  ? <img src={visibleOn} alt="видно" />
+                  : <img src={visibleOff} alt="не видно" />
+                }
+              </button>
+            </div>
 
             {hasPasswordErrorOk ? (
               <p className='login__input-error'>{hasPasswordErrorOk}</p>

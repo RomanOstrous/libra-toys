@@ -202,6 +202,20 @@
     }
   }
 
+  &__password {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__visible {
+    position: absolute;
+    right: 10px;
+    border: none;
+    outline: none;
+    background: none;
+  }
+
   &__button {
     margin-top: 32px;
     margin-bottom: 5px;

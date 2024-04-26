@@ -11,6 +11,8 @@ import { client } from '../../services/httpClient';
 import Google from "../../assets/icons/google.svg";
 import {gapi} from 'gapi-script';
 import axios from "axios";
+import visibleOn from '../../assets/icons/visibility_on.svg';
+import visibleOff from '../../assets/icons/visibility_off.svg';
 
 interface TokenResponse {
   access: string;
@@ -24,12 +26,17 @@ function LoginForm() {
   const [error, setError] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const base = process.env.REACT_APP_BASE_URL;
   const clientId = process.env.REACT_APP_CLIENT_ID;
   let hasError = false;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -161,16 +168,25 @@ function LoginForm() {
               Пароль
             </p>
 
-            <input 
-              className={classNames('login__input', {
-                'login__input--is-ok':  password.length >= 8
-              })} 
-              type="password" 
-              name="password" 
-              placeholder="Введи свій пароль"
-              value={password}
-              onChange={handlePasswordChange}
-            />
+            <div className="login__password">
+              <input 
+                className={classNames('login__input', {
+                  'login__input--is-ok':  password.length >= 8
+                })} 
+                type={showPassword ? 'text' : 'password'} 
+                name="password" 
+                placeholder="Введи свій пароль"
+                maxLength={30}
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <button type="button" className="login__visible" onClick={togglePasswordVisibility}>
+                {showPassword 
+                  ? <img src={visibleOn} alt="видно" />
+                  : <img src={visibleOff} alt="не видно" />
+                }
+              </button>
+            </div>
 
           <button className="login__button" disabled={disable}>
             {loader ? 'Загрузка...' : 'Увійти'}

@@ -4,6 +4,8 @@ import Cookies from "js-cookie";
 import arrow from '../../assets/icons/arrow.svg';
 import classNames from "classnames";
 import axios from "axios";
+import visibleOn from '../../assets/icons/visibility_on.svg';
+import visibleOff from '../../assets/icons/visibility_off.svg';
 
 const PasswordReset = () => {
   const [oldPassword, setOldPassword] = useState('');
@@ -16,6 +18,9 @@ const PasswordReset = () => {
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(true);
   const [edit, setEdit] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const [showPassword3, setShowPassword3] = useState(false);
 
   const userId = sessionStorage.getItem('userID');
   const base = process.env.REACT_APP_BASE_URL;
@@ -75,6 +80,18 @@ useEffect(() => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const togglePasswordVisibility2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+
+  const togglePasswordVisibility3 = () => {
+    setShowPassword3(!showPassword3);
+  };
+
   const onFinish = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleNewBlur();
@@ -128,19 +145,28 @@ useEffect(() => {
             Старий пароль
           </p>
 
-          <input
-            className={classNames('password__input', {
-              'password__input--is-danger': oldPasswordError,
-            })}
-            type="password"
-            name="старий пароль" 
-            placeholder="Введи старий пароль"
-            autoComplete='off'
-            value={oldPassword}
-            onChange={handleOldChange}
-            onBlur={handleOldBlur}
-            readOnly={edit}
-          />
+          <div className="login__password">
+            <input
+              className={classNames('password__input', {
+                'password__input--is-danger': oldPasswordError,
+              })}
+              type={showPassword ? 'text' : 'password'} 
+              name="старий пароль" 
+              placeholder="Введи старий пароль"
+              autoComplete='off'
+              maxLength={30}
+              value={oldPassword}
+              onChange={handleOldChange}
+              onBlur={handleOldBlur}
+              readOnly={edit}
+            />
+            <button type="button" className="login__visible" onClick={togglePasswordVisibility}>
+              {showPassword 
+                ? <img src={visibleOn} alt="видно" />
+                : <img src={visibleOff} alt="не видно" />
+              }
+            </button>
+          </div>
 
           {oldPasswordError? (
             <p className='password__input-error'>{oldPasswordError}</p>
@@ -152,19 +178,28 @@ useEffect(() => {
             Новий пароль
           </p>
 
-          <input
-            className={classNames('password__input', {
-              'password__input--is-danger': newPasswordError,
-            })}
-            type="password"
-            name="новий пароль" 
-            placeholder="Введи новий пароль"
-            autoComplete='off'
-            value={newPassword}
-            onChange={handleNewChange}
-            onBlur={handleNewBlur}
-            readOnly={edit}
-          />
+          <div className="login__password">
+            <input
+              className={classNames('password__input', {
+                'password__input--is-danger': newPasswordError,
+              })}
+              type={showPassword2 ? 'text' : 'password'} 
+              name="новий пароль" 
+              placeholder="Введи новий пароль"
+              autoComplete='off'
+              maxLength={30}
+              value={newPassword}
+              onChange={handleNewChange}
+              onBlur={handleNewBlur}
+              readOnly={edit}
+            />
+            <button type="button" className="login__visible" onClick={togglePasswordVisibility2}>
+              {showPassword2 
+                ? <img src={visibleOn} alt="видно" />
+                : <img src={visibleOff} alt="не видно" />
+              }
+            </button>
+          </div>
 
           {newPasswordError? (
             <p className='password__input-error'>{newPasswordError}</p>
@@ -176,19 +211,28 @@ useEffect(() => {
             Повторно введи новий пароль
           </p>
 
-          <input
-            className={classNames('password__input', {
-              'password__input--is-danger': checkPasswordError,
-            })}
-            type="password"
-            name="спідтвердження паролю" 
-            placeholder="Повторно введи новий пароль"
-            autoComplete='off'
-            value={checkPassword}
-            onChange={handleCheckChange}
-            onBlur={handleCheckBlur}
-            readOnly={edit}
-          />
+          <div className="login__password">
+            <input
+              className={classNames('password__input', {
+                'password__input--is-danger': checkPasswordError,
+              })}
+              type={showPassword3 ? 'text' : 'password'} 
+              name="підтвердження паролю" 
+              placeholder="Повторно введи новий пароль"
+              autoComplete='off'
+              maxLength={30}
+              value={checkPassword}
+              onChange={handleCheckChange}
+              onBlur={handleCheckBlur}
+              readOnly={edit}
+            />
+            <button type="button" className="login__visible" onClick={togglePasswordVisibility3}>
+              {showPassword3 
+                ? <img src={visibleOn} alt="видно" />
+                : <img src={visibleOff} alt="не видно" />
+              }
+            </button>
+          </div>
 
           {checkPasswordError? (
             <p className='password__input-error'>{checkPasswordError}</p>
