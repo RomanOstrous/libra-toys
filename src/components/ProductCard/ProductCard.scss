@@ -26,7 +26,7 @@
       height: 100%;
       border-radius: 30px;
       box-sizing: border-box;
-      background: linear-gradient(to bottom, #0000 0%, #80000000 100%);
+      background: linear-gradient(to bottom, #0000 0%, #00000080 100%);
       z-index: 1;
     }
   }
@@ -47,7 +47,7 @@
     bottom: 0;
     padding: 16px;
     color: $c-white;
-    z-index: 1;
+    z-index: 2;
 
     @include libra32;
   }
