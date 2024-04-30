@@ -3,7 +3,8 @@ import Cookies from "js-cookie";
 import './LogOut.scss';
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hook";
-import { actions } from "../../app/Slices/authSlice";
+import { actions as log } from "../../app/Slices/authSlice";
+import { actions } from "../../app/Slices/cartSlice";
 
 export default function LogOut() {
   const navigate = useNavigate();
@@ -12,7 +13,8 @@ export default function LogOut() {
   const logOut = () => {
     Cookies.remove('access_token');
     Cookies.remove('refresh_token');
-    dispatch(actions.logout());
+    dispatch(log.logout());
+    dispatch(actions.clear());
     navigate('/');
   }
 

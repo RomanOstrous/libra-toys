@@ -56,17 +56,25 @@ export const Header = () => {
         </div>
 
         <div className="header__right">
-          <div className="header__nav-item">
-            <NavLink to={Path.Cart} className={getLinkClass}>
-              <img src={CartIco} alt="" className="header__cart"/>
-
-              {cart.length > 0 && (
-                <span className="header__counter">
-                  {counter}
-                </span>
-              )}
-            </NavLink>
-          </div>
+          {!isLoggedIn ? (
+            <div className="header__nav-item">
+              <NavLink to={Path.Login} className={getLinkClass}>
+                <img src={CartIco} alt="" className="header__cart"/>
+              </NavLink>
+            </div>
+          ):(
+            <div className="header__nav-item">
+              <NavLink to={Path.Cart} className={getLinkClass}>
+                <img src={CartIco} alt="" className="header__cart"/>
+  
+                {cart.length > 0 && (
+                  <span className="header__counter">
+                    {counter}
+                  </span>
+                )}
+              </NavLink>
+            </div>
+          )}
 
           {!isLoggedIn ? (
             <div className="header__nav-item">

@@ -87,7 +87,9 @@ export const ToyDetalPage = () => {
   };
 
   const handleCartButton = () => {
-    if (info) {
+    if (!isLoggedIn) {
+      navigate('/login')
+    } else if (info) {
       cart.includes(info.id)
         ? dispatch(actions.take(info.id))
         : dispatch(actions.add(info.id));
