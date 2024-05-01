@@ -14,85 +14,34 @@ import axios from "axios";
 import visibleOn from '../../assets/icons/visibility_on.svg';
 import visibleOff from '../../assets/icons/visibility_off.svg';
 
+import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import * as Yup from 'yup';
+
 interface TokenResponse {
   access: string;
   refresh: string;
 }
 
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
 function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [hasEmailError, setHasEmailError] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [timeoutId, setTimeoutId] =  useState<NodeJS.Timeout | null>(null);
 
   const base = process.env.REACT_APP_BASE_URL;
   const clientId = process.env.REACT_APP_CLIENT_ID;
-  let hasError = false;
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setEmail(value);
-    setHasEmailError('');
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setPassword(value);
-  };
-
-  const handleEmailBlur = () => {
-    if (!email.includes('@')) {
-      setHasEmailError('Введіть коректну адресу електронної пошти');
-      hasError = true;
-    }
-  };
-  
-  const onFinish = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    handleEmailBlur();
-
-    if (!hasError) {
-      setDisable(true);
-
-      const data = {
-        email: email,
-        password: password
-      };
-
-      try {
-        setLoader(true);
-        const response = await client.post<TokenResponse>('user/token/', data);
-        const { access, refresh } = response;
-
-        Cookies.set('access_token', access);
-        Cookies.set('refresh_token', refresh);
-        dispatch(actions.login());
-        navigate('/account');
-        setEmail('');
-        setPassword('');
-
-        console.log('Логін успішний:', response);
-      } catch {
-        setError('Схоже сталась помилка, перевірте правильність почти та паролю');
-
-        setTimeout(() =>{
-          setError('');
-        }, 5000);
-      } finally {
-        setLoader(false);
-        setDisable(false);
-      }
-    }
-  };
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Неправильний формат електронної пошти').required(`Поле "Пошта" є обов'язковим`),
+    password: Yup.string().min(8, 'Пароль повинен містити принаймні 8 символів').required(`Поле "Пароль" є обов'язковим`),
+  });
 
   const handleGoogle = () => {
     gapi.load('auth2', () => {
@@ -111,8 +60,6 @@ function LoginForm() {
             Cookies.set('refresh_token', resp.data.tokens.refresh);
             dispatch(actions.login());
             navigate('/account');
-            setEmail('');
-            setPassword('');
             console.log(resp);
           });
         }).catch((error: any) => {
@@ -133,71 +80,57 @@ function LoginForm() {
             <p className='login__google-text'>Через Google</p>
           </button>
           
-          
           <div className="login__decor">
             <span className="login__decor-line"></span>
             <span className="login__decor-text">або</span>
             <span className="login__decor-line"></span>
           </div>
 
-          <form className='login__form' onSubmit={onFinish}>
-            <p className='login__form-text'>
-              Пошта
-            </p>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            validationSchema={validationSchema}
+            onSubmit={async (values, { setSubmitting }) => {
+              const data = {
+                email: values.email,
+                password: values.password
+              };
 
-            <input
-              className={classNames('login__input', {
-                'login__input--is-danger': hasEmailError,
-                'login__input--is-ok': !hasEmailError && email
-              })}
-              name="email" 
-              placeholder="Введи свою почту"
-              autoComplete='off'
-              value={email}
-              onChange={handleEmailChange}
-              onBlur={handleEmailBlur}
-            />
+              setDisable(true);
 
-            {hasEmailError ? (
-              <p className='login__input-error'>{hasEmailError}</p>
-            ) : (
-              <p className='login__input-noerror'></p>
+              if (timeoutId) {
+                clearTimeout(timeoutId);
+              }
+
+              try {
+                setLoader(true);
+                const response = await client.post<TokenResponse>('user/token/', data);
+                const { access, refresh } = response;
+        
+                Cookies.set('access_token', access);
+                Cookies.set('refresh_token', refresh);
+                dispatch(actions.login());
+                navigate('/account');
+        
+                console.log('Логін успішний:', response);
+              } catch {
+                setError('Схоже сталась помилка, перевірте правильність почти та паролю');
+                
+                const timeout = setTimeout(() =>{
+                  setError('');
+                }, 5000);
+
+                setTimeoutId(timeout);
+              } finally {
+                setLoader(false);
+                setDisable(false);
+              }
+            }}
+          >
+            {({ isSubmitting }) => (
+              <InnerForm loader={loader} disable={disable} error={error}/>
             )}
-
-            <p className='login__form-text'>
-              Пароль
-            </p>
-
-            <div className="login__password">
-              <input 
-                className={classNames('login__input', {
-                  'login__input--is-ok':  password.length >= 8
-                })} 
-                type={showPassword ? 'text' : 'password'} 
-                name="password" 
-                placeholder="Введи свій пароль"
-                maxLength={30}
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              <button type="button" className="login__visible" onClick={togglePasswordVisibility}>
-                {showPassword 
-                  ? <img src={visibleOn} alt="видно" />
-                  : <img src={visibleOff} alt="не видно" />
-                }
-              </button>
-            </div>
-
-          <button className="login__button" disabled={disable}>
-            {loader ? 'Загрузка...' : 'Увійти'}
-          </button>
-          
-          {error ? (
-              <p className='login__input-error'>{error}</p>
-            ) : (
-              <p className='login__input-noerror'></p>
-            )}
-        </form>
+            
+          </Formik>
 
         <button
           onClick={() => navigate('/res-password')}
@@ -217,3 +150,78 @@ function LoginForm() {
 }
 
 export default LoginForm;
+
+type Props = {
+  loader: boolean,
+  disable: boolean,
+  error: string,
+}
+
+const InnerForm: React.FC<Props> = ({loader, disable, error}) => {
+  
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const { errors, touched } = useFormikContext<LoginFormValues>();
+
+  return (
+    <Form noValidate className='login__form'>
+      <div className="login__form">
+        <p className="login__form-text">Пошта</p>
+        <Field
+          type="email"
+          name="email"
+          autoComplete="off"
+          className={classNames('login__input', {
+            'login__input--is-danger': errors.email && touched.email,
+            'login__input--is-ok': !errors.email && touched.email
+          })}
+        />
+
+        {errors.email && touched.email ? (
+          <ErrorMessage name="email" component="div" className="login__input-error" />
+        ) : (
+          <p className='login__input-noerror'></p>
+        )}
+
+        <p className="login__form-text">Пароль</p>
+
+        <div className="login__password">
+          <Field
+            type={showPassword ? 'text' : 'password'} 
+            name="password"
+            className={classNames('login__input', {
+              'login__input--is-danger': errors.password && touched.password,
+              'login__input--is-ok': !errors.password && touched.password
+            })}
+          />
+
+          <button type="button" className="login__visible" onClick={togglePasswordVisibility}>
+            {showPassword 
+              ? <img src={visibleOn} alt="видно" />
+              : <img src={visibleOff} alt="не видно" />
+            }
+          </button>
+        </div>
+        
+        {errors.password && touched.password? (
+          <ErrorMessage name="password" component="div" className="login__input-error" />
+        ) : (
+          <p className='login__input-noerror'></p>
+        )}
+
+        <button className="login__button" disabled={disable}>
+          {loader ? 'Загрузка...' : 'Увійти'}
+        </button>
+
+        {error ? (
+          <p className='login__input-error'>{error}</p>
+        ) : (
+          <p className='login__input-noerror'></p>
+        )}
+      </div>
+    </Form>
+  );
+};
