@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from 'react-dom/client';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route,BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Path } from './types/pathName';
 import './styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.css';

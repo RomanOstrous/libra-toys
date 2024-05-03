@@ -283,6 +283,7 @@ function SigninForm() {
             <div className="login__password">
               <input 
                 className={classNames('login__input', {
+                  'login__input--is-danger': hasPasswordError,
                   'login__input--is-ok': password.length >= 8
                 })} 
                 type={showPassword ? 'text' : 'password'} 
