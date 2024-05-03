@@ -46,19 +46,23 @@ const PayForm = () => {
     setFirstEror(false);
   };
 
+  const formatCardNumber = (value: string) => {
+    const onlyNumbers = value.replace(/[^\d]/g, '');
+    const formattedValue = onlyNumbers.replace(/(\d{4})(?=\d)/g, '$1 ');
+    return formattedValue;
+  };
+
   const handleChangeCard = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
 
-    const cardNumber = newText.replace(/\s/g, '');
-    const formattedCardNumber = cardNumber.replace(/(\d{4})/g, '$1 ').trim();
-
-    setCard(formattedCardNumber);
+    const formattedValue = formatCardNumber(newText);
     setCardEror(false);
+    setCard(formattedValue);
   };
 
   const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
-    const cardDate = newText.replace(/\s/g, '');
+    const cardDate = newText.replace(/[^\d]/g, '');
     const formattedDate = cardDate.replace(/(\d{2})(?=\d{2})/g, '$1.').trim();
     setDate(formattedDate);
     setDateEror(false);
@@ -66,7 +70,8 @@ const PayForm = () => {
 
   const handleChangeCVV = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
-    setCVV(newText);
+    const cardCVV = newText.replace(/[^\d]/g, '');
+    setCVV(cardCVV);
     setCVVEror(false);
   };
 
@@ -83,13 +88,17 @@ const PayForm = () => {
   };
 
   const handleCardBlur = () => {
-    if (card.length < 19) {
+    if (card.length !== 19) {
       setCardEror(true);
     } 
   };
 
   const handleDateBlur = () => {
-    if (date.length < 8) {
+    const validDate = date.split('.');
+  
+    if(+validDate[0] > 31 || +validDate[1] > 12 || +validDate[2] < 24) {
+      setDateEror(true);
+    }else if (date.length !== 8) {
       setDateEror(true);
     } 
   };

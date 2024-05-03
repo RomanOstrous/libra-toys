@@ -16,7 +16,7 @@ const NewPochta = () => {
   const [lastError, setLastEror] =useState(false);
   const [midleName, setMidleName] = useState(sessionStorage.getItem('midle') || '');
   const [midleError, setMidleEror] =useState(false);
-  const [phone, setPhone] = useState(sessionStorage.getItem('phone') || '');
+  const [phone, setPhone] = useState(sessionStorage.getItem('phone') || '+380');
   const [phoneError, setPhoneEror] =useState(false);
   const [city, setCity] = useState(sessionStorage.getItem('city') || '');
   const [cityError, setCityEror] =useState(false);
@@ -133,9 +133,15 @@ const NewPochta = () => {
     setMidleEror(false);
   };
 
+  const formatPhoneNumber = (value: string) => {
+    const onlyNumbers = value.replace(/[^\d+]/g, '');
+    return onlyNumbers;
+  };
+
   const handleChangePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
-    setPhone(newText);
+    const formattedValue = formatPhoneNumber(newText);
+    setPhone(formattedValue);
     setPhoneEror(false);
   };
 
@@ -168,25 +174,37 @@ const NewPochta = () => {
   };
 
   const handleLastBlur = () => {
-    if (!lastName || validName(lastName)) {
+    if (
+      !lastName 
+      || validName(lastName) 
+      || !/^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ]+$/.test(lastName)
+    ) {
       setLastEror(true);
     } 
   };
 
   const handleFirstBlur = () => {
-    if (!firstName || validName(firstName)) {
+    if (
+      !firstName 
+      || validName(firstName)
+      || !/^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ]+$/.test(firstName)
+    ) {
       setFirstEror(true);
     } 
   };
 
   const handleMidleBlur = () => {
-    if (!midleName || validName(midleName)) {
+    if (
+      !midleName 
+      || validName(midleName)
+      || !/^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ]+$/.test(midleName)
+    ) {
       setMidleEror(true);
     } 
   };
 
   const handlePhoneBlur = () => {
-    if (!phone) {
+    if (!phone || !/^(\+380\d{9})$/.test(phone)) {
       setPhoneEror(true);
     } 
   };
@@ -285,11 +303,12 @@ const NewPochta = () => {
 
           <input 
             className="newp__input"
-            type="number" 
+            type="text" 
             name="телефон" 
             value={phone}
+            maxLength={13}
             onChange={handleChangePhone}
-            placeholder='Введи свій телефон'
+            placeholder='Введи свій телефон +380...'
             autoComplete='off'
             onBlur={() => handlePhoneBlur()}
           />

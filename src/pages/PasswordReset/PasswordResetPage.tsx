@@ -25,8 +25,12 @@ export default function PasswordResetPage() {
   };
 
   const handlePasswordBlur = () => {
-    if (password.length < 8) {
-      setHasPasswordError('Пароль має містити мінімум 8 символів');
+    if (/\s/.test(password) || /[^\S ]/.test(password)) {
+      setHasPasswordError('Введіть пароль без пробілів');
+    } else if (password.length === 0) {
+      setHasPasswordError('Введіть пароль');
+    } else if (password.length < 8) {
+      setHasPasswordError('Пароль повинен містити не менше 8 символів');
     }
   };
 
@@ -42,11 +46,13 @@ export default function PasswordResetPage() {
   };
 
   const handlePasswordAgainBlur = () => {
-    if (passwordAgain !== password) {
+    if (passwordAgain.length === 0) {
+      setHasPasswordAgainError('Введіть пароль повторно');
+    } else if (passwordAgain !== password) {
       setHasPasswordAgainError('Схоже ви допустили помилку');
       setDisable(true);
-    } else {setHasPasswordAgainError('')}
-  };
+    }
+  }
 
   const handleClick = () => {
     handlePasswordAgainBlur();

@@ -55,8 +55,14 @@ useEffect(() => {
 
   const handleOldBlur = () => {
     if (edit === false) {
-      if (oldPassword.length < 8) {
-        setOldPasswordError("Довжина паролю не менше 8 символів");
+      if (/\s/.test(oldPassword) || /[^\S ]/.test(oldPassword)) {
+        setOldPasswordError('Введіть пароль без пробілів');
+        hasError = true;
+      } else if (oldPassword.length === 0) {
+        setOldPasswordError('Введіть пароль');
+        hasError = true;
+      } else if (oldPassword.length < 8) {
+        setOldPasswordError('Пароль повинен містити не менше 8 символів');
         hasError = true;
       }
     }
@@ -64,8 +70,14 @@ useEffect(() => {
 
   const handleNewBlur = () => {
     if (edit === false) {
-      if (newPassword.length < 8) {
-        setNewPasswordError("Довжина паролю не менше 8 символів");
+      if (/\s/.test(newPassword) || /[^\S ]/.test(newPassword)) {
+        setNewPasswordError('Введіть пароль без пробілів');
+        hasError = true;
+      } else if (newPassword.length === 0) {
+        setNewPasswordError('Введіть пароль');
+        hasError = true;
+      } else if (newPassword.length < 8) {
+        setNewPasswordError('Пароль повинен містити не менше 8 символів');
         hasError = true;
       }
     }
@@ -73,6 +85,7 @@ useEffect(() => {
 
   const handleCheckBlur = () => {
     if (edit === false) {
+
       if (checkPassword !== newPassword) {
         setCheckPasswordError("Провірте правильність паролю");
         hasError = true;

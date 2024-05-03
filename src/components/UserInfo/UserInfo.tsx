@@ -67,6 +67,9 @@ export default function UserInfo() {
     if (!name) {
       setHasNameError("Введіть ім'я");
       hasError = true;
+    } else if (!/^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ]+$/.test(name)) {
+      setHasNameError("Ім'я може містити тільки літери");
+      hasError = true;
     } else if (!startsWithCapitalLetter(name)) {
       setHasNameError("Ім'я має починатись з великої літери");
       hasError = true;
@@ -76,6 +79,9 @@ export default function UserInfo() {
   const handleLastNameBlur = () => {
     if (!lastName) {
       setHasLastNameError('Введіть прізвище');
+      hasError = true;
+    } else if (!/^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ]+$/.test(lastName)) {
+      setHasLastNameError("Прізвище може містити тільки літери");
       hasError = true;
     } else if (!startsWithCapitalLetter(lastName)) {
       setHasLastNameError("Прізвище має починатись з великої літери");
