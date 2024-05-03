@@ -73,39 +73,60 @@ function SigninForm() {
     if (!name) {
       setHasNameError("Введіть ім'я");
       hasError = true;
+    } else if (!/^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ]+$/.test(name)) {
+      setHasNameError("Ім'я може містити тільки літери");
+      hasError = true;
     } else if (!startsWithCapitalLetter(name)) {
       setHasNameError("Ім'я має починатись з великої літери");
       hasError = true;
     }
   };
-
+  
   const handleLastNameBlur = () => {
     if (!lastName) {
       setHasLastNameError('Введіть прізвище');
+      hasError = true;
+    } else if (!/^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ]+$/.test(lastName)) {
+      setHasLastNameError("Прізвище може містити тільки літери");
       hasError = true;
     } else if (!startsWithCapitalLetter(lastName)) {
       setHasLastNameError("Прізвище має починатись з великої літери");
       hasError = true;
     }
   };
-
+  
   const handleEmailBlur = () => {
-    if (!email.includes('@')) {
+    if (
+      !email.includes('@') 
+      || email[0] === '@' 
+      || /[#\$ ]/.test(email) 
+      || !email.includes('.') 
+      || !/\.[A-Za-z]+$/.test(email)
+    ) {
       setHasEmailError('Введіть коректну адресу електронної пошти');
       hasError = true;
     }
   };
   
   const handlePasswordBlur = () => {
-    if (password.length < 8) {
+    if (/\s/.test(password) || /[^\S ]/.test(password)) {
+      setHasPasswordError('Введіть пароль без пробілів');
+      hasError = true;
+    } else if (password.length === 0) {
+      setHasPasswordError('Введіть пароль');
+      hasError = true;
+    } else if (password.length < 8) {
       setHasPasswordError('Пароль повинен містити не менше 8 символів');
       hasError = true;
     }
   };
   
   const handlePasswordOkBlur = () => {
-    if (password !== passwordOk) {
-      setHasPasswordErrorOk('Пароль не співпадає');
+    if (passwordOk.length === 0) {
+      setHasPasswordErrorOk('Введіть пароль повторно');
+      hasError = true;
+    } else if (password !== passwordOk) {
+      setHasPasswordErrorOk('Паролі не співпадають');
       hasError = true;
     }
   };
@@ -291,6 +312,7 @@ function SigninForm() {
                 placeholder="Введи свій пароль"
                 maxLength={30}
                 value={password}
+                onBlur={handlePasswordBlur}
                 onChange={handlePasswordChange}
               />
               <button type="button" className="login__visible" onClick={togglePasswordVisibility}>

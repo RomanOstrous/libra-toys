@@ -39,8 +39,19 @@ function LoginForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Неправильний формат електронної пошти').required(`Поле "Пошта" є обов'язковим`),
-    password: Yup.string().min(8, 'Пароль повинен містити принаймні 8 символів').required(`Поле "Пароль" є обов'язковим`),
+    email: Yup.string()
+    .email('Неправильний формат електронної пошти')
+    .required(`Поле "Пошта" є обов'язковим`)
+    .test('no-special-characters', 'Поле містить недопустимі символи', (value: string | undefined) => {
+      return !value || !/[#$]/.test(value);
+    }),
+    
+    password: Yup.string()
+    .min(8, 'Пароль повинен містити принаймні 8 символів')
+    .required(`Поле "Пароль" є обов'язковим`)
+    .test('no-whitespace', 'Пароль не може містити пробіли', (value: string | undefined) => {
+      return !value || !/\s/.test(value);
+    }),
   });
 
   const handleGoogle = () => {
