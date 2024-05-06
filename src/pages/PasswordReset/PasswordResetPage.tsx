@@ -12,6 +12,7 @@ export default function PasswordResetPage() {
   const [passwordAgain, setPasswordAgain] = useState('');
   const [hasPasswordAgainError, setHasPasswordAgainError] = useState('');
   const [message, setMessage] = useState('');
+  const [messageOk, setMessageOk] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(true);
   const [searchParams] = useSearchParams();
@@ -65,7 +66,7 @@ export default function PasswordResetPage() {
     })
     .then((response: any) => {
       setLoader(false);
-      setMessage('Посилання успішно надіслано');
+      setMessageOk('Посилання успішно надіслано');
       navigate('/login')
       console.log(response);
     })
@@ -135,11 +136,19 @@ export default function PasswordResetPage() {
           {loader ? 'Підтверджую...' : 'Підтвердити'}
         </button>
         
-        {message ? (
-            <p className='password-reset__input-error'>{message}</p>
-          ) : (
+        {(!message && !messageOk) && (
             <p className='password-reset__input-noerror'></p>
-          )}
+        )}
+        
+        {message && (
+            <p className='password-reset__input-error'>{message}</p>
+          ) 
+        }
+
+        {messageOk && (
+            <p className='password-reset__input-ok'>{messageOk}</p>
+          )
+        }
       </div>
     </div>
   )
