@@ -4,6 +4,8 @@ import '../../styles/style/PasswordReset.scss';
 import classNames from 'classnames';
 import { client } from '../../services/httpClient';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import visibleOn from '../../assets/icons/visibility_on.svg';
+import visibleOff from '../../assets/icons/visibility_off.svg';
 
 
 export default function PasswordResetPage() {
@@ -15,6 +17,8 @@ export default function PasswordResetPage() {
   const [messageOk, setMessageOk] = useState('');
   const [loader, setLoader] = useState(false);
   const [disable, setDisable] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
   const [searchParams] = useSearchParams();
   const navigate= useNavigate();
   const token = searchParams.get('token');
@@ -77,29 +81,46 @@ export default function PasswordResetPage() {
     })
   }
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const togglePasswordVisibility2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+
   return (
     <div className="password-reset container grid">
       <div className="password-reset__container grid__item--desktop-3-6 grid__item--tablet-2-5">
-        <p className='password-reset__title'>Новий паароль</p>
+        <p className='password-reset__title'>Новий пароль</p>
         
         <div className="password-reset__box">
           <p className='password-reset__text'>
             Новий пароль
           </p>
 
-          <input
-            className={classNames('password-reset__input', {
-              'password-reset__input--is-danger': hasPasswordError,
-              'password-reset__input--is-ok': !hasPasswordError && password
-            })}
-            name="Password" 
-            type='password'
-            placeholder="Введи новий пароль"
-            autoComplete='off'
-            value={password}
-            onChange={handlePasswordChange}
-            onBlur={handlePasswordBlur}
-          />
+          <div className="login__password">
+            <input
+              className={classNames('password-reset__input', {
+                'password-reset__input--is-danger': hasPasswordError,
+                'password-reset__input--is-ok': !hasPasswordError && password
+              })}
+              name="Password" 
+              type={showPassword ? 'text' : 'password'} 
+              placeholder="Введи новий пароль"
+              autoComplete='off'
+              value={password}
+              onChange={handlePasswordChange}
+              onBlur={handlePasswordBlur}
+            />
+
+            <button type="button" className="login__visible" onClick={togglePasswordVisibility}>
+              {showPassword 
+                ? <img src={visibleOn} alt="видно" />
+                : <img src={visibleOff} alt="не видно" />
+              }
+            </button>
+          </div>
 
           {hasPasswordError ? (
             <p className='password-reset__input-error'>{hasPasswordError}</p>
@@ -111,19 +132,30 @@ export default function PasswordResetPage() {
             Повторно введи новий пароль
           </p>
 
-          <input
-            className={classNames('password-reset__input', {
-              'password-reset__input--is-danger': hasPasswordAgainError,
-              'password-reset__input--is-ok': !hasPasswordAgainError && passwordAgain
-            })}
-            name="Password" 
-            type='password'
-            placeholder="Повторно введи новий пароль"
-            autoComplete='off'
-            value={passwordAgain}
-            onChange={handlePasswordAgainChange}
-            onBlur={handlePasswordAgainBlur}
-          />
+          <div className="login__password">
+            <input
+              className={classNames('password-reset__input', {
+                'password-reset__input--is-danger': hasPasswordAgainError,
+                'password-reset__input--is-ok': !hasPasswordAgainError && passwordAgain
+              })}
+              name="Password" 
+              type={showPassword2 ? 'text' : 'password'} 
+              placeholder="Повторно введи новий пароль"
+              autoComplete='off'
+              value={passwordAgain}
+              onChange={handlePasswordAgainChange}
+              onBlur={handlePasswordAgainBlur}
+            />
+
+            <button type="button" className="login__visible" onClick={togglePasswordVisibility2}>
+              {showPassword2 
+                ? <img src={visibleOn} alt="видно" />
+                : <img src={visibleOff} alt="не видно" />
+              }
+            </button>
+          </div>
+
+
 
           {hasPasswordAgainError ? (
             <p className='password-reset__input-error'>{hasPasswordAgainError}</p>
