@@ -70,6 +70,7 @@ function LoginForm() {
             Cookies.set('access_token', resp.data.tokens.access);
             Cookies.set('refresh_token', resp.data.tokens.refresh);
             dispatch(actions.login());
+            dispatch(actions.loginGoogle());
             navigate('/account');
             console.log(resp);
           });

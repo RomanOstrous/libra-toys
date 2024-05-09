@@ -16,6 +16,7 @@ export const AccountPage = () => {
   const [orders, setOrders] = useState<OrderType[]>([]);
   const [button, setButton] = useState(false);
   const { product } = useAppSelector(state => state.product);
+  const isGoogle = useAppSelector((state) => state.auth.isGoogle);
   const token = Cookies.get('access_token');
   const base = process.env.REACT_APP_BASE_URL;
 
@@ -37,7 +38,10 @@ export const AccountPage = () => {
         <div className="account__container grid__item--desktop-1-4 grid__item--tablet-1-4">
           <UserInfo />
           <LogOut />
-          <PasswordReset />
+
+          {isGoogle === false && (
+            <PasswordReset />
+          )}
 
           <button className="account__select" onClick={() => setButton(!button)}>
             <p className="account__title">Закази</p>
