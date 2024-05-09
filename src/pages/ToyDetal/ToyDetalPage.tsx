@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './ToyDetalPage.scss';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { client } from '../../services/httpClient';
 import { ProductDetalType } from '../../types/ProductDetalsType';
-import ButtonBack from '../../assets/icons/buttonBack.svg';
 import Heart from '../../assets/icons/heart.svg';
 import RedHeart from '../../assets/icons/heartfilled.svg';
 import { useAppDispatch, useAppSelector } from '../../app/hook';
@@ -14,6 +13,7 @@ import {
   removeFromWishlist, 
   updateWishlist 
 } from "../../app/Slices/wishListSlice";
+import ButtonBack from '../../components/ButtonBack/ButtonBack';
 
 export const ToyDetalPage = () => {
   const [info, setInfo] = useState<ProductDetalType | null> (null);
@@ -104,12 +104,7 @@ export const ToyDetalPage = () => {
 
       {info && (
         <div className='info container'>
-          <div className="info__top">
-            <Link to=".." className="info__back">
-              <img src={ButtonBack} alt="back"/>
-            </Link>
-            <p className="info__title">{info.title}</p>
-          </div>
+          <ButtonBack text={info.title} />
 
           <div className="info__container">
             <div className="info__imgs grid__item--desktop-1-5">

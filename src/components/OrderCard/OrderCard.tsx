@@ -42,7 +42,7 @@ const OrderCard: FC<Props> = ({toy}) => {
           </div>
           <div className='order__count'>
             <p className='order__count-text'>Ціна:</p>
-            <p className='order__count-text'>{toy?.price}</p>
+            <p className='order__count-text'>{toy?.price}₴</p>
           </div>
         </div>
       </div>

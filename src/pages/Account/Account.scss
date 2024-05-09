@@ -75,6 +75,7 @@
   &__card {
     transition: 0.3s ease;
     margin-bottom: 20px;
+    padding: 10px;
 
     &:hover {
       background-color: $c-black-1;

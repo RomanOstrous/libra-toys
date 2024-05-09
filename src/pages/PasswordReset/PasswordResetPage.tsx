@@ -27,6 +27,7 @@ export default function PasswordResetPage() {
     const { value } = event.target;
     setPassword(value);
     setHasPasswordError('');
+    handlePasswordAgainBlur();
   };
 
   const handlePasswordBlur = () => {
@@ -37,6 +38,8 @@ export default function PasswordResetPage() {
     } else if (password.length < 8) {
       setHasPasswordError('Пароль повинен містити не менше 8 символів');
     }
+
+    handlePasswordAgainBlur();
   };
 
   const handlePasswordAgainChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,21 +67,23 @@ export default function PasswordResetPage() {
     handlePasswordBlur();
     setLoader(true);
 
-    client.post('user/password_reset/confirm/', {
-      "password": password,
-      "token": token,
-    })
-    .then((response: any) => {
-      setLoader(false);
-      setMessageOk('Посилання успішно надіслано');
-      navigate('/login')
-      console.log(response);
-    })
-    .catch((err: any) => {
-      setLoader(false);
-      setMessage('Сталась помилка, спробуй ще раз');
-      console.log(err);
-    })
+    if(!hasPasswordAgainError && !hasPasswordError) {
+      client.post('user/password_reset/confirm/', {
+        "password": password,
+        "token": token,
+      })
+      .then((response: any) => {
+        setLoader(false);
+        setMessageOk('Посилання успішно надіслано');
+        navigate('/login')
+        console.log(response);
+      })
+      .catch((err: any) => {
+        setLoader(false);
+        setMessage('Сталась помилка, спробуй ще раз');
+        console.log(err);
+      })
+    }
   }
 
   const togglePasswordVisibility = () => {

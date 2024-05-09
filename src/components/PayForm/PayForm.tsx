@@ -76,13 +76,13 @@ const PayForm = () => {
   };
 
   const handleLastBlur = () => {
-    if (!lastName || validName(lastName)) {
+    if (!lastName || validName(lastName) || !/^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ]+$/.test(lastName)) {
       setLastEror(true);
     } 
   };
 
   const handleFirstBlur = () => {
-    if (!firstName || validName(firstName)) {
+    if (!firstName || validName(firstName) || !/^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ]+$/.test(firstName)) {
       setFirstEror(true);
     } 
   };
