@@ -146,7 +146,9 @@ useEffect(() => {
         }
       })
       .then(response => {
-        
+        setOldPassword('');
+        setNewPassword('');
+        setCheckPassword('');
         console.log('пароль змінено', response);
         setEdit(true);
       })
