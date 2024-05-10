@@ -35,6 +35,63 @@ useEffect(() => {
   }
 }, [validator]);
 
+  const handleOldBlur = () => {
+    if (edit === false) {
+      if (/\s/.test(oldPassword) || /[^\S ]/.test(oldPassword)) {
+        setOldPasswordError('Введіть пароль без пробілів');
+        setDisable(true);
+        hasError = true;
+      } else if (oldPassword.length === 0) {
+        setOldPasswordError('Введіть пароль');
+        setDisable(true);
+        hasError = true;
+      } else if (oldPassword.length < 8) {
+        setOldPasswordError('Пароль повинен містити не менше 8 символів');
+        setDisable(true);
+        hasError = true;
+      }
+      
+    }
+  };
+
+  const handleNewBlur = () => {
+    if (edit === false) {
+      if (newPassword.length === 8){
+        setNewPasswordError('');
+      }
+
+      if (/\s/.test(newPassword) || /[^\S ]/.test(newPassword)) {
+        setNewPasswordError('Введіть пароль без пробілів');
+        setDisable(true);
+        hasError = true;
+      } else if (newPassword.length === 0) {
+        setNewPasswordError('Введіть пароль');
+        setDisable(true);
+        hasError = true;
+      } else if (newPassword.length < 8) {
+        setNewPasswordError('Пароль повинен містити не менше 8 символів');
+        setDisable(true);
+        hasError = true;
+      }
+      
+      handleCheckBlur();
+    }
+  };
+
+  const handleCheckBlur = () => {
+    if (edit === false) {
+
+      if (checkPassword !== newPassword) {
+        setCheckPasswordError("Провірте правильність паролю");
+        setDisable(true);
+        hasError = true;
+      } else {
+        setDisable(false);
+        setCheckPasswordError("");
+      }
+    }
+  };
+
   const handleOldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setOldPassword(value);
@@ -45,52 +102,14 @@ useEffect(() => {
     const { value } = event.target;
     setNewPassword(value);
     setNewPasswordError('');
+    handleCheckBlur();
   };
 
   const handleCheckChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setCheckPassword(value);
     setCheckPasswordError('');
-  };
-
-  const handleOldBlur = () => {
-    if (edit === false) {
-      if (/\s/.test(oldPassword) || /[^\S ]/.test(oldPassword)) {
-        setOldPasswordError('Введіть пароль без пробілів');
-        hasError = true;
-      } else if (oldPassword.length === 0) {
-        setOldPasswordError('Введіть пароль');
-        hasError = true;
-      } else if (oldPassword.length < 8) {
-        setOldPasswordError('Пароль повинен містити не менше 8 символів');
-        hasError = true;
-      }
-    }
-  };
-
-  const handleNewBlur = () => {
-    if (edit === false) {
-      if (/\s/.test(newPassword) || /[^\S ]/.test(newPassword)) {
-        setNewPasswordError('Введіть пароль без пробілів');
-        hasError = true;
-      } else if (newPassword.length === 0) {
-        setNewPasswordError('Введіть пароль');
-        hasError = true;
-      } else if (newPassword.length < 8) {
-        setNewPasswordError('Пароль повинен містити не менше 8 символів');
-        hasError = true;
-      }
-    }
-  };
-
-  const handleCheckBlur = () => {
-    if (edit === false) {
-
-      if (checkPassword !== newPassword) {
-        setCheckPasswordError("Провірте правильність паролю");
-        hasError = true;
-      }
-    }
+    setDisable(false);
   };
 
   const togglePasswordVisibility = () => {
@@ -132,6 +151,7 @@ useEffect(() => {
         setEdit(true);
       })
       .catch(error => {
+        setLoader(false);
         console.log('Не вдалось змінити пароль', error);
       })
       .finally(() => {
