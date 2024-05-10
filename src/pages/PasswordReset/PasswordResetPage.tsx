@@ -160,8 +160,6 @@ export default function PasswordResetPage() {
             </button>
           </div>
 
-
-
           {hasPasswordAgainError ? (
             <p className='password-reset__input-error'>{hasPasswordAgainError}</p>
           ) : (

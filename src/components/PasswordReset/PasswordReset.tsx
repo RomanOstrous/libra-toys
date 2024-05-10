@@ -21,6 +21,8 @@ const PasswordReset = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [showPassword3, setShowPassword3] = useState(false);
+  const [message, setMessage] = useState('');
+  const [messageOk, setMessageOk] = useState('');
 
   const userId = sessionStorage.getItem('userID');
   const base = process.env.REACT_APP_BASE_URL;
@@ -150,11 +152,15 @@ useEffect(() => {
         setNewPassword('');
         setCheckPassword('');
         console.log('пароль змінено', response);
+        setMessageOk('Пароль успішно змінено');
+        setMessage('')
         setEdit(true);
       })
       .catch(error => {
         setLoader(false);
         console.log('Не вдалось змінити пароль', error);
+        setMessage('Не вдалось змінити пароль, спробуй ще раз');
+        setMessageOk('');
       })
       .finally(() => {
         setLoader(false);
@@ -294,6 +300,18 @@ useEffect(() => {
           >
             Змінити
           </button>
+        )}
+
+        {(!message && !messageOk) && (
+            <p className='password-reset__input-noerror'></p>
+        )}
+        
+        {message && (
+            <p className='password-reset__input-error'>{message}</p>
+          )}
+
+        {messageOk && (
+            <p className='password-reset__input-ok'>{messageOk}</p>
         )}
       </div>
     </div>
