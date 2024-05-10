@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './BuyPage.scss';
 import ButtonBack from '../../components/ButtonBack/ButtonBack';
 import NewPochta from '../../components/NewPochta/NewPochta';
@@ -20,7 +20,9 @@ const BuyPage = () => {
   const token = Cookies.get('access_token');
   const base = process.env.REACT_APP_BASE_URL;
   const visibleToys = product.filter(item => cart.includes(item.id));
-  const valid = useAppSelector(state => state.buy.npValidate)
+  const valid = useAppSelector(state => state.buy.npValidate);
+  const [message, setMessage] = useState('');
+  const [messageOk, setMessageOk] = useState('');
   console.log("korzuha", cart);
 
   const infoObj = visibleToys.map(el => ({
@@ -45,8 +47,13 @@ const BuyPage = () => {
       }
     })
     .then(response => {
-      console.log('все чотко', response)
-    });
+      console.log('все чотко', response);
+      setMessageOk("Товар придбано, переглянути замовлення можна на особистій сторінці!")
+    })
+    .catch(response => {
+      console.log('помилка', response);
+      setMessage("Сталась помилка, спробуйте ще раз!")
+    })
   }
 
   return (
@@ -70,6 +77,20 @@ const BuyPage = () => {
           >
             Придбати
           </button>
+
+          {(!message && !messageOk) && (
+            <p className='password-reset__input-noerror'></p>
+          )}
+        
+          {message && (
+              <p className='password-reset__input-error'>{message}</p>
+            ) 
+          }
+
+          {messageOk && (
+              <p className='password-reset__input-ok'>{messageOk}</p>
+            )
+          }
         </div>
       </div>
     </div>
